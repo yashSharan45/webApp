@@ -39,7 +39,7 @@ Commands to run our Web-App:
 1. . venv/bin/activate  #flask will already be installed
 2. python app.py   #Now open localhost:5000 and see our first page .. to quit press Ctrl+c 
 
-====
+**
 Still if you want to know the steps to Set Up flask ->
 1. Make sure you have python 2.7 installed. ( Command : python --version )
 2. Set up virtual environment. ( Command : virtualenv venv ) # venv is name of virtual env
