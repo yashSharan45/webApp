@@ -1,6 +1,5 @@
 # WebApp-Python
 
-===============================================================
 STEPS FOR GIT
 ===============================================================
 PUSH
@@ -31,9 +30,7 @@ PULL
 Merge
 1. When need to merge we will create a pull request on github
 
-================================================================
 
-================================================================
 STEPS FOR SETTING UP PYTHON AND FLASK
 ================================================================
 When you will clone the repo, virtual environment would already have been set up so
@@ -42,11 +39,10 @@ Commands to run our Web-App:
 1. . venv/bin/activate  #flask will already be installed
 2. python app.py   #Now open localhost:5000 and see our first page .. to quit press Ctrl+c 
 
-====
+**
 Still if you want to know the steps to Set Up flask ->
 1. Make sure you have python 2.7 installed. ( Command : python --version )
 2. Set up virtual environment. ( Command : virtualenv venv ) # venv is name of virtual env
 3. Activate virtual environment. ( Command : . venv/bin/activate)
 4. Install flask. ( Command : pip install flask )
 5. python app.py
-=================================================================
