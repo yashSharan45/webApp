@@ -1,0 +1,45 @@
+// sudo apt-get install mysql-server libmysqlclient-dev 
+
+//mysql -u root -p // root user... p for password
+				// password is 'toor'
+
+//sudo apt-get install python-dev
+//pip install flask-mysqldb				
+
+/*
+	DATABASE NAME: portalDB
+
+	TABLES : 1. UserDB
+			 2. CompanyDB
+	FIELDS : User ==>
+
+	id				AUTO_INCREMENT,INT(11),NOTNULL	
+	name 			VARCHAR(100),NOTNULL
+	email			VARCHAR(100),UNIQUE,NOTNULL,PRIMARY
+	username		VARCHAR(50),UNIQUE,NOTNULL					  
+	password		VARCHAR(100),NOTNULL
+	register_date	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,NOTNULL
+
+*/
+
+/*
+	misterAneesh aneeshvrma@yahoo.com 12345
+*/
+
+*****
+THINGS TO CHECK/ADD =>
+1. Index
+2. Views
+3. Injection/ Security
+4. Test the uniqueness..while signing up unique email,username... handle the duplicate key exceptions
+5. Foreign Key
+*****
+
+create database portalDB;
+use portalDB;
+CREATE TABLE UserDB(Id INT(11) AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL,  Email VARCHAR(100) UNIQUE NOT NULL,Username VARCHAR(50) UNIQUE NOT NULL, Password VARCHAR(100) NOT NULL, RegisterDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (Id,Email));
+
+CREATE TABLE CompanyDB(Id INT(11) AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL,Company VARCHAR(100) NOT NULL,Website VARCHAR(100) NOT NULL, Email VARCHAR(100) UNIQUE NOT NULL,Username VARCHAR(50) UNIQUE NOT NULL, Password VARCHAR(100) NOT NULL, RegisterDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (Id,Email));
+
+show databases;
+show tables;

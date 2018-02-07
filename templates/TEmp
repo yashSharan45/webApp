@@ -1,0 +1,12 @@
+{% if flag == true %}  
+
+
+{% endif %}
+{{render_field(form.company_name,class_="form-control")}}
+
+{{render_field(form.website,class_="form-control")}}
+
+
+
+	company_name = StringField('Company',[validators.Length(min = 1, max = 50)])
+	website = StringField('Website',[validators.Length(min = 1, max = 50)])
