@@ -1,0 +1,7 @@
+{% if flag == true %}  
+
+
+{% endif %}
+{{render_field(form.company_name,class_="form-control")}}
+
+{{render_field(form.website,class_="form-control")}}
