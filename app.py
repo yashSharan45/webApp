@@ -21,34 +21,34 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-	return render_template('home.html')
+    return render_template('home.html')
 
 @app.route('/about')
 def about():
-	return render_template('about.html')
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-	return render_template('contact.html')
+    return render_template('contact.html')
 
 @app.route('/login')
 def login():
-	return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
-	return render_template('logout.html')
+    return render_template('logout.html')
 
 # USING WTFORMS MAKING A FORM CLASS WITH INBUILT VALIDATIONS
 class Signup(Form):
-	name = StringField('Name',[validators.Length(min = 1, max = 50)])
-	email = StringField('Email',[validators.Length(min = 6, max = 50)])
-	username = StringField('Username',[validators.Length(min = 4, max = 25)])
-	password = PasswordField('Password',[
-		validators.DataRequired(),
-		validators.EqualTo('confirm',message = 'Passwords do not match')
-		])
-	confirm = PasswordField('Confirm Password')
+    name = StringField('Name',[validators.Length(min = 1, max = 50)])
+    email = StringField('Email',[validators.Length(min = 6, max = 50)])
+    username = StringField('Username',[validators.Length(min = 4, max = 25)])
+    password = PasswordField('Password',[
+        validators.DataRequired(),
+        validators.EqualTo('confirm',message = 'Passwords do not match')
+        ])
+    confirm = PasswordField('Confirm Password')
 
 # signup for user
 @app.route('/signup',methods=['GET','POST'])
@@ -81,16 +81,16 @@ def signup():
     return render_template('signup.html', form = form)
 
 class SignupCompany(Form):
-	name = StringField('Name',[validators.Length(min = 1, max = 50)])
-	company_name = StringField('Company',[validators.Length(min = 1, max = 50)])
-	website = StringField('Website',[validators.Length(min = 1, max = 50)])
-	username = StringField('Username',[validators.Length(min = 4, max = 25)])
-	email = StringField('Email',[validators.Length(min = 6, max = 50)])
-	password = PasswordField('Password',[
-		validators.DataRequired(),
-		validators.EqualTo('confirm',message = 'Passwords do not match')
-		])
-	confirm = PasswordField('Confirm Password')
+    name = StringField('Name',[validators.Length(min = 1, max = 50)])
+    company_name = StringField('Company',[validators.Length(min = 1, max = 50)])
+    website = StringField('Website',[validators.Length(min = 1, max = 50)])
+    username = StringField('Username',[validators.Length(min = 4, max = 25)])
+    email = StringField('Email',[validators.Length(min = 6, max = 50)])
+    password = PasswordField('Password',[
+        validators.DataRequired(),
+        validators.EqualTo('confirm',message = 'Passwords do not match')
+        ])
+    confirm = PasswordField('Confirm Password')
 
 # signup for company
 @app.route('/signup_company',methods=['GET','POST'])
@@ -124,5 +124,5 @@ def signup_company():
     return render_template('signup_company.html',form = form)
 
 if __name__ == '__main__':
-	app.secret_key = 'secretZone'
-	app.run(debug = True)
+    app.secret_key = 'secretZone'
+app.run(debug = True)
