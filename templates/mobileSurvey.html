@@ -1,0 +1,274 @@
+{% extends 'layout.html' %}
+
+{%block body%}
+
+<style type="text/css">
+    
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 1px; }
+h1 { font-size: 2em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 7px;
+  font-size: 3em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+
+
+div.grid      { width: 900px; }
+div.grid div  { float: left; height: 100px; }
+div.col100    { width: 100px; }
+div.col200    { width: 200px; }
+div.col300    { width: 510px; }
+div.grey      { background-color: white; }
+div.red       { background-color: white; }
+div.clear     { clear: both; }
+
+
+
+</style>
+
+<style type="text/css">
+    
+    /*
+ * Copyright (c) 2012-2013 Thibaut Courouble
+ * http://www.cssflow.com
+ * Licensed under the MIT License
+ *
+ * Sass/SCSS source: https://goo.gl/qEV26
+ * PSD by Hemn Chawroka: https://goo.gl/nXZHJ
+ */
+
+body {
+  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: light-grey;
+}
+
+.cont {
+  margin: 80px auto;
+  width: 400px;
+  text-align: center;
+}
+
+.cont > .drop {
+  margin: 0 20px;
+  vertical-align: top;
+}
+
+.drop {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 150px;
+  background: #f2f2f2;
+  border: 1px solid;
+  border-color: white #f7f7f7 whitesmoke;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.drop:before, .drop:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #888888 transparent;
+  pointer-events: none;
+}
+
+.drop:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.drop:after {
+  margin-top: 7px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.drop-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  background: #f2f2f2; /* Fallback for IE 8 */
+  background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.drop-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #49aff2;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.drop-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+
+.lt-ie9 .dropdown {
+  z-index: 1;
+}
+
+.lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+
+.lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+
+@-moz-document url-prefix() {
+  .dropdown-select {
+    padding-left: 6px;
+  }
+}
+
+.drop-dark {
+  background: #444;
+  border-color: #111111 #0a0a0a black;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.drop-dark:before {
+  border-bottom-color: #aaa;
+}
+
+.drop-dark:after {
+  border-top-color: #aaa;
+}
+
+.drop-dark .drop-select {
+  color: #aaa;
+  text-shadow: 0 1px black;
+  background: #444;  /* Fallback for IE 8 */
+}
+
+.drop-dark .drop-select:focus {
+  color: #ccc;
+}
+
+.drop-dark .drop-select > option {
+  background: #444;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+}
+
+
+</style>
+
+
+<section class="cont">
+  <div class="drop drop-dark">
+    <select name="one" class="drop-select">
+      <option value="">Select Brand</option>
+      <option value="1">Option #1</option>
+      <option value="2">Option #2</option>
+      <option value="3">Option #3</option>
+    </select>
+  </div>
+  <div class="drop drop-dark">
+    <select name="two" class="drop-select">
+      <option value="">Select Model</option>
+      <option value="1">Option #1</option>
+      <option value="2">Option #2</option>
+      <option value="3">Option #3</option>
+    </select>
+  </div>
+</section>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea placeholder="Any suggestions" rows="4" cols="100">
+</textarea>
+
+
+<h1 align="center">Pure CSS Star Rating Widget</h1>
+<div class="grid">
+<div class="col300 red"></div>
+<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+</fieldset>
+<div class="clear">
+</div></div>
+<br><br>
+
+{%endblock%}
