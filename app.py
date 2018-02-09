@@ -39,6 +39,10 @@ def login():
 def logout():
     return render_template('logout.html')
 
+@app.route('/mobile')
+def mobile():
+    return render_template('mobileSurvey.html')
+
 # USING WTFORMS MAKING A FORM CLASS WITH INBUILT VALIDATIONS
 class Signup(Form):
     name = StringField('Name',[validators.Length(min = 1, max = 50)])
