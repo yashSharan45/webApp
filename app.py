@@ -21,6 +21,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
+	flash("Hey")
 	return render_template('home.html')
 
 @app.route('/about')
@@ -39,6 +40,11 @@ def login():
 def logout():
 	return render_template('logout.html')
 
+@app.route('/admin')
+def admin():
+	return "Admin"
+
+
 # USING WTFORMS MAKING A FORM CLASS WITH INBUILT VALIDATIONS
 class Signup(Form):
 	name = StringField('Name',[validators.Length(min = 1, max = 50)])
@@ -55,29 +61,34 @@ class Signup(Form):
 def signup():
     form = Signup(request.form)    
     if request.method == 'POST' and form.validate():
+    	#Create Cursor
+        cur = mysql.connection.cursor()
+
         name = form.name.data
         email = form.email.data
+
+        #Check if Email already exists
+        email_exists = cur.execute("SELECT * FROM UserDB where Email = %s",[email])
+        if email_exists > 0:
+        	flash('This email already exists','danger')
+        
         username = form.username.data
+        #Check if Username already exists
+        username_exists = cur.execute("SELECT * FROM UserDB where Username = %s",[username])
+        if username_exists > 0:
+        	flash('This username already exists','danger')
+
         password = sha256_crypt.encrypt(str(form.password.data))
 
-        #Create Cursor
-        cur = mysql.connection.cursor()
         
-        #Execute Cursor
-        cur.execute("INSERT INTO UserDB(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
-        #cur.execute("INSERT INTO temp(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
-
-        
-        #Commit to DB
-        mysql.connection.commit()
-
-        #Close Connection
-        cur.close()
-
-        flash('You are now registered and can log in','success')
-        return render_template('home.html')
-        #return redirect(url_for('home'))
-
+        try:
+        	cur.execute("INSERT INTO UserDB(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
+        	mysql.connection.commit()
+        	cur.close()
+        	flash('You are now registered and can log in','success')
+        	return redirect(url_for('login'))
+        except Exception as e:
+        	exception_user = e
     return render_template('signup.html', form = form)
 
 class SignupCompany(Form):
@@ -97,30 +108,44 @@ class SignupCompany(Form):
 def signup_company():
     form = SignupCompany(request.form)
     if request.method == 'POST' and form.validate():
+    	#Create Cursor
+        cur = mysql.connection.cursor()
+
         name = form.name.data
         company = form.company_name.data
         website = form.website.data
+
         email = form.email.data
+
+        #Check if Email already exists
+        email_exists = cur.execute("SELECT * FROM CompanyDB where Email = %s",[email])
+        if email_exists > 0:
+        	flash('This email already exists','danger')
+
         username = form.username.data
+        
+        #Check if Username already exists
+        username_exists = cur.execute("SELECT * FROM CompanyDB where Username = %s",[username])
+        if username_exists > 0:
+        	flash('This username already exists','danger')
+
         password = sha256_crypt.encrypt(str(form.password.data))
+                
+        try:
+        	#Execute Cursor
+            cur.execute("INSERT INTO CompanyDB(Name,Company,Website,Email,Username,Password) VALUES (%s,%s,%s,%s,%s,%s)",(name,company,website,email,username,password))
+            #cur.execute("INSERT INTO temp(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
 
-        #Create Cursor
-        cur = mysql.connection.cursor()
-        
-        #Execute Cursor
-        cur.execute("INSERT INTO CompanyDB(Name,Company,Website,Email,Username,Password) VALUES (%s,%s,%s,%s,%s,%s)",(name,company,website,email,username,password))
-        #cur.execute("INSERT INTO temp(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
+            #Commit to DB
+            mysql.connection.commit()
 
-        
-        #Commit to DB
-        mysql.connection.commit()
+            #Close Connection
+            cur.close()
 
-        #Close Connection
-        cur.close()
-
-        flash('You are now registered and can log in','success')
-        return render_template('home.html')
-        #return redirect(url_for('home'))
+            flash('You are now registered and can log in','success')
+            return redirect(url_for('login'))
+        except Exception as e:
+        	exception_company = e
     return render_template('signup_company.html',form = form)
 
 if __name__ == '__main__':
