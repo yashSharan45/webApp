@@ -81,7 +81,7 @@ body {
 }
 
 .cont {
-  margin: 80px auto;
+  margin: 20px auto;
   width: 400px;
   text-align: center;
 }
@@ -224,28 +224,64 @@ body {
   text-shadow: 0 1px rgba(0, 0, 0, 0.4);
 }
 
-
 </style>
 
 
+
+
+<script type="text/javascript">
+var varieties=[
+[" "],
+["Varient","i Phone X","i Phone 8","i Phone 7"],
+["Varient","note 8","s7 Edge","c9 pro"],
+["Varient","a1","note 4"]
+];
+
+function Box2(idx) {
+var f=document.myform;
+f.box2.options.length=null;
+for(var i=0; i<varieties[idx].length; i++) {
+    f.box2.options[i]=new Option(varieties[idx][i], i); 
+    }    
+}
+
+window.onload=function() {
+var box1=document.myform.box1;
+box1.onchange=function(){Box2(this.selectedIndex);};
+// create 2nd select
+try { // IE
+  var sel=document.createElement("<select name=\"box2\"><\/select>");
+  }
+catch(e) {
+  var sel=document.createElement("select");
+  sel.name = "box2";
+  }
+document.myform.getElementsByTagName('fieldset')[0].insertBefore(sel, box1.nextSibling);
+// fill 2nd select
+Box2(0);
+}
+</script>
+
+<div class="container" style="width: 50%; height: 500px; border-radius: 21px 21px 0 0;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="/static/img/a4.png" height="100%" width="85%"></a>  
+        </div>
+
+
 <section class="cont">
-  <div class="drop drop-dark">
-    <select name="one" class="drop-select">
-      <option value="">Select Brand</option>
-      <option value="1">Option #1</option>
-      <option value="2">Option #2</option>
-      <option value="3">Option #3</option>
-    </select>
-  </div>
-  <div class="drop drop-dark">
-    <select name="two" class="drop-select">
-      <option value="">Select Model</option>
-      <option value="1">Option #1</option>
-      <option value="2">Option #2</option>
-      <option value="3">Option #3</option>
-    </select>
-  </div>
+<form name="myform" method="post" action="http://www.mysite.com/mysite">
+<fieldset>
+<select name="box1" >
+<div class="container">
+    <option value="e">Select Brand</option>
+    <option value="a">APPLE</option>
+    <option value="b">Samsung</option>
+    <option value="c">Xiaomi</option>
+</div>
+</select>
+</fieldset>
+</form>
 </section>
+
 
 
 
@@ -373,234 +409,276 @@ body {
 
 
 <div class="container">
-<div class="col-md-4">
+<div class="col-md-16">
             <form>
-                <h2>1. Customs Checkboxes</h2>
+                <h2>How likely is it that you would recommend this company to a friend or colleague?</h2>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" checked> <span class="label-text">Option 01</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">EXTREMELY LIKELY</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 02</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">SOMEWHAT GOOD</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 03</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">AVERAGE</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" disabled> <span class="label-text">Option 04</span>
-                    </label>
-                </div>
-            </form>
-
-        </div>
-        <div class="col-md-4">
-            <form>
-                <h2>2. Customs Radios</h2>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" checked> <span class="label-text">Option 01</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">BELOW AVERAGE</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 02</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 03</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" disabled> <span class="label-text">Option 04</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">NOT AT ALL LIKELY</span>
                     </label>
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-16">
             <form>
-                <h2>3.Radios Toggles</h2>
+                <h2>Overall, how satisfied or dissatisfied are you with our company?</h2>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" checked> <span class="label-text">Option 01</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Very satisfied</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 02</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat satisfied</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 03</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Neither satisfied nor dissatisfied</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" disabled> <span class="label-text">Option 04</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat dissatisfied</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very dissatisfied</span>
                     </label>
                 </div>
             </form>
         </div>
-</div>
-<div class="container">
-<div class="col-md-4">
+        <div class="col-md-16">
             <form>
-                <h2>1. Customs Checkboxes</h2>
-                <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" checked> <span class="label-text">Option 01</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 02</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 03</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" disabled> <span class="label-text">Option 04</span>
-                    </label>
-                </div>
-            </form>
-
-        </div>
-        <div class="col-md-4">
-            <form>
-                <h2>2. Customs Radios</h2>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" checked> <span class="label-text">Option 01</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 02</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 03</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" disabled> <span class="label-text">Option 04</span>
-                    </label>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form>
-                <h2>3.Radios Toggles</h2>
+                <h2>Which of the following words would you use to describe our products? Select all that apply.</h2>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" checked> <span class="label-text">Option 01</span>
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Reliable</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 02</span>
+                        <input type="checkbox" name="checkbox"> <span class="label-text">High quality</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 03</span>
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Useful</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" disabled> <span class="label-text">Option 04</span>
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Unique</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Good value for money</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Overpriced</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Impractical</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Ineffective</span>
                     </label>
                 </div>
             </form>
         </div>
 </div>
 <div class="container">
-<div class="col-md-4">
+<div class="col-md-16">
             <form>
-                <h2>1. Customs Checkboxes</h2>
+                <h2>How would you rate the quality of the product?</h2>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" checked> <span class="label-text">Option 01</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very high quality</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 02</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">High quality</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check"> <span class="label-text">Option 03</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Neither high nor low quality</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="checkbox" name="check" disabled> <span class="label-text">Option 04</span>
-                    </label>
-                </div>
-            </form>
-
-        </div>
-        <div class="col-md-4">
-            <form>
-                <h2>2. Customs Radios</h2>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" checked> <span class="label-text">Option 01</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Low quality</span>
                     </label>
                 </div>
                 <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 02</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio"> <span class="label-text">Option 03</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label>
-                        <input type="radio" name="radio" disabled> <span class="label-text">Option 04</span>
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very low quality</span>
                     </label>
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-16">
             <form>
-                <h2>3.Radios Toggles</h2>
+                <h2>How would you rate the value for money of the product?</h2>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" checked> <span class="label-text">Option 01</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 02</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Option 03</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle" disabled> <span class="label-text">Option 04</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>How likely are you to purchase any of our products again?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Extremely likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Not so likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Not at all likely</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+</div>
+<div class="container">
+<div class="col-md-16">
+            <form>
+                <h2>How is the battery life of the mobile</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>How is the camera quality of the mobile</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Does it provide regular upgrade and latest security patch</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Yes</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">No</span>
                     </label>
                 </div>
             </form>
@@ -613,7 +691,7 @@ body {
 </textarea>
 
 
-<h1 align="center">Pure CSS Star Rating Widget</h1>
+<h1 align="center">Your rating for the product</h1>
 <div class="grid">
 <div class="col300 red"></div>
 <fieldset class="rating">
