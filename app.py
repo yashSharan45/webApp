@@ -43,6 +43,18 @@ def logout():
 def mobile():
     return render_template('mobileSurvey.html')
 
+@app.route('/laptop')
+def laptop():
+    return render_template('laptopSurvey.html')
+
+@app.route('/camera')
+def camera():
+    return render_template('cameraSurvey.html')
+
+@app.route('/tv')
+def tv():
+    return render_template('tvSurvey.html')
+
 @app.route('/admin')
 def admin():
 	return "Admin"
