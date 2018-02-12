@@ -1,4 +1,6 @@
+from exceptions import Exception
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request
+from pip._vendor.requests.compat import str
 from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
@@ -123,14 +125,14 @@ def admin():
 
 # USING WTFORMS MAKING A FORM CLASS WITH INBUILT VALIDATIONS
 class Signup(Form):
-    name = StringField('Name',[validators.Length(min = 1, max = 50)])
-    email = StringField('Email',[validators.Length(min = 6, max = 50)])
-    username = StringField('Username',[validators.Length(min = 4, max = 25)])
+    name = StringField('Name',[validators.Length(min = 1, max = 50)], render_kw={"placeholder": "Name"})
+    email = StringField('Email',[validators.Length(min = 6, max = 50)], render_kw={"placeholder": "Email"})
+    username = StringField('Username',[validators.Length(min = 4, max = 25)], render_kw={"placeholder": "Username"})
     password = PasswordField('Password',[
         validators.DataRequired(),
         validators.EqualTo('confirm',message = 'Passwords do not match')
-        ])
-    confirm = PasswordField('Confirm Password')
+        ], render_kw={"placeholder": "Password"})
+    confirm = PasswordField('Confirm Password', render_kw={"placeholder": "Confirm Password"})
 
 # signup for user
 @app.route('/signup',methods=['GET','POST'])
@@ -168,16 +170,16 @@ def signup():
     return render_template('signup.html', form = form)
 
 class SignupCompany(Form):
-    name = StringField('Name',[validators.Length(min = 1, max = 50)])
-    company_name = StringField('Company',[validators.Length(min = 1, max = 50)])
-    website = StringField('Website',[validators.Length(min = 1, max = 50)])
-    username = StringField('Username',[validators.Length(min = 4, max = 25)])
-    email = StringField('Email',[validators.Length(min = 6, max = 50)])
+    name = StringField('Name',[validators.Length(min = 1, max = 50)], render_kw={"placeholder": "Name"})
+    company_name = StringField('Company',[validators.Length(min = 1, max = 50)], render_kw={"placeholder": "Company Name"})
+    website = StringField('Website',[validators.Length(min = 1, max = 50)], render_kw={"placeholder": "Website"})
+    username = StringField('Username',[validators.Length(min = 4, max = 25)], render_kw={"placeholder": "Username"})
+    email = StringField('Email',[validators.Length(min = 6, max = 50)], render_kw={"placeholder": "Email"})
     password = PasswordField('Password',[
         validators.DataRequired(),
         validators.EqualTo('confirm',message = 'Passwords do not match')
-        ])
-    confirm = PasswordField('Confirm Password')
+        ], render_kw={"placeholder": "Password"})
+    confirm = PasswordField('Confirm Password', render_kw={"placeholder": "Confirm Password"})
 
 # signup for company
 @app.route('/signup_company',methods=['GET','POST'])

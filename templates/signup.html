@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body%}
-<link rel="stylesheet" type="text/css" href="/static/static/css/radio3.css">
+<link rel="stylesheet" type="text/css" href="/static/static/css/radio6.css">
 <script type="text/javascript">
 	function check() {
 		if(document.getElementById("no").checked) {
@@ -16,41 +16,42 @@
     height: auto;
 '></h1></center>
 
-<p class="btn-switch">          
-  <input type="radio" id="yes" name="switch" class="btn-switch__radio btn-switch__radio_yes" checked />
+<p class="btn-switch" style = "margin-left:20%">
+  <input type="radio" id="yes" name="switch" class="btn-switch__radio btn-switch__radio_yes"  checked />
   <input type="radio"  id="no" name="switch" class="btn-switch__radio btn-switch__radio_no" onclick="check()" />   
-  <label for="yes" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt">User</span></label>                 
-  <label for="no" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">Company</span></label>             
+  <label for="yes" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt">User</span></label>
+  <label for="no" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">Company</span></label>
 </p>
-
 <!--
-<form method="POST" action="">
-	<div>{{ form.name.label }}: {{ form.name() }}</div>
-	<div>{{ form.email.label }}: {{ form.email() }}</div>
-    <div>{{ form.username.label }}:{{ form.username(class="css_class") }}</div>
-    <div>{{ form.password.label }}: {{ form.password() }}</div>
-    <p><input type="submit" class="btn btn-primary" value="Submit" ></p>
-</form> -->
+#FAF0E6
+-->
 
+    <style>
+        .form-control {
+        width:80%;
+    </style>
 {%from "include/formhelpers.html" import render_field %}
-<div class="cont">
+<div class="cont" style="
+    padding: 5%;
+    margin-left: 15% ">
 <form method="POST" action = "" >
 <div class="form-group" >
- {{render_field(form.name,class_="form-control")}}
+     {{render_field(form.name,class_="form-control")}}
 </div>
 <div class="form-group">
-  {{render_field(form.email,class_="form-control")}}
-</div>
-<div class="form-group">
-  {{render_field(form.username,class_="form-control")}}
-</div>
-<div class="form-group">
-  {{render_field(form.password,class_="form-control")}}
-</div>
-<div class="form-group">
-  {{render_field(form.confirm,class_="form-control")}}
-</div>
-<p><input type="submit" class="btn btn-primary" value="Submit" ></p>
-</form>
-</div>
-{% endblock %}
+   {{render_field(form.email,class_="form-control")}}
+ </div>
+ <div class="form-group">
+   {{render_field(form.username,class_="form-control")}}
+ </div>
+ <div class="form-group">
+   {{render_field(form.password,class_="form-control")}}
+ </div>
+ <div class="form-group">
+   {{render_field(form.confirm,class_="form-control")}}
+ </div>
+ <p><input type="submit" class="btn btn-primary" value="Submit" ></p>
+ </form>
+ </div>
+ </div>
+ {% endblock %}

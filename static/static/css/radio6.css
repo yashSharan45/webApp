@@ -5,7 +5,7 @@ html {
 .btn-switch {
   font-size: 1em;
 	position: relative;
-	display: inline-block;		
+	display: inline-block;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -15,18 +15,18 @@ html {
 	display: none;
 }
 .btn-switch__label {
-	display: inline-block;	
+	display: inline-block;
 	padding: .75em .5em .75em .75em;
 	vertical-align: top;
 	font-size: 1em;
 	font-weight: 700;
 	line-height: 1.5;
 	color: #666;
-  cursor: pointer;
+    cursor: pointer;
 	transition: color .2s ease-in-out;
 }
 .btn-switch__label + .btn-switch__label {
-  padding-right: .75em;
+  padding-right: .01em;
 	padding-left: 0;
 }
 .btn-switch__txt {
@@ -56,7 +56,7 @@ html {
 	transition: background .2s ease-in-out;
 }
 .btn-switch__radio_yes:checked ~ .btn-switch__label:before {
-	background: #6ad500;
+	background: darkslategray;
 }
 .btn-switch__label_no:after {
 	content: "";
@@ -67,7 +67,7 @@ html {
 	left: .5em;
 	width: 2em;
 	background: #fff;
-	border-radius: 1em;	
+	border-radius: 1em;
 	pointer-events: none;
 	box-shadow: 0 .1429em .2143em rgba(43,43,43,.2), 0 .3572em .3572em rgba(43,43,43,.1);
 	transition: left .2s ease-in-out, background .2s ease-in-out;
