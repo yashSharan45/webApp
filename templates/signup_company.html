@@ -4,20 +4,31 @@
 
 <script type="text/javascript">
 	function check() {
-		if(document.getElementById("user").checked) {
+		if(document.getElementById("yes").checked) {
     			window.location = '/signup'
 			}	
 	}
 </script>
+<body background="/static/img/ww.jpg"></body>
+<link rel="stylesheet" type="text/css" href="/static/static/css/radio3.css">
 
 <div class="container" style= "width: 100%"> 
-{% set flag = false %}
 
-<h1>Sign Up</h1>
+
+<center><h1><img src="/static/img/reg.png" style='width:100% , min-width:200px , min-height:120px'></h1></center>
+<p class="btn-switch">          
+  <input type="radio" id="yes" name="switch" class="btn-switch__radio btn-switch__radio_yes" onclick="check()" />
+  <input type="radio"  id="no" name="switch" class="btn-switch__radio btn-switch__radio_no"  checked />   
+  <label for="yes" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt">User</span></label>                 
+  <label for="no" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">Company</span></label>             
+</p>
+
+<!--
 <div class="radio-inline">
 	  <label><input type="radio" name="optradio" id ="user" onclick="check()"> User </label>
  <label><input type="radio" name="optradio" id ="company" checked="checked"> Company </label>
 </div>
+-->
 
 {%from "include/formhelpers.html" import render_field %}
 <form method="POST" action = "" >

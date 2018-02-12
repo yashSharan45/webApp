@@ -28,7 +28,10 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	    {% include 'include/navbar.html' %}
 	    {% include 'include/flashMessages.html' %}
+
+	    <!--
 	<nav class="site-header sticky-top py-1">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
         <a class="py-2" href="#">
@@ -51,7 +54,7 @@
                 </li>
       </div>
     </nav>
-
+		-->
 
         
 	<div class="limiter">
@@ -63,16 +66,17 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="POST">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Username</span>
 						<input class="input100" type="text" name="username" placeholder="Enter username">
 						<span class="focus-input100"></span>
 					</div>
 
+
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 
