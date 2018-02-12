@@ -31,9 +31,82 @@ def about():
 def contact():
     return render_template('contact.html')
 
-@app.route('/login')
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('login.html')
+	if request.method == 'POST':
+		#get credentials
+		username = request.form['username']
+		password_candidate = request.form['password']
+
+		#create cursor
+		cur = mysql.connection.cursor()
+
+		# get user by username
+		result = cur.execute("SELECT * FROM UserDB WHERE Username = %s",[username])
+
+		if result > 0:
+			# get stored hash
+			data = cur.fetchone() # get only first row
+			password = data['Password']	
+			name = data['Name']
+			#compare passwords
+			if sha256_crypt.verify(password_candidate,password):
+			    #appe.logger.info('PASSWORD MATCHED')
+			    session['logged_in'] = True
+			    session['username'] = username
+			    session['name'] = name
+			    
+			    flash('You are now logged in','success')
+			    return redirect(url_for('dashboard'))		 		           
+			else:
+			    #app.logger.info('PASSWORD NOT MATCHED')
+			    error = 'Invalid Password'
+			    return render_template('login.html',error=error)
+		else:
+			error = 'USERNAME NOT FOUND'
+			return render_template('login.html',error=error) 
+	return render_template('login.html')
+
+@app.route('/login_comp',methods=['GET','POST'])
+def login_comp():
+	if request.method == 'POST':
+		#get credentials
+		username = request.form['username']
+		password_candidate = request.form['password']
+
+		#create cursor
+		cur = mysql.connection.cursor()
+
+		# get user by username
+		result = cur.execute("SELECT * FROM CompanyDB WHERE Username = %s",[username])
+
+		if result > 0:
+			# get stored hash
+			data = cur.fetchone() # get only first row
+			password = data['Password']	
+			name = data['Name']
+			#compare passwords
+			if sha256_crypt.verify(password_candidate,password):
+			    #appe.logger.info('PASSWORD MATCHED')
+			    session['logged_in'] = True
+			    session['username'] = username
+			    session['name'] = name
+			    flash('You are now logged in','success')
+			    return redirect(url_for('dashboard'))		 		           
+			else:
+			    #app.logger.info('PASSWORD NOT MATCHED')
+			    error = 'Invalid Password'
+			    return render_template('login_comp.html',error=error)
+		else:
+			error = 'USERNAME NOT FOUND'
+			return render_template('login_comp.html',error=error) 
+	return render_template('login_comp.html')
+
 
 @app.route('/logout')
 def logout():
