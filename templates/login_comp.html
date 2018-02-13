@@ -29,8 +29,19 @@
 </head>
 <body>
 	    {% include 'include/navbar.html' %}
-	    {% include 'include/flashMessages.html' %}
-		<div  style="margin-top:100px"></div>
+	<style>
+      .flashmsg{
+      margin: 40;
+      margin-left: -9;
+      padding: 20;
+      font-size: larger;
+      width: 100%;
+      }
+    </style>
+		<div  style="margin-top:100px"  class="flashmsg" >
+			{% include 'include/flashMessages.html' %}
+		</div>
+
 
 		<div class="limiter">
 		<div class="container-login100">

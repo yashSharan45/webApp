@@ -4,6 +4,7 @@ from pip._vendor.requests.compat import str
 from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
+from functools import wraps
 
 # pip install Flask-WTF
 # pip install passlib
@@ -20,10 +21,30 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #init MYSQL
 mysql = MySQL(app)
 
+# check if user logger_in
+def is_logged_in(f):
+	@wraps(f)
+	def wrap(*args, **kwargs):
+		if 'logged_in' in session:
+			return f(*args,**kwargs)
+		else:
+			flash('Unauthorized,Please login','danger')
+			return redirect(url_for('login'))
+	return wrap
+
+# a gateway of login
+def is_logged_in2(f):
+	@wraps(f)
+	def wrap(*args, **kwargs):
+		if 'logged_in' in session:
+			return f(*args,**kwargs)
+		else:
+			return redirect(url_for('login'))
+	return wrap
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+	return render_template('home.html')
 
 @app.route('/about')
 def about():
@@ -34,9 +55,9 @@ def contact():
     return render_template('contact.html')
 
 @app.route('/dashboard')
+@is_logged_in
 def dashboard():
     return render_template('dashboard.html')
-
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -64,14 +85,14 @@ def login():
 			    session['name'] = name
 			    
 			    flash('You are now logged in','success')
-			    return redirect(url_for('dashboard'))		 		           
+			    return redirect(url_for('dashboard'))
 			else:
 			    #app.logger.info('PASSWORD NOT MATCHED')
 			    error = 'Invalid Password'
 			    return render_template('login.html',error=error)
 		else:
-			error = 'USERNAME NOT FOUND'
-			return render_template('login.html',error=error) 
+			error = 'Username Not Found'
+			return render_template('login.html',error=error)
 	return render_template('login.html')
 
 @app.route('/login_comp',methods=['GET','POST'])
@@ -105,16 +126,20 @@ def login_comp():
 			    error = 'Invalid Password'
 			    return render_template('login_comp.html',error=error)
 		else:
-			error = 'USERNAME NOT FOUND'
+			error = 'Username Not Found'
 			return render_template('login_comp.html',error=error) 
 	return render_template('login_comp.html')
 
 
 @app.route('/logout')
 def logout():
-    return render_template('logout.html')
+	session.clear()
+	flash('You are now logged out','success')
+	return redirect(url_for('login'))
+
 
 @app.route('/mobile')
+@is_logged_in2
 def mobile():
     return render_template('mobileSurvey.html')
 
