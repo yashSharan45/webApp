@@ -1,3 +1,4 @@
+
 jQuery(document).ready(function($){
 	//move nav element position according to window width
 	moveNavigation();
@@ -34,10 +35,14 @@ jQuery(document).ready(function($){
         	//desktop screen - insert navigation inside header element
 			navigation.detach();
 			navigation.insertBefore('.cd-nav-trigger');
+			$(window).on('resize', function(){
+            		(!window.requestAnimationFrame) ? setTimeout(moveNavigation, 300) : window.requestAnimationFrame(moveNavigation);
+            	});
 		} else {
 			//mobile screen - insert navigation after .cd-main-content element
 			//navigation.detach();
 			navigation.insertAfter('.cd-main-content');
+
 		}
 	}
 

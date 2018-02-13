@@ -229,7 +229,10 @@ header::before {
   transform: translateX(260px);
 }
 .cd-main-nav.nav-is-visible {
-  visibility: visible;
+   margin-right: -100%;
+   width: 100%;
+   margin-top: -0%;
+   visibility: visible;
   -webkit-transition: visibility 0s 0s;
   -moz-transition: visibility 0s 0s;
   transition: visibility 0s 0s;
