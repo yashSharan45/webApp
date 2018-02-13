@@ -27,7 +27,7 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('/navbar1.html')
+    return render_template('/include/navbar.html')
 
 @app.route('/contact')
 def contact():
