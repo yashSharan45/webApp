@@ -1,25 +1,75 @@
-<nav class="site-header sticky-top py-1">
+<!--
+ <nav class="site-header sticky-top py-1">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
+<<<<<<< HEAD
         <a class="py-2" href="/">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
         </a>
+=======
+>>>>>>> 319e7c0a6d7fa7d6d451a93420ff0589a0ab3106
         <li href="#"><a class="py-2 d-none d-md-inline-block" href="/">Home</a></li>
+                <li><a class="py-2 d-none d-md-inline-block" href="/categories">Categories</a></li>
                 <li><a class="py-2 d-none d-md-inline-block"   href="/about">About</a></li>
                 <li><a class="py-2 d-none d-md-inline-block" href="/contact">Contact</a></li>
                 <li class="dropdown">
-                  <a class="py-2 d-none d-md-inline-block" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a class="py-2 d-none d-md-inline-block" href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  role="button" aria-haspopup="true" aria-expanded="false">Register/SignIn <span class="caret">
+                  </span></a>
                   <ul class="dropdown-menu">
-                    <li><a class="py-2 d-none d-md-inline-block" href="/login">Login</a></li>
+                    <li><a class="py-2 d-none d-md-inline-block" href="/login">User login</a></li>
+                    <li><a class="py-2 d-none d-md-inline-block" href="/login_comp">Company login</a></li>
                     <li><a class="py-2 d-none d-md-inline-block" href="/signup">Signup</a></li>
-                    <li><a class="py-2 d-none d-md-inline-block" href="/logout">Logout</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li  class="dropdown-header">Nav header</li>
-                    <li><a class="py-2 d-none d-md-inline-block"  href="#">Separated link</a></li>
-                    <li><a class="py-2 d-none d-md-inline-block" href="#">One more separated link</a></li>
                   </ul>
-                </li>
+                 </li>
       </div>
     </nav>
+-->
 
 
-        
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="static/nav/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="static/nav/css/style.css"> <!-- Resource style -->
+    <script src="static/nav/js/modernizr.js"></script> <!-- Modernizr -->
+
+<body>
+<header >
+    <div class="cd-logo"><a href="#0"><img src="static/nav/img/cd-logo.svg" alt="Logo"></a></div>
+
+    <nav class="cd-main-nav-wrapper" >
+        <ul class="cd-main-nav">
+            <li><a href="/">Home</a></li>
+            {% if not session.logged_in %}
+            <li><a href="/signup">Register</a></li>
+            <li><a href="/login">User Login</a></li>
+            <li><a href="/login_comp">Company Login</a></li>
+            {% endif %}
+            <li><a href="/contact">Contact</a></li>
+            {% if session.logged_in %}
+            <li><a href="/logout"> Logout </a></li>
+            <!--<li>
+                <a href="#0" class="cd-subnav-trigger"><span>Categories</span></a>
+
+                <ul>
+                    <li class="go-back"><a href="#0">Menu</a></li>
+                    <li><a href="/mobile">Phones</a></li>
+                    <li><a href="#0">Laptops</a></li>
+                    <li><a href="#0">Electronics</a></li>
+                    <li><a href="#0">Category 4</a></li>
+                    <li><a href="#0">Category 5</a></li>
+                    <li><a href="#0" class="placeholder">Placeholder</a></li>
+                </ul>
+            </li> -->
+            {% endif %}
+        </ul> <!-- .cd-main-nav -->
+    </nav> <!-- .cd-main-nav-wrapper -->
+
+    <a href="#0" class="cd-nav-trigger"><span></span></a>
+</header>
+<div> </div>
+<script src="static/nav/js/jquery-2.1.1.js"></script>
+<script src="static/nav/js/main.js"></script> <!-- Resource jQuery -->
+</body>
