@@ -1,0 +1,716 @@
+{% extends 'layout.html' %}
+
+{%block body%}
+
+<style type="text/css">
+    
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 1px; }
+h1 { font-size: 2em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 7px;
+  font-size: 3em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+
+
+div.grid      { width: 900px; }
+div.grid div  { float: left; height: 100px; }
+div.col100    { width: 100px; }
+div.col200    { width: 200px; }
+div.col300    { width: 510px; }
+div.grey      { background-color: white; }
+div.red       { background-color: white; }
+div.clear     { clear: both; }
+
+
+
+</style>
+
+<style type="text/css">
+    
+    /*
+ * Copyright (c) 2012-2013 Thibaut Courouble
+ * http://www.cssflow.com
+ * Licensed under the MIT License
+ *
+ * Sass/SCSS source: https://goo.gl/qEV26
+ * PSD by Hemn Chawroka: https://goo.gl/nXZHJ
+ */
+
+body {
+  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: light-grey;
+}
+
+.cont {
+  margin: 20px auto;
+  width: 400px;
+  text-align: center;
+}
+
+.cont > .drop {
+  margin: 0 20px;
+  vertical-align: top;
+}
+
+.drop {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 150px;
+  background: #f2f2f2;
+  border: 1px solid;
+  border-color: white #f7f7f7 whitesmoke;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.drop:before, .drop:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #888888 transparent;
+  pointer-events: none;
+}
+
+.drop:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.drop:after {
+  margin-top: 7px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.drop-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  background: #f2f2f2; /* Fallback for IE 8 */
+  background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.drop-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #49aff2;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.drop-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+
+.lt-ie9 .dropdown {
+  z-index: 1;
+}
+
+.lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+
+.lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+
+@-moz-document url-prefix() {
+  .dropdown-select {
+    padding-left: 6px;
+  }
+}
+
+.drop-dark {
+  background: #444;
+  border-color: #111111 #0a0a0a black;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.drop-dark:before {
+  border-bottom-color: #aaa;
+}
+
+.drop-dark:after {
+  border-top-color: #aaa;
+}
+
+.drop-dark .drop-select {
+  color: #aaa;
+  text-shadow: 0 1px black;
+  background: #444;  /* Fallback for IE 8 */
+}
+
+.drop-dark .drop-select:focus {
+  color: #ccc;
+}
+
+.drop-dark .drop-select > option {
+  background: #444;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+}
+
+</style>
+
+
+
+
+<script type="text/javascript">
+var varieties=[
+[" "],
+["Varient","mac","mac-air"],
+["Varient","ultrabool","spectre 360"],
+["Varient","insperon 15 r","alienware"]
+];
+
+function Box2(idx) {
+var f=document.myform;
+f.box2.options.length=null;
+for(var i=0; i<varieties[idx].length; i++) {
+    f.box2.options[i]=new Option(varieties[idx][i], i); 
+    }    
+}
+
+window.onload=function() {
+var box1=document.myform.box1;
+box1.onchange=function(){Box2(this.selectedIndex);};
+// create 2nd select
+try { // IE
+  var sel=document.createElement("<select name=\"box2\"><\/select>");
+  }
+catch(e) {
+  var sel=document.createElement("select");
+  sel.name = "box2";
+  }
+document.myform.getElementsByTagName('fieldset')[0].insertBefore(sel, box1.nextSibling);
+// fill 2nd select
+Box2(0);
+}
+</script>
+<br>
+<div class="container" style="width: 50%; height: 400px; border-radius: 21px 21px 0 0;">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="/static/img/a5.jpg" height="100%" width="85%"></a>  
+        </div>
+
+
+<section class="cont">
+<form name="myform" method="post" action="http://www.mysite.com/mysite">
+<fieldset>
+<select name="box1" >
+<div class="container">
+    <option value="e">Select Brand</option>
+    <option value="a">Apple</option>
+    <option value="b">HP</option>
+    <option value="c">Dell</option>
+</div>
+</select>
+</fieldset>
+</form>
+</section>
+
+
+
+
+<style type="text/css">
+    
+    @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+.label{
+    position: relative;
+    cursor: pointer;
+    color: #666;
+    font-size: 30px;
+}
+
+.input[type="checkbox"], input[type="radio"]{
+    position: absolute;
+    right: 9000px;
+}
+
+/*Check box*/
+.input[type="checkbox"] + .label-text:before{
+    content: "\f096";
+    font-family: "FontAwesome";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing:antialiased;
+    width: 1em;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.input[type="checkbox"]:checked + .label-text:before{
+    content: "\f14a";
+    color: #2980b9;
+    animation: effect 250ms ease-in;
+}
+
+.input[type="checkbox"]:disabled + .label-text{
+    color: #aaa;
+}
+
+.input[type="checkbox"]:disabled + .label-text:before{
+    content: "\f0c8";
+    color: #ccc;
+}
+
+/*Radio box*/
+
+.input[type="radio"] + .label-text:before{
+    content: "\f10c";
+    font-family: "FontAwesome";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing:antialiased;
+    width: 1em;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.input[type="radio"]:checked + .label-text:before{
+    content: "\f192";
+    color: #8e44ad;
+    animation: effect 250ms ease-in;
+}
+
+.input[type="radio"]:disabled + .label-text{
+    color: #aaa;
+}
+
+.input[type="radio"]:disabled + .label-text:before{
+    content: "\f111";
+    color: #ccc;
+}
+
+/*Radio Toggle*/
+
+.toggle input[type="radio"] + .label-text:before{
+    content: "\f204";
+    font-family: "FontAwesome";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing:antialiased;
+    width: 1em;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.toggle input[type="radio"]:checked + .label-text:before{
+    content: "\f205";
+    color: #16a085;
+    animation: effect 250ms ease-in;
+}
+
+.toggle input[type="radio"]:disabled + .label-text{
+    color: #aaa;
+}
+
+.toggle input[type="radio"]:disabled + .label-text:before{
+    content: "\f204";
+    color: #ccc;
+}
+
+
+@keyframes effect{
+    0%{transform: scale(0);}
+    25%{transform: scale(1.3);}
+    75%{transform: scale(1.4);}
+    100%{transform: scale(1);}
+}
+
+</style>
+
+
+
+<div class="container">
+<div class="col-md-16">
+            <form>
+                <h2>How likely is it that you would recommend this company to a friend or colleague?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">EXTREMELY LIKELY</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">SOMEWHAT GOOD</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">AVERAGE</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">BELOW AVERAGE</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">NOT AT ALL LIKELY</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Overall, how satisfied or dissatisfied are you with our company?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very satisfied</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat satisfied</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Neither satisfied nor dissatisfied</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat dissatisfied</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very dissatisfied</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Which of the following words would you use to describe our products? Select all that apply.</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Reliable</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">High quality</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Useful</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Unique</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Good value for money</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Overpriced</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Impractical</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="checkbox" name="checkbox"> <span class="label-text">Ineffective</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+</div>
+<div class="container">
+<div class="col-md-16">
+            <form>
+                <h2>How would you rate the quality of the product?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very high quality</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">High quality</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Neither high nor low quality</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Low quality</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very low quality</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>How would you rate the value for money of the product?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>How likely are you to purchase any of our products again?</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Extremely likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Very likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Somewhat likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Not so likely</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Not at all likely</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+</div>
+<div class="container">
+<div class="col-md-16">
+            <form>
+                <h2>How is the battery life of this laptop</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Does it support gesture control</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Yes</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">No</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Is it a gaming laptop</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Yes</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">No</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-16">
+            <form>
+                <h2>Is their a heating issue with this laptop</h2>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">Yes</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="toggle">
+                        <input type="radio" name="toggle"> <span class="label-text">No</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+</div>
+<br><br>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea placeholder="Any suggestions" rows="4" cols="100">
+</textarea>
+
+
+<h1 align="center">Your rating for the product</h1>
+<div class="grid">
+<div class="col300 red"></div>
+<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+</fieldset>
+<div class="clear">
+</div></div>
+<br><br>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" class="btn btn-primary" value="Submit" ></p>
+<br><br>
+
+{%endblock%}

@@ -44,15 +44,27 @@ def is_logged_in2(f):
 
 @app.route('/')
 def index():
-	return render_template('home.html')
+	return render_template('index.html')
 
-@app.route('/about')
+@app.route('/index')
+def index1():
+    return render_template('index.html')
+
+'''@app.route('/about')
 def about():
     return render_template('/include/navbar.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html')'''
+
+@app.route('/web_app')
+def web_app():
+    return render_template('web_app.html')
+
+@app.route('/phone_app')
+def phone_app():
+    return render_template('phone_app.html')
 
 @app.route('/dashboard')
 @is_logged_in
@@ -138,10 +150,22 @@ def logout():
 	return redirect(url_for('login'))
 
 
-@app.route('/mobile')
+'''@app.route('/mobile')
 @is_logged_in2
 def mobile():
     return render_template('mobileSurvey.html')
+
+@app.route('/laptop')
+def laptop():
+    return render_template('laptopSurvey.html')
+
+@app.route('/camera')
+def camera():
+    return render_template('cameraSurvey.html')
+
+@app.route('/tv')
+def tv():
+    return render_template('tvSurvey.html')'''
 
 @app.route('/admin')
 def admin():
