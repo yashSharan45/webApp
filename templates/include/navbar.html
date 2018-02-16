@@ -9,7 +9,7 @@
 
 <body>
 <header >
-    <div class="cd-logo"><a href="#0"><img src="static/nav/img/cd-logo.svg" alt="Logo"></a></div>
+    <div class="cd-logo"><a href="/"><img src="static/nav/img/cd-logo.svg" alt="Logo"></a></div>
 
     <nav class="cd-main-nav-wrapper" >
         <ul class="cd-main-nav">
@@ -21,7 +21,7 @@
             {% endif %}
             <li><a href="#abc">Contact</a></li>
             {% if session.logged_in %}
-            <li><a href="dashboard"> Dashboard </a></li>
+            <li><a href="/dashboard"> Dashboard </a></li>
             <li>
                 <a href="/logout" ><span>Logout</span></a>
                 <a href="#0" class="cd-subnav-trigger"><span>Categories</span></a>
@@ -29,7 +29,7 @@
                     <li class="go-back"><a href="#0">Menu</a></li>
                     <li><a href="/phones">Phones</a></li>
                     <li><a href="/laptops">Laptops</a></li>
-                    <li><a href="#0">Miscellaneous</a></li>
+                    <li><a href="#0">Gadgets</a></li>
                     <li><a href="#0" class="placeholder">Placeholder</a></li>
                     
                 </ul>

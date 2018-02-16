@@ -1,6 +1,55 @@
-{% extends 'layout.html' %}
-
 {%block body%}
+
+
+<style>
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 12px;
+    padding: 15px 32px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+<form action="/" class="inline">
+<button class="button" style="vertical-align:middle"><span>Home </span></button>
+</form>
+
+
 
 <style type="text/css">
     
@@ -262,12 +311,9 @@ Box2(0);
 }
 </script>
 
-<div class="container" style="width: 50%; height: 500px; border-radius: 21px 21px 0 0;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="/static/img/a4.png" height="100%" width="85%"></a>  
-        </div>
-
 
 <section class="cont">
+ <img src="/static/img/a4.png" height="50%" width="100%">
 <form name="myform" method="post" action="http://www.mysite.com/mysite">
 <fieldset>
 <select name="box1" >
