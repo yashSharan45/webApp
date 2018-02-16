@@ -105,6 +105,14 @@ def phone_app():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/user')
+@is_logged_in
+def user():
+    return render_template('user.html')
+
+
+
+
 @app.route('/login',methods=['GET','POST'])
 def login():
 	if request.method == 'POST':
