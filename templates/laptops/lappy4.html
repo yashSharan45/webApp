@@ -1,6 +1,58 @@
-{% extends 'layout.html' %}
 
 {%block body%}
+
+
+<style>
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 12px;
+    padding: 15px 32px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+<form action="/" class="inline">
+<button class="button" style="vertical-align:middle"><span>Home </span></button>
+</form>
+
+
+
+
 
 <style type="text/css">
     
@@ -262,12 +314,11 @@ Box2(0);
 }
 </script>
 
-<div class="container" style="width: 50%; height: 500px; border-radius: 21px 21px 0 0;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="/static/img/a4.png" height="100%" width="85%"></a>  
-        </div>
+          
 
 
 <section class="cont">
+<img src="/static/img/a5.jpg" align="center" height="50%" width="100%">
 <form name="myform" method="post" action="http://www.mysite.com/mysite">
 <fieldset>
 <select name="box1" >
@@ -610,7 +661,7 @@ Box2(0);
 <div class="container">
 <div class="col-md-16">
             <form>
-                <h2>How is the battery life of the mobile</h2>
+                <h2>How is the battery life of the laptop</h2>
                 <div class="form-check">
                     <label class="toggle">
                         <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
@@ -640,37 +691,22 @@ Box2(0);
         </div>
         <div class="col-md-16">
             <form>
-                <h2>How is the camera quality of the mobile</h2>
+                <h2>Is it a gaming laptop</h2>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Excellent</span>
+                        <input type="radio" name="toggle"> <span class="label-text">Yes</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Above average</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Average</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Below average</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="toggle">
-                        <input type="radio" name="toggle"> <span class="label-text">Poor</span>
+                        <input type="radio" name="toggle"> <span class="label-text">No</span>
                     </label>
                 </div>
             </form>
         </div>
         <div class="col-md-16">
             <form>
-                <h2>Does it provide regular upgrade and latest security patch</h2>
+                <h2>Is their a heating issue with this laptop</h2>
                 <div class="form-check">
                     <label class="toggle">
                         <input type="radio" name="toggle"> <span class="label-text">Yes</span>
