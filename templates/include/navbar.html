@@ -11,6 +11,15 @@
 <header >
     <div class="cd-logo"><a href="/"><img src="static/nav/img/cd-logo.svg" alt="Logo"></a></div>
 
+    <style type="text/css">
+	@media only screen and (min-width: 1024px) {
+  	.mob{
+    	display: none !important ;
+    	visibility: hidden !important ;
+  }
+    </style>
+
+
     <nav class="cd-main-nav-wrapper" >
         <ul class="cd-main-nav">
             <li><a href="/">Home</a></li>
@@ -22,6 +31,7 @@
             <li><a href="#abc">Contact</a></li>
             {% if session.logged_in %}
             <li><a href="/dashboard"> Dashboard </a></li>
+            <li class="mob"><a href="/user" > User Profile </a></li>
             <li>
                 <a href="/logout" ><span>Logout</span></a>
                 <a href="#0" class="cd-subnav-trigger"><span>Categories</span></a>
