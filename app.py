@@ -319,4 +319,4 @@ def signup_company():
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
-app.run(debug = True)
+    app.run(debug = True)
