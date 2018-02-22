@@ -88,7 +88,9 @@ def lappy3():
 def lappy4():
     return render_template('laptops/lappy4.html')
 
-
+@app.route('/survey')
+def survey():
+    return render_template('survey.html')
 
 
 
