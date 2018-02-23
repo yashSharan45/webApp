@@ -105,7 +105,7 @@ def phone_app():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('user.html')
 
 @app.route('/user')
 @is_logged_in
