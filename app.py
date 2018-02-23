@@ -44,20 +44,76 @@ def is_logged_in2(f):
 
 @app.route('/')
 def index():
-	return render_template('home.html')
+	return render_template('index.html')
 
-@app.route('/about')
-def about():
-    return render_template('/include/navbar.html')
+@app.route('/index')
+def index1():
+    return render_template('index.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+
+# ROUTING OF PHONES
+@app.route('/phones')
+def phones():
+    return render_template('phones.html')
+
+@app.route('/phones/phone1')
+def phone1():
+    return render_template('phones/phone1.html')
+@app.route('/phones/phone2')
+def phone2():
+    return render_template('phones/phone2.html')
+@app.route('/phones/phone3')
+def phone3():
+    return render_template('phones/phone3.html')
+@app.route('/phones/phone4')
+def phone4():
+    return render_template('phones/phone4.html')
+
+
+# ROUTING OF LAPTOPS
+@app.route('/laptops')
+def laptops():
+    return render_template('laptops.html')
+
+@app.route('/laptops/lappy1')
+def lappy1():
+    return render_template('laptops/lappy1.html')
+@app.route('/laptops/lappy2')
+def lappy2():
+    return render_template('laptops/lappy2.html')
+@app.route('/laptops/lappy3')
+def lappy3():
+    return render_template('laptops/lappy3.html')
+@app.route('/laptops/lappy4')
+def lappy4():
+    return render_template('laptops/lappy4.html')
+
+@app.route('/survey')
+def survey():
+    return render_template('survey.html')
+
+
+
+@app.route('/web_app')
+def web_app():
+    return render_template('web_app.html')
+
+@app.route('/phone_app')
+def phone_app():
+    return render_template('phone_app.html')
 
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route('/user')
+@is_logged_in
+def user():
+    return render_template('user.html')
+
+
+
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -138,10 +194,22 @@ def logout():
 	return redirect(url_for('login'))
 
 
-@app.route('/mobile')
+'''@app.route('/mobile')
 @is_logged_in2
 def mobile():
     return render_template('mobileSurvey.html')
+
+@app.route('/laptop')
+def laptop():
+    return render_template('laptopSurvey.html')
+
+@app.route('/camera')
+def camera():
+    return render_template('cameraSurvey.html')
+
+@app.route('/tv')
+def tv():
+    return render_template('tvSurvey.html')'''
 
 @app.route('/admin')
 def admin():
@@ -253,4 +321,4 @@ def signup_company():
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
-app.run(debug = True)
+    app.run(debug = True)

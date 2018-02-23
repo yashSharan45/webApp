@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="static/assets/img/favicon.ico">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>OSP 1.0 </title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <link href="static/assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="static/assets/css/landing-page.css" rel="stylesheet"/>
+
+        <!--     Fonts and icons     -->
+        <link href="static/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
+        <link href="static/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+    </head>
+    {% include 'include/navbar.html' %}
+    <body class="landing-page landing-page1">
+        
+        <div class="wrapper">
+            <div class="parallax filter-gradient blue" data-color="blue">
+                <div class="parallax-background">
+                    <img class="parallax-background-image" src="static/assets/img/template/bg3.jpg">
+                </div>
+                <div class= "container">
+                    <div class="row">
+                        <div class="col-md-5 hidden-xs">
+                            <div class="parallax-image">
+                                <img class="phone" src="static/assets/img/template/iphone3.png" style="margin-top: 20px"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            <div class="description">
+                                <h2>Latest Tech Updates</h2>
+                                <br>
+                                <h5>The latest tech news about the world's best (and sometimes worst) hardware, apps, and much more. From top companies like Google and Apple to tiny startups vying for your attention</h5>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-fill btn-neutral">
+                                <i class="fa fa-apple"></i> Appstore
+                                </button>
+                                <button class="btn btn-simple btn-neutral">
+                                <i class="fa fa-android"></i>
+                                </button>
+                                <button class="btn btn-simple btn-neutral">
+                                <i class="fa fa-windows"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="section section-gray section-clients">
+                <div class="container text-center">
+                    <h4 class="header-text">Friends in high places</h4>
+                    <p>
+                        Build customer confidence by listing your users! Anyone who has used your service and has been pleased with it should have a place here! From Fortune 500 to start-ups, all your app enthusiasts will be glad to be featured in this section. Moreover, users will feel confident seing someone vouching for your product!<br>
+                    </p>
+                    <div class="logos">
+                        <ul class="list-unstyled">
+                            <li ><img src="static/assets/img/logos/adobe.png"/></li>
+                            <li ><img src="static/assets/img/logos/zendesk.png"/></li>
+                            <li ><img src="static/assets/img/logos/ebay.png"/></i>
+                            <li ><img src="static/assets/img/logos/evernote.png"/></li>
+                            <li ><img src="static/assets/img/logos/airbnb.png"/></li>
+                            <li ><img src="static/assets/img/logos/zappos.png"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-presentation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="description">
+                                <h4 class="header-text">Processors</h4>
+                                <p>In computing, a processor or processing unit is an electronic circuit which performs operations on some external data source, usually memory or some other data stream. The term is frequently used to refer to the central processor (central processing unit) in a system, but typical computer systems (especially SoCs) combine a number of specialised "processors". </p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1 hidden-xs">
+                            <img src="static/assets/img/template/processor.jpg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 400px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/1.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/CP.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/intel.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">Intel Core i9 7960X</h4>
+                            <p>
+                                16 Cores, 32 Threads, Supported Memory: DDR4-2666</p>
+                            <p> Intel Turbo Boost Max 3.0 Technology </p>
+                            <p>    Socket LGA 2066, 22MB L3 Cache </p>
+                             <p>   Compatible with Intel X299 Chipset Motherboards 
+                            </p>
+                            <br>
+                            <a href="https://ark.intel.com/products/126697/Intel-Core-i9-7960X-X-series-Processor-22M-Cache-up-to-4_20-GHz" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            <a href="https://www.amazon.in/dp/B0775X4FFV/ref=pd_lpo_sbs_dp_ss_2?pf_rd_p=cd818f9c-142a-4b42-ad2c-f0421857aaf5&pf_rd_s=lpo-top-stripe&pf_rd_t=201&pf_rd_i=B072KTSCCS&pf_rd_m=A1VBAL9TL5WCBF&pf_rd_r=99N5NMPV3EP3CDR4N1CK&pf_rd_r=99N5NMPV3EP3CDR4N1CK&pf_rd_p=cd818f9c-142a-4b42-ad2c-f0421857aaf5" target="_blank" id="Demo3" class="btn btn-fill btn-info" data-button="info">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 400px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/2.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/3.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/4.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">R7 370 IceQ X²</h4>
+                            <p>
+                                16 Cores, 32 Threads, Supported Memory: DDR4-2666</p>
+                            <p> Arm yourself for battle with support for DirectX® 12. </p>
+                            <p>    Frame Rate Target Control (FRTC)</p>
+                             <p>   AMD Eyefinity Technology 
+                            </p>
+                            <br>
+                            <a href="http://www.hisdigital.com/us/product2-925.shtml" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            <a href="https://www.amazon.in/Gigabyte-Overclocked-Graphics-GV-R736OC-2GD-REV2-0/dp/B01DT48WSU?tag=googinhydr18418-21&tag=googinkenshoo-21&ascsubtag=7caea86b-52dc-4346-9a1b-fc33de99ec7e" target="_blank" id="Demo3" class="btn btn-fill btn-info" data-button="info">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 400px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/5.png" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/6.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/7.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">Snapdragon 835</h4>
+                            <p>
+                                With an advanced 10-nanometer design, the Qualcomm® Snapdragon™ 835 mobile platform can support phenomenal mobile performance.</p>
+                            <p> It is 35% smaller and uses 25% less power than previous designs, and is engineered to deliver exceptionally long battery life, lifelike VR and AR experiences, cutting-edge camera capabilities and Gigabit Class download speeds.</p>
+                            
+                            <br>
+                            <a href="https://www.qualcomm.com/products/snapdragon/processors/835" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 250px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/8.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/9.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/10.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">Moov Now</h4>
+                            <p>
+                                The Moov Now doesn't have all the bells and whistles you would associate with a fitness tracker. It doesn't have GPS tracking, it doesn't even have a screen; but what it does have is a cheap price tag and six-month battery life. Yes, you read that right: six months.</p>
+                            <p> During those six months you can track your steps, your sleep, your fitness, your running technique and a whole lot more. This may be an unconventional fitness tracker, but it's a great one. </p>
+                            
+                            <br>
+                            <a href="https://welcome.moov.cc/" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            <a href="https://www.amazon.in/Moov-Fitness-Tracker-Audio-Stealth/dp/B01CX26IP8?psc=1&SubscriptionId=AKIAIPHVZTVH6LZ5BFZA&tag=tech0e7-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B01CX26IP8&ascsubtag=trd-1067100434-21" target="_blank" id="Demo3" class="btn btn-fill btn-info" data-button="info">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 250px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/11.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/12.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/13.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">Nikon D850</h4>
+                            <p>
+                                TAccording to TechRadar's Photography Editor Phil Hall, the "fabulous D850 DSLR pretty much ticks every box".It has a brillaint 45.4MP full-frame sensor, stunning image quality, and that's where the story starts.</p>
+                            <p> It has a sophisticated 153-point AF system and 9fps bust shooting speed. The D850 is just as home shooting wildlife, landscape, and portraits. He thinks it could perhaps be the most well-rounded camera he's ever seen. </p>
+                            
+                            <br>
+                            <a href="http://www.nikon.co.in/en_IN/product/digital-slr-cameras/d850?utm_source=Google&utm_medium=Search&utm_campaign=Feb2018" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            <a href="https://www.amazon.in/Nikon-D850-45-7MP-Camera-Optical/dp/B00JE2R38C?SubscriptionId=AKIAIPHVZTVH6LZ5BFZA&tag=tech0e7-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B00JE2R38C&ascsubtag=trd-1409393617-21" target="_blank" id="Demo3" class="btn btn-fill btn-info" data-button="info">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-demo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
+                                <div class="carousel-inner"  style="height: 250px">
+                                    <div class="item active">
+                                        <img src="static/assets/img/template/examples/14.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/15.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="static/assets/img/template/examples/16.jpg" alt="">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators carousel-indicators-blue">
+                                    <li data-target="#description-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#description-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#description-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <h4 class="header-text">HTC Vive</h4>
+                            <p>
+                                The HTC Vive is the best VR headset in the world right now. The controls are intuitive to use, the resolution is incredible, with a 1080p screen per eye, and the base stations mean you can play in a space that's 13 x 13 feet in size – that's some serious playing space to swing yourself around in. </p>
+                            <p> Like most of the entries on our list this is a premium product at a high price, but if you're looking for the best first-generation VR headset around, then the HTC Vive is the one to go for.  </p>
+                            
+                            <br>
+                            <a href="https://www.vive.com/in/product/" id="Demo3" class="btn btn-fill btn-info" target="_blank" data-button="info">Details</a>
+                            <a href="https://www.amazon.in/HTC-VIVE-Virtual-Reality-System/dp/B06ZY6LJ2F?SubscriptionId=AKIAIPHVZTVH6LZ5BFZA&tag=tech0e7-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B06ZY6LJ2F&ascsubtag=trd-1476303084-21" target="_blank" id="Demo3" class="btn btn-fill btn-info" data-button="info">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="abc">
+            <div class="section section-features">
+                <div class="container">
+                    <h4 class="header-text text-center">Features</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-note2"></i>
+                                </div>
+                                <div class="text">
+                                    <h4>Online Customers Management</h4>
+                                    <p>All appointments sync with your Google calendar so your availability is always up to date. See your schedule at a glance from any device.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-bell"></i>
+                                </div>
+                                <h4>Smart Notifications on hands</h4>
+                                <p>Automatic text and email reminders make sure customers always remember their upcoming appointments.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-blue">
+                                <div class="icon">
+                                    <i class="pe-7s-graph1"></i>
+                                </div>
+                                <h4>Know your business better now</h4>
+                                <p>Take payments and run your business on the go, in your store and then see how it all adds up with analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			</section>
+
+            <div class="section section-testimonial">
+                <div class="container">
+                    <h4 class="header-text text-center">What people think</h4>
+                    <div id="carousel-example-generic" class="carousel fade" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item">
+                                <div class="mask">
+                                    <img src="static/assets/img/faces/face-4.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p>Jay Z, Producer</p>
+                                    <h3>"I absolutely love your app! It's truly amazing and looks awesome!"</h3>
+                                </div>
+                            </div>
+                            <div class="item active">
+                                <div class="mask">
+                                    <img src="static/assets/img/faces/face-3.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p>Drake, Artist</p>
+                                    <h3>"This is one of the most awesome apps I've ever seen! Wish you luck Creative Tim!"</h3>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="mask">
+                                    <img src="static/assets/img/faces/face-2.jpg">
+                                </div>
+                                <div class="carousel-testimonial-caption">
+                                    <p>Rick Ross, Musician</p>
+                                    <h3>"Loving this! Just picked it up the other day. Thank you for the work you put into this."</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators carousel-indicators-blue">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-no-padding">
+                <div class="parallax filter-gradient blue" data-color="blue">
+                    <div class="parallax-background">
+                        <img class ="parallax-background-image" src="static/assets/img/template/bg3.jpg"/>
+                    </div>
+                    <div class="info">
+                        <h1>Download this landing page for free!</h1>
+                        <p>Beautiful multipurpose bootstrap landing page.</p>
+                        <a href="https://themewagon.com/themes/free-responsive-html5-landing-page-template-download/" class="btn btn-neutral btn-lg btn-fill">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+        <div class="fixed-plugin">
+            <div class="dropdown">
+                <a href="#" data-toggle="dropdown">
+                <i class="fa fa-cog fa-2x"> </i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header-title">Adjustments</li>
+                    <li class="adjustments-line">
+                        <a href="javascript:void(0)" class="switch-trigger">
+                            <p class="pull-right">Filter</p>
+                            <div class="pull-left">
+                                <span class="badge selector badge-blue active" data-color="blue" data-button="info"></span>
+                                <span class="badge selector badge-green" data-color="green" data-button="success"></span>
+                                <span class="badge selector badge-orange" data-color="orange" data-button="warning"></span>
+                                <span class="badge selector badge-red" data-color="red" data-button="danger"></span>
+                                <span class="badge selector badge-black" data-color="gray" data-button="default"></span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="index" class="switch">
+                            <img alt="..." src="static/assets/img/blue.jpg">
+                            <p class="pull-left">Tech News</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="phone_app" class="switch">
+                            <img alt="..." src="static/assets/img/phone_app.jpg">
+                            <p class="pull-left">Mobiles</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="web_app" class="switch">
+                            <img alt="..." src="static/assets/img/web_app.jpg">
+                            <p class="pull-left">Laptop</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+    <script src="static/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="static/assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+    <script src="static/assets/js/bootstrap.js" type="text/javascript"></script>
+    <script src="static/assets/js/awesome-landing-page.js" type="text/javascript"></script>
+</html>
