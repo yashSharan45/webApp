@@ -91,6 +91,9 @@ def lappy4():
 @app.route('/survey')
 def survey():
     return render_template('survey.html')
+@app.route('/surv')
+def surv():
+    return render_template('surv.html')
 
 
 

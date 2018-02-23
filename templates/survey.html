@@ -15,30 +15,54 @@
   font-family: roboto;
 }
 
-body { background: #000; }
+body { background: #000;
+	/*background-color: #ede7f6;*/
+	background: url("/static/img/pastel.jpg") no-repeat center center fixed;
+	/*background-image: url("/static/img/back.jpeg");
+	opacity: 0.5;*/
+ }
 
 .cont {
+  font-style: italic;
+  font-size: 90%; 	
   width: 93%;
   max-width: 100%;
   text-align: center;
   margin: 4% auto;
   padding: 30px 0;
-  background: #111;
+  /*background: #111;*/
+  color: #EEE;
+  /*border-radius: 5px;
+  border: thin solid #444;*/
+  overflow: hidden;
+}
+
+.container {
+  width: 60%;
+  max-width: 100%;
+  text-align: center;
+  margin: 4% auto;
+  margin-top: 10%;
+  padding: 30px 0;
+  /*background: #000;*/
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   color: #EEE;
   border-radius: 5px;
   border: thin solid #444;
   overflow: hidden;
+ background-image: url("/static/img/back.jpeg");
 }
 
+
 .cont1 {
-  width: 17%;
+  /*width: 17%;*/
   max-width: 100%;
   text-align: center;
   margin: 4% auto;
   padding: 0px 0;
-  background: #000;
+  /*background: #000;*/
   color: #000;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   overflow: hidden;
 }
 
@@ -50,11 +74,16 @@ hr {
 
 div.title { font-size: 2em; }
 
-h4 span {
+h4 span  {
   font-weight: 300;
   color: #Fd4;
 }
-
+.heading {
+  font-weight: 300;
+  color: #Fd4;
+  font-size:-webkit-xxx-large;
+  margin-top:5%;
+}
 div.stars {
   width: 270px;
   display: inline-block;
@@ -94,8 +123,8 @@ label.star:before {
 </head>
 <body>
 {% include 'include/navbar.html' %}
-
-
+<div class="container" background="/static/img/osp.png">
+<p class="heading">Provide us with your valuable survey</p>	
 <div class="cont" style="margin-top:150px;">
   <div class="title">
     <h4><span>How likely is it that you would recommend this company to a friend or colleague?</span></h4>
@@ -272,7 +301,9 @@ label.star:before {
     <h4><span>Any other suggestions</span></h4>
   </div>
   <br>
-<input type="text" name="text" placeholder="suggestions" style="height: 100px;width: 95%; background: #222; color: white; font-size: 30px;">
+<textarea name="text" placeholder="Suggestions..." style="height: 100px;width: 95%;background-image: url('/static/img/back.jpeg'); background: url(images/bg.jpg) no-repeat center center fixed;
+ color: white; font-size: 20px; font-style: italic; font-weight: lighter;">
+</textarea>
 </div>
 <div class="cont">
 <div class="title">
@@ -352,5 +383,6 @@ label.star:before {
   ga('send', 'pageview');
 
 </script>
+</div>
 </body>
 </html>
