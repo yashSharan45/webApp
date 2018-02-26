@@ -439,15 +439,7 @@ label.star:before {
 </section> 
   
 <section id="section11" class="cd-section">
-<div class="cont" style="margin-top: 0px">
-<div class="title">
-    <h4><span>Any other suggestions</span></h4>
-  </div>
-  <br>
-<textarea name="text" placeholder="Suggestions..." style="height: 100px;width: 95%;background-image: url('/static/img/back.jpeg'); background: url(images/bg.jpg) no-repeat center center fixed;
- color: white; font-size: 20px; font-style: italic; font-weight: lighter;">
-</textarea>
-</div>
+<!--
 <div class="cont" style="margin-top: 0px">
 <div class="title">
     <h4><span>What will you rate your over all experience with the device.</span></h4>
@@ -466,37 +458,11 @@ label.star:before {
       <label class="star star-1" for="star-1-10"></label>
     </form>
   </div>
-</div> 
+</div> -->
 <script>
-  
-    /*function foo10() {
-    
-      if(document.getElementById('star-5-10').checked) {
-        document.getElementById('new').value = f1;
-      }
-      else if (document.getElementById('star-4-10').checked) {
-        document.getElementById('new').value = 4;
-      } 
-      else if (document.getElementById('star-3-10').checked) {
-        document.getElementById('new').value = 3;
-      }
-      else if (document.getElementById('star-2-10').checked) {
-        document.getElementById('new').value = 2;
-      }
-      else if (document.getElementById('star-1-10').checked) {
-        document.getElementById('new').value = 1;
-      }
-      else {
-        document.getElementById('new').value = 0;
-      }
-    }  
-*/
-
   var f1=0,f2=0,f3=0,f4=0,f5=0,f6=0,f7=0,f8=0,f9=0,f10=0;
 
   function foo1() {
-       //if ( document.getElementById('icd').checked === false ) {
-
       if(document.getElementById('star-5').checked) {
         f1 = 5;
       }
@@ -676,7 +642,7 @@ label.star:before {
         f9 = 0;
       }
     }            
-  function foo10() {
+ /* function foo10() {
       if(document.getElementById('star-5-10').checked) {
         f10 = 5;
       }
@@ -695,7 +661,7 @@ label.star:before {
       else {
         f10 = 0;
       }
-    }    
+    }    */
   function foo() {
       foo1();
       foo2();
@@ -705,16 +671,24 @@ label.star:before {
       foo6();
       foo7();
       foo8();
-      foo9(); // f6
-      foo10(); 
-      var final = (f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8 + f9 + f10)/10;
-      //var final = f1 + f2 + f3 + f4 + f5;
+      foo9();
+      //foo10(); 
+      var final = (f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8 + f9)/10;
       document.getElementById('new').value = Math.floor(final);
   }
 
 </script>
 <div class="cont1">
 <form action="" class="inline" method="POST">
+  <div class="cont" style="margin-top: 0px">
+<div class="title">
+    <h4><span>Any other suggestions</span></h4>
+  </div>
+  <br>
+<textarea name="text" placeholder="Suggestions..." style="height: 100px;width: 95%;background-image: url('/static/img/back.jpeg'); background: url(images/bg.jpg) no-repeat center center fixed;
+ color: white; font-size: 20px; font-style: italic; font-weight: lighter;">
+</textarea>
+</div>
 <input type="" id ="new" name="starwar" value="" style="visibility: hidden; display: none">
 <button class="button" style="vertical-align:middle" name="b"  onmouseover="foo()"><span>Submit</span></button>
 </form>

@@ -5,6 +5,8 @@ from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
 from functools import wraps
+from flask_mail import Mail, Message
+
 
 # pip install Flask-WTF
 # pip install passlib
@@ -20,6 +22,18 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MYSQL
 mysql = MySQL(app)
+
+#init Mail
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'aneeshverma0412@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Chitkara@71'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail=Mail(app)
+
+
+
 
 # check if user logger_in
 def is_logged_in(f):
@@ -50,6 +64,11 @@ def index():
 def index1():
     return render_template('index.html')
 
+def send_mail(suggestions):
+    app.logger.info('%s',suggestions)
+    msg = Message('Message from ', sender = 'aneeshverma0412@gmail.com', recipients = ['aneesh.verma09@gmail.com'])
+    msg.body = suggestions
+    mail.send(msg)
 
 # ROUTING OF PHONES
 @app.route('/phones')
@@ -78,11 +97,13 @@ def laptops():
 @app.route('/laptops/mac',methods=['GET','POST'])
 def lappy1():
     if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
         review = request.form['starwar']
-        if review is not None:
-            app.logger.info('%s',review)
-        else:
-            app.logger.info("0")        
+        app.logger.info('%s',review)
+        
     return render_template('laptops/mac.html')
 @app.route('/laptops/alienware')
 def lappy2():
@@ -142,13 +163,15 @@ def login():
 			data = cur.fetchone() # get only first row
 			password = data['Password']	
 			name = data['Name']
+            		email = data['Email']
 			#compare passwords
 			if sha256_crypt.verify(password_candidate,password):
 			    #appe.logger.info('PASSWORD MATCHED')
 			    session['logged_in'] = True
 			    session['username'] = username
 			    session['name'] = name
-			    
+			    session['email'] = email
+
 			    flash('You are now logged in','success')
 			    return redirect(url_for('dashboard'))
 			else:

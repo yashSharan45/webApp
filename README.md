@@ -46,3 +46,10 @@ Still if you want to know the steps to Set Up flask ->
 3. Activate virtual environment. ( Command : . venv/bin/activate)
 4. Install flask. ( Command : pip install flask )
 5. python app.py
+
+
+
+
+
+OTHER
+pip install Flask-Mail
