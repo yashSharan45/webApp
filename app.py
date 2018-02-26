@@ -75,22 +75,28 @@ def phone4():
 def laptops():
     return render_template('laptops.html')
 
-@app.route('/laptops/lappy1')
+@app.route('/laptops/mac',methods=['GET','POST'])
 def lappy1():
-    return render_template('laptops/lappy1.html')
-@app.route('/laptops/lappy2')
+    if request.method == 'POST':
+        review = request.form['starwar']
+        if review is not None:
+            app.logger.info('%s',review)
+        else:
+            app.logger.info("0")        
+    return render_template('laptops/mac.html')
+@app.route('/laptops/alienware')
 def lappy2():
-    return render_template('laptops/lappy2.html')
-@app.route('/laptops/lappy3')
+    return render_template('laptops/alienware.html')
+@app.route('/laptops/yoga')
 def lappy3():
-    return render_template('laptops/lappy3.html')
-@app.route('/laptops/lappy4')
+    return render_template('laptops/yoga.html')
+@app.route('/laptops/spectre')
 def lappy4():
-    return render_template('laptops/lappy4.html')
+    return render_template('laptops/spectre.html')
 
-@app.route('/survey')
+@app.route('/lap_survey')
 def survey():
-    return render_template('survey.html')
+    return render_template('lap_survey.html')
 @app.route('/surv')
 def surv():
     return render_template('surv.html')
