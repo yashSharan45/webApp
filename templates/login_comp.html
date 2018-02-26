@@ -41,11 +41,26 @@
 		<div  style="margin-top:100px"  class="flashmsg" >
 			{% include 'include/flashMessages.html' %}
 		</div>
-
+<link rel="stylesheet" type="text/css" href="/static/static/css/radio6.css">
+<script type="text/javascript">
+	function check() {
+		if(document.getElementById("yes").checked) {
+    			window.location = 'login' // check /signup_company
+			}
+	}
+</script>
 
 		<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+			<p class="btn-switch" style="margin-bottom: 1%; margin-top: 1%">
+  <input type="radio" id="yes" name="switch" class="btn-switch__radio btn-switch__radio_yes" onclick="check()" />
+  <input type="radio"  id="no" name="switch" class="btn-switch__radio btn-switch__radio_no"  checked />
+  <label for="yes" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt">User</span></label>
+  <label for="no" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">Company</span></label>
+  <br>
+
+</p>
 				<div class="login100-form-title" style="background-image: url(/static/Login_v15/images/company3.jpg);"> 
 					<span class="login100-form-title-1">
 						Sign In
