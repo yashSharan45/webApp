@@ -979,16 +979,27 @@ textarea.form-control {
   color: #3091B2; }
 
 .alert-success {
-  background-color: #8EF3C5;
-  color: #42A084; }
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: normal;
+  font-size: large;
+  border-radius: 6px; 
+  padding: 15px;
+   }
 
 .alert-warning {
   background-color: #FFE28C;
   color: #BB992F; }
 
 .alert-danger {
-  background-color: #FF8F5E;
-  color: #B33C12; }
+  font-weight: normal;
+  font-size: large;
+  border-radius: 6px;
+  padding: 15px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+ }
 
 .table thead tr > th,
 .table thead tr > td,

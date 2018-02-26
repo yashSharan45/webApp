@@ -66,9 +66,10 @@ def index1():
 
 def send_mail(suggestions):
     app.logger.info('%s',suggestions)
-    msg = Message('Message from ', sender = 'aneeshverma0412@gmail.com', recipients = ['aneesh.verma09@gmail.com'])
-    msg.body = suggestions
-    mail.send(msg)
+    if suggestions != "":
+    	msg = Message('FEEDBACK', sender = 'aneeshverma0412@gmail.com', recipients = ['aneeshverma0412@gmail.com'])
+    	msg.body = suggestions
+    	#mail.send(msg)
 
 # ROUTING OF PHONES
 @app.route('/phones')
@@ -101,8 +102,30 @@ def lappy1():
         suggestions = request.form['text']
         send_mail(suggestions)
         # get data through invisible form
-        review = request.form['starwar']
-        app.logger.info('%s',review)
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+        	flash('You can submit the forms only once','danger')
+		return redirect(url_for('user'))
+        try:
+        	cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+        	mysql.connection.commit()
+        	cur.close()
+        	flash('Survey submitted successfully','success')
+        	return redirect(url_for('user'))
+        except Exception as e:
+        	exception_user = e
+        
+        #app.logger.info('%s %s %s %s ',email,category,product,rating)
         
     return render_template('laptops/mac.html')
 @app.route('/laptops/alienware')
@@ -224,24 +247,6 @@ def logout():
 	session.clear()
 	flash('You are now logged out','success')
 	return redirect(url_for('login'))
-
-
-'''@app.route('/mobile')
-@is_logged_in2
-def mobile():
-    return render_template('mobileSurvey.html')
-
-@app.route('/laptop')
-def laptop():
-    return render_template('laptopSurvey.html')
-
-@app.route('/camera')
-def camera():
-    return render_template('cameraSurvey.html')
-
-@app.route('/tv')
-def tv():
-    return render_template('tvSurvey.html')'''
 
 @app.route('/admin')
 def admin():

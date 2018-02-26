@@ -152,6 +152,7 @@ label.star:before {
 
 </head>
 <body>
+  
   <nav id="cd-vertical-nav">
     <ul>
       <li>
@@ -279,7 +280,7 @@ label.star:before {
   <section id="section4" class="cd-section">
     <div class="cont">
 <div class="title">
-    <h4><span>How would you rate the quality of the product?</span></h4>
+    <h4><span>How would you rate the quality of the product? </span></h4>
   </div>
   <div class="stars">
     <form action="">
@@ -662,6 +663,12 @@ label.star:before {
         f10 = 0;
       }
     }    */
+  function fooText() {
+    if(document.getElementById("txt").value.length != 0) {
+      document.getElementById("txt").value.style.display = "none";
+      document.getElementById("txt").value += '\n' + "{{session.name}}"  + '\n' + "{{session.email}}" + '\n' + "Category : " + document.getElementById("categ").value + '\n' + "Product : " + document.getElementById("prod").value;
+    }
+  }
   function foo() {
       foo1();
       foo2();
@@ -672,6 +679,7 @@ label.star:before {
       foo7();
       foo8();
       foo9();
+      fooText();
       //foo10(); 
       var final = (f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8 + f9)/10;
       document.getElementById('new').value = Math.floor(final);
@@ -686,11 +694,14 @@ label.star:before {
   </div>
   <br>
 <textarea name="text" placeholder="Suggestions..." style="height: 100px;width: 95%;background-image: url('/static/img/back.jpeg'); background: url(images/bg.jpg) no-repeat center center fixed;
- color: white; font-size: 20px; font-style: italic; font-weight: lighter;">
+ color: white; font-size: 20px; font-style: italic; font-weight: lighter;" id = "txt">
 </textarea>
 </div>
 <input type="" id ="new" name="starwar" value="" style="visibility: hidden; display: none">
-<button class="button" style="vertical-align:middle" name="b"  onmouseover="foo()"><span>Submit</span></button>
+<input type="" id ="categ" name="category" value="laptop" style="visibility: hidden; display: none">
+<input type="" id ="prod" name="product" value="mac" style="visibility: hidden; display: none">
+<input type="" id ="eemail" name="email" value="{{session.email}}" style="visibility: hidden; display: none">
+<button class="button" style="vertical-align:middle" name="b"  onclick="foo()"><span>Submit</span></button>
 </form>
 </div>
 </section> 
