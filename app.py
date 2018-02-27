@@ -352,8 +352,15 @@ def lappy4():
 
 
 # ROUTING OF GADGETS
-@app.route('/gadgets',methods=['GET'])
+@app.route('/gadgets',methods=['GET','POST'])
 def gadgets():
+    if request.method == 'POST': # if get then not redirecting
+        email = request.values.get('eemail')
+        flash('You are subscribed with us :)','info')
+        email = 'SUBSCRIBE THIS PERSON : ' + email
+        app.logger.info("%s",email)
+        send_mail(email)
+        return redirect(url_for('user'))
     return render_template('gadgets.html')
 
 
