@@ -939,7 +939,7 @@ textarea.form-control {
   max-width: 100%;
   padding: 10px 18px;
   resize: none; }
-
+/*
 .alert {
   border: 0;
   border-radius: 0;
@@ -985,7 +985,7 @@ textarea.form-control {
   font-size: large;
   border-radius: 6px; 
   padding: 15px;
-   }
+   }*/
 
 .alert-warning {
   background-color: #FFE28C;

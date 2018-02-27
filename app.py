@@ -65,31 +65,149 @@ def index1():
     return render_template('index.html')
 
 def send_mail(suggestions):
-    app.logger.info('%s',suggestions)
+    #app.logger.info('%s',suggestions)
     if suggestions != "":
     	msg = Message('FEEDBACK', sender = 'aneeshverma0412@gmail.com', recipients = ['aneeshverma0412@gmail.com'])
     	msg.body = suggestions
-    	#mail.send(msg)
+    	mail.send(msg)
 
 # ROUTING OF PHONES
 @app.route('/phones')
 def phones():
     return render_template('phones.html')
 
-@app.route('/phones/phone1')
+@app.route('/phones/iphoneX',methods=['GET','POST'])
 def phone1():
-    return render_template('phones/phone1.html')
-@app.route('/phones/phone2')
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+                
+    return render_template('phones/iphoneX.html')
+
+@app.route('/phones/pixel2',methods=['GET','POST'])
 def phone2():
-    return render_template('phones/phone2.html')
-@app.route('/phones/phone3')
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+                
+    return render_template('phones/pixel2.html')
+
+@app.route('/phones/SamsungS8',methods=['GET','POST'])
 def phone3():
-    return render_template('phones/phone3.html')
-@app.route('/phones/phone4')
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+                
+    return render_template('phones/SamsungS8.html')
+
+@app.route('/phones/oneplus5T',methods=['GET','POST'])
 def phone4():
-    return render_template('phones/phone4.html')
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
 
 
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+                
+    return render_template('phones/oneplus5T.html')
+    
 # ROUTING OF LAPTOPS
 @app.route('/laptops')
 def laptops():
@@ -128,15 +246,123 @@ def lappy1():
         #app.logger.info('%s %s %s %s ',email,category,product,rating)
         
     return render_template('laptops/mac.html')
-@app.route('/laptops/alienware')
+
+@app.route('/laptops/alienware',methods=['GET','POST'])
 def lappy2():
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+        
+        #app.logger.info('%s %s %s %s ',email,category,product,rating)
+        
     return render_template('laptops/alienware.html')
-@app.route('/laptops/yoga')
+
+@app.route('/laptops/yoga',methods=['GET','POST'])
 def lappy3():
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+        
+        #app.logger.info('%s %s %s %s ',email,category,product,rating)
+        
     return render_template('laptops/yoga.html')
-@app.route('/laptops/spectre')
+
+@app.route('/laptops/spectre',methods=['GET','POST'])
 def lappy4():
+    if request.method == 'POST':
+        #sending mail from data acquired from textbox
+        suggestions = request.form['text']
+        send_mail(suggestions)
+        # get data through invisible form
+        email = request.form['email']
+        category = request.form['category']
+        product = request.form['product']
+        rating = request.form['starwar']
+
+
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        # if same survey already submitted
+        result = cur.execute("SELECT * FROM SurveyDB WHERE Email = %s and Categories = %s and Products = %s",[email,category,product])
+        if result > 0:
+            flash('You can submit the forms only once','danger')
+            return redirect(url_for('user'))
+        try:
+            app.logger.info('%s %s %s %s ',email,category,product,rating)
+            cur.execute("INSERT INTO SurveyDB(Email,Categories,Products,Rating) VALUES (%s,%s,%s,%s)",(email,category,product,rating))
+            mysql.connection.commit()
+            cur.close()
+            flash('Survey submitted successfully','success')
+            return redirect(url_for('user'))
+        except Exception as e:
+            exception_user = e
+                
     return render_template('laptops/spectre.html')
+
+
+# ROUTING OF GADGETS
+@app.route('/gadgets',methods=['GET','POST'])
+def gadgets():
+    if request.method == 'POST': # if get then not redirecting
+        email = request.values.get('eemail')
+        flash('You are subscribed with us :)','info')
+        email = 'SUBSCRIBE THIS PERSON : ' + email
+        app.logger.info("%s",email)
+        send_mail(email)
+        return redirect(url_for('user'))
+    return render_template('gadgets.html')
+
 
 @app.route('/lap_survey')
 def survey():
