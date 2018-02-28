@@ -51,3 +51,7 @@ NOT NULL, PRIMARY KEY (Id));
 
 CREATE TABLE User_infoDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL, Phone VARCHAR(12), Gender VARCHAR(20), Address VARCHAR(100), City VARCHAR(50), Country VARCHAR(50), Postal VARCHAR(10), About TINYTEXT, PRIMARY KEY (Id));
 
+
+
+
+id email no.of.reviews aggregateRating correspondingPoints imgSrc

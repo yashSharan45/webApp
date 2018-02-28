@@ -11,8 +11,6 @@ from flask_mail import Mail, Message
 # pip install Flask-WTF
 # pip install passlib
 
-global emailGlobal
-emailGlobal = "abc"
 app = Flask(__name__) # object called app is created of Flask class
 
 #Config MySQL
@@ -414,6 +412,17 @@ def user():
 
     ########################### ON SUBMIT #######################################
     if request.method == 'POST':
+        """
+        if request.form['submit'] == 'Main':
+            #return render_template('gadgets.html')
+            return redirect(url_for('gadgets'))
+        elif request.form['submit2'] == 'Main2':
+            return redirect(url_for('laptops'))
+
+            ### VERY IMPORTANT .. IF WANT TO ACCESS TWO FORMS IN SAME HTML PAGE THEN 
+                GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
+                AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
+        """    
         phone = request.form['phone']
         gender = request.form['gender']
         address = request.form['home']

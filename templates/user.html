@@ -104,7 +104,25 @@
                 </div>
             </div>
         </nav> -->
+<script type="text/javascript">
+                                     function imgSrc() {
+                                        document.getElementById('pic').src = "static/paper/assets/img/faces/ninja.jpg"
+                                        //alert("SD")
+                                     }   
+                                     function readURL(input) {
+                                        if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
 
+                                        reader.onload = function (e) {
+                                        $('#pic')
+                                        .attr('src', e.target.result)
+                                        //.width(150)
+                                        //.height(200);
+                                        };
+                                        reader.readAsDataURL(input.files[0]);
+                                        }
+                                        }                               
+                                    </script>
 
         <div class="content">
             <div class="container-fluid">
@@ -117,15 +135,28 @@
                             </div>
                             <div class="content">
                                 <div class="author">
-                                  <img class="avatar border-white" src="static/paper/assets/img/faces/face-2.jpg" alt="..."/>
-                                  <h4 class="title">Chet Faker<br />
-                                     <a href="#"><small>@chetfaker</small></a>
+                                  <!--<img class="avatar border-white" src="static/paper/assets/img/faces/face-2.jpg" alt="..."/> -->
+                                  <img class="avatar border-white"
+                                  src = "static/paper/assets/img/faces/face-1.jpg"
+                                    id = 'pic' onload="imgSrc();"    "="..."/>
+                                  <!--<form action="">
+                                  <input type="file" name="pic" accept="image/*" style="margin-bottom:20% ">
+                                  <input type="submit" style="margin-top: -27%;margin-left: 80%; ">
+                                  </form>
+                                    -->
+
+                                    
+                                     <input type='file' style="margin-bottom:10%; margin-left: 20% " onchange="readURL(this);  " />
+                                  <h4 class="title">{{session.name}}<br />
+                                     <a href="#"><small>@{{session.username}}</small></a>
                                   </h4>
                                 </div>
-                                <p class="description text-center">
+                                <p class="description text-center"> 
+                                    {{session.about}}
+                                    <!--
                                     "I like the way you work it <br>
                                     No diggity <br>
-                                    I wanna bag it up"
+                                    I wanna bag it up" -->
                                 </p>
                             </div>
                             <hr>
@@ -218,7 +249,7 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form method="POST" action=" ">
+                                <form method="POST" action=" " value ="additional info">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -298,7 +329,7 @@
                                     </div>
                                     <input type="text" name="email" style="visibility: hidden;display: none" value="{{session.email}}">
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd" name="submit" value="Main">Update Profile</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
