@@ -53,3 +53,7 @@ Still if you want to know the steps to Set Up flask ->
 
 OTHER
 pip install Flask-Mail
+
+
+pip freeze > requirements.txt
+pip install -r requirements.txt

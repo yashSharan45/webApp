@@ -11,6 +11,8 @@ from flask_mail import Mail, Message
 # pip install Flask-WTF
 # pip install passlib
 
+global emailGlobal
+emailGlobal = "abc"
 app = Flask(__name__) # object called app is created of Flask class
 
 #Config MySQL
@@ -386,13 +388,90 @@ def phone_app():
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/user')
+@app.route('/user',methods = ['GET','POST'])
 @is_logged_in
 def user():
+
+    ####################### ON LOAD OF USER PROFILE ############################
+    #Create Cursor
+    cur = mysql.connection.cursor()
+    # get user by email
+    result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[session['email']])    
+    if result > 0:
+        #app.logger.info('%s',result)
+        mysql.connection.commit()
+
+        data = cur.fetchone() # get only first row
+        # Setting session data
+        session['phone'] = data['Phone']
+        session['gender'] = data['Gender']
+        session['address'] = data['Address']
+        session['city'] = data['City']
+        session['country'] = data['Country']
+        session['postal'] = data['Postal']
+        session['about'] = data['About']
+        app.logger.info('%s',data['About'])
+
+    ########################### ON SUBMIT #######################################
+    if request.method == 'POST':
+        phone = request.form['phone']
+        gender = request.form['gender']
+        address = request.form['home']
+        city = request.form['city']
+        country = request.form['country']
+        postal = request.form['postal']
+        about = request.form['about']
+        email = request.form['email']
+        #app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
+        
+        # get user by email
+        result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
+        flag = False
+        if result <= 0:
+            cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
+        
+        if phone != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
+        
+        if gender != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
+        
+        if address != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
+
+        if city != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+        
+        if country != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
+
+        if postal != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        
+        if about != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+
+        mysql.connection.commit()
+        if flag == True:    
+            flash('Changes will be visible the next time you visit User Profile','info')
+    cur.close()
+    
     return render_template('user.html')
 
-
-
+"""
+cursor.execute ("
+   UPDATE tblTableName
+   SET Year=%s, Month=%s, Day=%s, Hour=%s, Minute=%s
+   WHERE Server=%s
+", (Year, Month, Day, Hour, Minute, ServerID))
+"""
 
 @app.route('/login',methods=['GET','POST'])
 def login():
