@@ -1256,6 +1256,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de8e0009', e
       margin: 0 auto;
     }
 
+    .maskk{
+      width: 100px;
+      height: 100px;
+      border-radius: 20%;
+      border: 5px solid #ddd;
+      overflow: hidden;
+      display: block;
+      margin: 0 auto;
+    }
+
    .landing-page .section-testimonial .carousel-inner .item img{
       width: 100%;
       height: auto;

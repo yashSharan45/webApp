@@ -386,7 +386,7 @@ def phone_app():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    return render_template('user.html')
+    return render_template('dashboard.html')
 
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
