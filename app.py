@@ -408,7 +408,7 @@ def user():
         session['country'] = data['Country']
         session['postal'] = data['Postal']
         session['about'] = data['About']
-        app.logger.info('%s',data['About'])
+        #app.logger.info('%s',data['About'])
 
     ########################### ON SUBMIT #######################################
     if request.method == 'POST':
@@ -669,6 +669,40 @@ def signup_company():
         except Exception as e:
         	exception_company = e
     return render_template('signup_company.html',form = form)
+
+#change password
+@app.route('/password_update',methods=['GET','POST'])
+def password_update():
+    if request.method == 'POST':
+        email = request.form['form-email']
+        old_password = request.form['form-password']
+        new_password = request.form['new-password']
+        
+        #Create Cursor
+        cur = mysql.connection.cursor()
+
+        #Check if Email already exists
+        result = cur.execute("SELECT * FROM UserDB where Email = %s",[email])
+        if result > 0:
+            app.logger.info('%s',result)
+            data = cur.fetchone() # get only first row
+            password = data['Password']
+            if sha256_crypt.verify(old_password,password):
+                new_password = sha256_crypt.encrypt(str(new_password))
+                cur.execute("UPDATE UserDB SET Password = %s WHERE Email = %s",(new_password,email));
+                app.logger.info('%s %s',old_password,new_password)
+            else:
+                flash('Incorrect Password','danger')
+                return render_template('password_update.html')
+
+        #Commit to DB
+        mysql.connection.commit()
+
+        #Close Connection
+        cur.close()             
+        flash('Password Updated','success')
+        return redirect(url_for('user'))
+    return render_template('password_update.html')
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
