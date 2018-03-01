@@ -386,6 +386,11 @@ def phone_app():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/dashboard2')
+@is_logged_in
+def dashboard2():
+    return render_template('dashboard2.html')
+
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
 def user():
@@ -693,7 +698,7 @@ def password_update():
                 app.logger.info('%s %s',old_password,new_password)
             else:
                 flash('Incorrect Password','danger')
-                return render_template('password_update.html')
+                return render_template('changepass.html')
 
         #Commit to DB
         mysql.connection.commit()
@@ -702,7 +707,7 @@ def password_update():
         cur.close()             
         flash('Password Updated','success')
         return redirect(url_for('user'))
-    return render_template('password_update.html')
+    return render_template('changepass.html')
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
