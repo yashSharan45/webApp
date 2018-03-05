@@ -38,13 +38,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard">
+                    <a href="mobile_suggestions">
                         <i class="ti-panel"></i>
                         <p>Mobile Suggestion</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="dashboard2">
+                    <a href="laptop_suggestions">
                         <i class="ti-panel"></i>
                         <p>Laptop Suggestion</p>
                     </a>
@@ -112,12 +112,14 @@
 
   
   <div class="container">
-        <h1>Requirments</h1>
+        <h1>Requirements</h1>
         <form class="form cf">
+            <!--
             <section class="plan cf">
                 <h2>Choose a RAM varient:</h2>
                 <input type="radio" name="radio1" id="1" value="1"><label class="free-label four col" for="1">4 Gb</label>
                 <input type="radio" name="radio1" id="2" value="2"><label class="basic-label four col" for="2">8 Gb</label>
+                <input type="radio" name="radio1" id="3.1" value="3.1"><label class="premium-label four col" for="2">12 Gb</label>
             </section>
             <section class="plan cf">
                 <h2>Choose a HDD varient:</h2>
@@ -126,8 +128,8 @@
             </section>
             <section class="plan cf">
                 <h2>Choose a SSD varient:</h2>
-                <input type="radio" name="radio2" id="5" value="5"><label class="free-label four col" for="5">128 Gb</label>
-                <input type="radio" name="radio2" id="6" value="6"><label class="basic-label four col" for="6">None</label>
+                <input type="radio" name="radio2.1" id="5" value="5"><label class="free-label four col" for="5">128 Gb</label>
+                <input type="radio" name="radio2.1" id="6" value="6"><label class="basic-label four col" for="6">None</label>
             </section>
             <section class="payment-plan cf">
                 <h2>Select screen size:</h2>
@@ -141,20 +143,63 @@
             </section>
             <section class="payment-type cf">
                 <h2>Price range:</h2>
-                <input type="radio" name="radio4" id="12" value="12"><label class="credit-label four col" for="12">Rs. 25000-40000</label>
-                <input type="radio" name="radio4" id="13" value="13"><label class="debit-label four col" for="13">Rs. 40000-60000</label>
-            </section>  
-            <input class="submit" type="submit" value="Submit">     
+                <input type="radio" name="radio5" id="12" value="12"><label class="credit-label four col" for="12">Rs. 25000-40000</label>
+                <input type="radio" name="radio5" id="13" value="13"><label class="debit-label four col" for="13">Rs. 40000-60000</label>
+            </section>
+            -->  
+            <section class="plan cf">
+                <h2>Choose a RAM varient:</h2>
+                <input type="radio" name="radio1" id="1" value="1"><label class="free-label four col" for="1">4 GB</label>
+                <input type="radio" name="radio1" id="2" value="2"><label class="basic-label four col" for="2">8 GB</label>
+                <input type="radio" name="radio1" id="3" value="3"><label class="premium-label four col" for="3">12 GB</label>
+            </section>
+            <section class="plan cf">
+                <h2>Choose a HDD varient:</h2>
+                <input type="radio" name="radio2" id="4" value="4"><label class="free-label four col" for="4">500 GB</label>
+                <input type="radio" name="radio2" id="5" value="5"><label class="basic-label four col" for="5">1 TB</label>
+                <input type="radio" name="radio2" id="6" value="6"><label class="premium-label four col" for="6">2 TB</label>
+            </section>
+            <section class="payment-plan cf">
+                <h2>Choose a SSD varient:</h2>
+                <input type="radio" name="radio3" id="7" value="7"><label class="monthly-label four col" for="7">128 GB</label>
+                <input type="radio" name="radio3" id="8" value="8"><label class="yearly-label four col" for="8">256 GB</label>
+                <input type="radio" name="radio3" id="9" value="9"><label class="yearly-label four col" for="9">None</label>
+            </section>
+            <section class="payment-type cf">
+                <h2>Select screen size:</h2>
+                <input type="radio" name="radio4" id="10" value="10"><label class="credit-label four col" for="10">10-13 inch</label>
+                <input type="radio" name="radio4" id="11" value="11"><label class="debit-label four col" for="11">13-15.5 inch</label>
+                <input type="radio" name="radio4" id="12" value="12"><label class="paypal-label four col" for="12">>15.5 inch</label>
+            </section>
+            <section class="payment-type cf">
+                <h2>Type:</h2>
+                <input type="radio" name="radio5" id="13" value="13"><label class="credit-label four col" for="13">Gaming</label>
+                <input type="radio" name="radio5" id="14" value="14"><label class="debit-label four col" for="14">Daily use</label>
+                <input type="radio" name="radio5" id="15" value="15"><label class="paypal-label four col" for="15">Business</label>
+            </section>
+            <section class="payment-type cf">
+                <h2>Price range:</h2>
+                <input type="radio" name="radio6" id="16" value="16"><label class="credit-label four col" for="16">Rs. 25000-40000</label>
+                <input type="radio" name="radio6" id="17" value="17"><label class="debit-label four col" for="17">Rs. 40000-60000</label>
+                <input type="radio" name="radio6" id="18" value="18"><label class="paypal-label four col" for="18">>Rs. 60000</label>
+            </section>
+            <input class="submit" type="submit" value="Submit" id="sbmt">     
         </form>
     </div>
+    <style type="text/css">
+        #head,#bdy {
+            visibility: hidden; 
+            display: none;
+        }
+    </style>
 
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="header">
+                            <div class="header"  id="head">
                                 <h4 class="title">Survey Records</h4>
                                 <p class="category">Here is a subtitle for this table</p>
                             </div>
-                            <div class="content table-responsive table-full-width">
+                            <div class="content table-responsive table-full-width" id="bdy">
                                 <table class="table table-striped">
                                     <thead>
                                         <th>ID</th>
@@ -208,7 +253,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
+                                    <p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
                             </div>
                         </div>
 
@@ -252,6 +297,8 @@ footer {
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+
 
 <!--
 	<script type="text/javascript">

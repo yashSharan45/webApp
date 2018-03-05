@@ -381,15 +381,15 @@ def web_app():
 def phone_app():
     return render_template('phone_app.html')
 
-@app.route('/dashboard')
+@app.route('/mobile_suggestions')
 @is_logged_in
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('mobile_suggestions.html')
 
-@app.route('/dashboard2')
+@app.route('/laptop_suggestions')
 @is_logged_in
 def dashboard2():
-    return render_template('dashboard2.html')
+    return render_template('laptop_suggestions.html')
 
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in

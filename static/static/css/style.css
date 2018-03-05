@@ -14,8 +14,16 @@ h1{
 	text-align: center;
 	padding-bottom: 10px;
 	border-bottom: 2px solid #2fcc71;
-	max-width: 40%;
+	max-width: 100%;
 	margin: 20px auto;
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (min-width : 1024px) {
+h1{
+max-width:40%;	
+}
 }
 
 /* CONTAINERS */
@@ -60,7 +68,7 @@ h1{
 	position: relative;
 	color: #fff;
 	background-color: #aaa;
-	font-size: 26px;
+	font-size: 2vw;
 	text-align: center;
 	height: 150px;
 	line-height: 150px;
