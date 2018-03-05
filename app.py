@@ -1,11 +1,15 @@
+import os
+
 from exceptions import Exception
-from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request
+from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
 from pip._vendor.requests.compat import str
 from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask_mysqldb import MySQL
 from passlib.hash import sha256_crypt
 from functools import wraps
 from flask_mail import Mail, Message
+from werkzeug import secure_filename
+from werkzeug.exceptions import BadRequest
 
 
 # pip install Flask-WTF
@@ -32,6 +36,18 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail=Mail(app)
 
+
+
+# This is the path to the upload directory
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+# These are the extension that we are accepting to be uploaded
+app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 
+'jpeg', 'gif'])
+# For a given file, return whether it's an allowed type or not
+def allowed_file(filename):
+    return '.' in filename and  filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+# This route will show a form to perform an AJAX request jQuery is 
+# loaded to execute the request and update the value of the operation
 
 
 
@@ -708,6 +724,41 @@ def password_update():
         flash('Password Updated','success')
         return redirect(url_for('user'))
     return render_template('changepass.html')
+
+@app.route('/upload', methods=['POST']) 
+def upload():
+    #
+    try:
+        # Get the name of the uploaded file
+        file = request.files['file']
+        # Check if the file is one of the allowed types/extensions
+        if file and allowed_file(file.filename):
+            # Make the filename safe, remove unsupported chars
+            filename = secure_filename(file.filename)
+            # Move the file form the temporal folder to the upload folder we 
+            # setup
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # Redirect the user to the uploaded_file route, which will 
+            # basicaly show on the browser the uploaded file
+            #return redirect(url_for('uploaded_file',filename=filename))
+            app.logger.info('%s',filename)
+        else:
+            flash("Error uploading file",'danger')    
+        return render_template('user.html')
+    except Exception as e:
+        flash("Please Select a photo ",'danger')
+        return render_template('user.html')
+        #raise BadRequest('Something Went Wrong!!')
+    
+# This route is expecting a parameter containing the name of a file. 
+# Then it will locate that file on the upload directory and show it on 
+# the browser, so if the user uploads an image, that image is going to 
+# be show after the upload
+@app.route('/uploads/<filename>') 
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
