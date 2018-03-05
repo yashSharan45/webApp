@@ -410,7 +410,19 @@ def dashboard2():
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
 def user():
+    ####################### Profile Pic ########################################
+    #Create Cursor
+    cur = mysql.connection.cursor()
+    # get user by email
+    result = cur.execute("SELECT * FROM RatingDB WHERE email = %s",[session['email']])    
+    if result > 0:
+        mysql.connection.commit()
 
+        data = cur.fetchone() # get only first row
+        # Setting session data
+        session['img'] = data['imgSrc']
+        #app.logger.info("%s",session['img'])
+    cur.close()
     ####################### ON LOAD OF USER PROFILE ############################
     #Create Cursor
     cur = mysql.connection.cursor()
@@ -727,7 +739,7 @@ def password_update():
 
 @app.route('/upload', methods=['POST']) 
 def upload():
-    #
+
     try:
         # Get the name of the uploaded file
         file = request.files['file']
@@ -741,13 +753,24 @@ def upload():
             # Redirect the user to the uploaded_file route, which will 
             # basicaly show on the browser the uploaded file
             #return redirect(url_for('uploaded_file',filename=filename))
-            app.logger.info('%s',filename)
+            #app.logger.info('%s',filename)
+            
+            #Create Cursor
+            cur = mysql.connection.cursor()
+
+            # get user by email
+            result = cur.execute("SELECT * FROM RatingDB WHERE email = %s",[session['email']])
+            if result <= 0:
+                cur.execute("INSERT INTO RatingDB(Email) VALUES (%s)",[session['email']])
+            cur.execute("UPDATE RatingDB SET imgSrc = %s WHERE Email = %s",(file.filename,[session['email']]));
+            mysql.connection.commit()
+            cur.close()    
         else:
             flash("Error uploading file",'danger')    
-        return render_template('user.html')
+        return redirect(url_for('user'))
     except Exception as e:
         flash("Please Select a photo ",'danger')
-        return render_template('user.html')
+        return redirect(url_for('user'))
         #raise BadRequest('Something Went Wrong!!')
     
 # This route is expecting a parameter containing the name of a file. 

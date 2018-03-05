@@ -17,7 +17,24 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="static/paper/assets/css/themify-icons.css" rel="stylesheet">
 
-
+<script type="text/javascript">
+	function foo() {
+		var str = "{{session.img}}";
+		if (str != null) {
+			if (str.indexOf(' ') !== -1) {
+				str = str.replace(/ /g,'_');
+				//str = str.replace(/':'/,'');
+				str = str.split(':').join('');
+				document.getElementById('pic').src = "uploads/"+str;
+			}
+			else {
+				document.getElementById('pic').src = "uploads/"+"{{session.img}}";
+			}
+		}
+		
+	}
+</script>
+<body onload="foo()"></body>
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
 
@@ -96,11 +113,12 @@
                             </div>
                             <div class="content">
                                 <div class="author">
-                                  <!--<img class="avatar border-white" src="static/paper/assets/img/faces/face-2.jpg" alt="..."/> -->
+                                  <!--
+                                  <img class="avatar border-white" src="static/paper/assets/img/faces/face-2.jpg" alt="..."/> 
+                                  -->
                                   <img class="avatar border-white"
-                                  src = "static/paper/assets/img/faces/face-1.jpg"
-                                    id = 'pic'     "="..."/>
-                                 
+                                  src=" " 
+                                    id = 'pic'     "="..."/> 
                                  <form action="upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file" id = 'inp' onchange="readURL(this);" >
         <input type="submit" value="Upload" style="margin-top: -7%;margin-left: 60%;">
@@ -317,7 +335,7 @@ footer {
     </div>
 </div>
 
-
+</body>
 
 
     <!--   Core JS Files   -->
