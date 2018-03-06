@@ -57,7 +57,7 @@ id email no.of.reviews aggregateRating correspondingPoints imgSrc
 CREATE TABLE RatingDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL,numReview INT(10), aggrRating INT(10), corrPoints INT(10), imgSrc VARCHAR(100), PRIMARY KEY (Id));
 
 
-CREATE TABLE MobileDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Rom INT(10), Screen_size DECIMAL(2,1), Mcam INT(10), Fcam INT(10), Price VARCHAR(50), PRIMARY KEY (Id));
+CREATE TABLE MobileDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Rom INT(10), Screen_size VARCHAR(50), Mcam INT(10), Fcam INT(10), Price VARCHAR(50), PRIMARY KEY (Id));
 
 INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5",3,16,6,13,8,"9999");
 

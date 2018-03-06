@@ -15,7 +15,13 @@
         <link href="static/assets/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
         <link href="static/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
+        <style type="text/css">            
+    @media only screen and (max-width: 1000px) {
+    .col-md-offset-1 {
+        margin-top:15%;
+    }
+}
+        </style>
     </head>
     {% include 'include/navbar.html' %}
     <body class="landing-page landing-page1">
@@ -699,12 +705,15 @@ input[type=submit]:hover {
 <h4 class="header-text text-center">Contact Us</h4>
 
 <div class="containerr">
-  <form action="/action_page.php">
+  <form action="" method="POST">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
     <label for="lname">Last Name</label>
     <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Your email..">
 
     <label for="country">Country</label>
     <select id="country" name="country" style="background-color:white ">

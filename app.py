@@ -72,12 +72,29 @@ def is_logged_in2(f):
 			return redirect(url_for('login'))
 	return wrap
 
-@app.route('/')
-def index():
-	return render_template('index.html')
+@app.route('/',methods=['GET','POST'])
+def index():    
+    if request.method == 'POST':
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        email = request.form['email']
+        country = request.form['country']
+        subject = request.form['subject']
+        info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
+        send_mail(info)
+    
+    return render_template('index.html')
 
-@app.route('/index')
+@app.route('/index',methods=['GET','POST'])
 def index1():
+    if request.method == 'POST':
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        email = request.form['email']
+        country = request.form['country']
+        subject = request.form['subject']
+        info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
+        send_mail(info)
     return render_template('index.html')
 
 def send_mail(suggestions):
@@ -397,14 +414,42 @@ def web_app():
 def phone_app():
     return render_template('phone_app.html')
 
-@app.route('/mobile_suggestions')
+@app.route('/mobile_suggestions',methods=['GET','POST'])
 @is_logged_in
-def dashboard():
+def mob_sug():
+    ram = request.args.get('radio1') # GET REQUEST
+    rom = request.args.get('radio2')
+    screen = request.args.get('radio3')
+    if screen == '5-5.5':
+        str.split("-")
+        app.logger.info("SS" +"str")
+    rear_cam = request.args.get('radio4')
+    front_cam = request.args.get('radio5')
+    price = request.args.get('radio6')
+    #app.logger.info("%s %s %s %s %s %s ",ram,rom,screen,rear_cam,front_cam,price)
+    
+    #Create Cursor
+    cur = mysql.connection.cursor()
+    # get user by email
+    result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s",[ram]) 
+    #app.logger.info("%s",screen)   
+    #result = cur.execute("SELECT * FROM MobileDB WHERE Screen_size = %s",[screen])    
+    if result > 0:
+        mysql.connection.commit()
+
+        #data = cur.fetchone() # get only first row
+        data = cur.fetchall()
+        for row in data:
+            app.logger.info("%s",row)    
+        # Setting session data
+        #session['name_mobile'] = data['Name']
+        #app.logger.info("%s",session['name_mobile'])
+    cur.close()
     return render_template('mobile_suggestions.html')
 
 @app.route('/laptop_suggestions')
 @is_logged_in
-def dashboard2():
+def lap_sug():
     return render_template('laptop_suggestions.html')
 
 @app.route('/user',methods = ['GET','POST'])
