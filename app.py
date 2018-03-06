@@ -1,4 +1,4 @@
-import os,sys
+import os,sys,math
 
 from exceptions import Exception
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
@@ -621,6 +621,33 @@ def lap_sug_res():
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
 def user():
+	######################### Points ##########################################
+	#Create Cursor
+    cur = mysql.connection.cursor()
+    #Number of Reviews:
+    result = cur.execute("SELECT COUNT(*) FROM SurveyDB WHERE email = %s",[session['email']])
+    if result > 0:
+    	mysql.connection.commit()
+        data = cur.fetchone()
+     	#app.logger.info(data['COUNT(*)'])   
+     	session['num_review'] = data['COUNT(*)']
+
+    # Sum of rating /9 ==> for 1 (45/9 = 5)	
+	result = cur.execute("SELECT SUM(Rating) FROM SurveyDB WHERE email = %s",[session['email']])     	
+    if result > 0:
+    	mysql.connection.commit()
+        data = cur.fetchone()
+	session['aggrRating'] = math.floor(data['SUM(Rating)']/9) #sublime Indentation fault
+     	app.logger.info(session['aggrRating'])
+	
+	# Corresponding points 
+	session['points'] = session['num_review'] * session['aggrRating']
+	app.logger.info(session['points'])
+
+	# Update DB
+	cur.execute("UPDATE RatingDB SET numReview = %s,aggrRating = %s,corrPoints = %s WHERE Email = %s",(session['num_review'],session['aggrRating'],session['points'],[session['email']])); 	     	  	
+    #cur.execute("INSERT INTO RatingDB(Email) VALUES (%s)",[session['email']])
+    cur.close()
     ####################### Profile Pic ########################################
     #Create Cursor
     cur = mysql.connection.cursor()
@@ -667,55 +694,69 @@ def user():
                 GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
                 AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
         """    
-        phone = request.form['phone']
-        gender = request.form['gender']
-        address = request.form['home']
-        city = request.form['city']
-        country = request.form['country']
-        postal = request.form['postal']
-        about = request.form['about']
-        email = request.form['email']
-        #app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
-        
-        # get user by email
-        result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
-        flag = False
-        if result <= 0:
-            cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
-        
-        if phone != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
-        
-        if gender != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
-        
-        if address != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
+		
+	"""        
+        if 2 == 1:
+        	flash("ILL Flash",'info')
+        	return render_template('user.html')
+    """ 
+	if request.form['sbmt'] == 'claim':
+		voucher = request.form['toggle']
+		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+		send_mail(msg)
+        	flash(msg,'info')
+        	return render_template('user.html')
 
-        if city != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+       	elif request.form['sbmt'] == 'update' :
+       		phone = request.form['phone']
+        	gender = request.form['gender']
+        	address = request.form['home']
+        	city = request.form['city']
+        	country = request.form['country']
+        	postal = request.form['postal']
+        	about = request.form['about']
+        	email = request.form['email']
+        	#app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
         
-        if country != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
-
-        if postal != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        	# get user by email
+        	result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
+        	flag = False
+        	if result <= 0:
+            		cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
         
-        if about != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+        	if phone != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
+        
+        	if gender != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
+        
+        	if address != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
 
-        mysql.connection.commit()
-        if flag == True:    
-            flash('Changes will be visible the next time you visit User Profile','info')
-    cur.close()
-    
+        	if city != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+        
+        	if country != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
+
+        	if postal != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        
+        	if about != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+
+        	mysql.connection.commit()
+        	if flag == True:    
+            		flash('Changes will be visible the next time you visit User Profile','info')
+    	cur.close()
+
     return render_template('user.html')
 
 """

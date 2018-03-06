@@ -17,6 +17,8 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="static/paper/assets/css/themify-icons.css" rel="stylesheet">
 
+
+
 <style type="text/css">
     
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -262,13 +264,13 @@
                             <div class="text-center">
                                 <div class="row">
                                     <div class="col-md-3 col-md-offset-1">
-                                        <h5>12<br /><small>Reviews</small></h5>
+                                        <h5>{{session.num_review}}<br /><small>Reviews</small></h5>
                                     </div>
                                     <div class="col-md-4">
                                         <h5><br /><small></small></h5>
                                     </div>
                                     <div class="col-md-3">
-                                        <h5>24,6$<br /><small>Points</small></h5>
+                                        <h5>{{session.points}}<br /><small>Points</small></h5>
                                     </div>
                                 </div>
                             </div>
@@ -276,76 +278,49 @@
                         <div class="card">
                             <div class="header">
                             <h4 align="center">Claim your rewards</h4><label class="toggle">
-                        <form style="margin-left: 5%">
-                        <input type="radio" name="toggle" id="111"> <span class="label-text">Flipkart voucher</span>
+                        <form style="margin-left: 5%" method="POST">
+                        <input type="radio" name="toggle" id="111" checked="checked" value="Flipkart"> <span class="label-text">Flipkart voucher</span>
                     </label>
                     <label class="toggle">
-                        <input type="radio" name="toggle" id="222"> <span class="label-text">Amazon voucher</span>
+                        <input type="radio" name="toggle" id="222" value = "Amazon"> <span class="label-text" >Amazon voucher</span>
                     </label>
-                    </form>
                             </div>
-<div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd"><a href ="goo.html" style="color: white">Claim Reward</a></button>
+                                        <div class="text-center">
+
+                                         <div id="myPopover" class="hide" style="color: red">
+                                           Minimum 100 points are needed to claim rewards!!  
+                                         </div>
+                                        {% if session.points < 100 %}    
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd"><a href ="" style="color: white" rel="popover" data-popover-content="#myPopover">Claim Reward</a></button>
+                                        
+                                        {% else %}
+                                        <!--
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd" action ="goo.html"><a href ="" style="color: white">
+                                        Claim Reward</a></button>
+                                         -->
+                                       <!-- <button type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "claim" name="sbmt1">
+                                        Claim Reward</button>
+                                    -->
+                                    <input type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "claim" name="sbmt">
+
+                                        {% endif %}
                                         <br> <br>
                                         </div>
-                            <!--<div class="content">
-                                <ul class="list-unstyled team-members">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="static/paper/assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        DJ Khaled
-                                                        <br />
-                                                        <span class="text-muted"><small>Offline</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="static/paper/assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Creative Tim
-                                                        <br />
-                                                        <span class="text-success"><small>Available</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="static/paper/assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Flume
-                                                        <br />
-                                                        <span class="text-danger"><small>Busy</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                            </div>-->
+                                        </form>
+                                        <script>
+                                          $(function(){
+                                            $('[rel="popover"]').popover({
+                                            container: 'body',
+                                            html: true,
+                                            content: function () {
+                                            var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
+                                            return clone;
+                                            }
+                                            }).click(function(e) {
+                                             e.preventDefault();
+                                             });
+                                            });  
+                                        </script>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-7">
@@ -434,7 +409,10 @@
                                     </div>
                                     <input type="text" name="email" style="visibility: hidden;display: none" value="{{session.email}}">
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd" name="submit" value="Main">Update Profile</button>
+                                        <!--
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd" name="submit" value="Main" name="sbmt" value="update">Update Profile</button> -->
+                                        <input type="submit" class="btn btn-info btn-fill btn-wd" name="sbmt" value="update">
+
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>

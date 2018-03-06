@@ -108,3 +108,77 @@ def mob_sug():
 
     cur.close()
     return render_template('mobile_suggestions.html')
+
+
+
+
+OTEHR SHIT
+
+    ########################### ON SUBMIT #######################################
+    if request.method == 'POST':
+        """
+        if request.form['submit'] == 'Main':
+            #return render_template('gadgets.html')
+            return redirect(url_for('gadgets'))
+        elif request.form['submit2'] == 'Main2':
+            return redirect(url_for('laptops'))
+
+            ### VERY IMPORTANT .. IF WANT TO ACCESS TWO FORMS IN SAME HTML PAGE THEN 
+                GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
+                AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
+        """    
+        """
+        if request.form['sbmt'] == 'claim':
+            flash("ILL Flash",'info')
+            return render_template('user.html')
+        """
+        phone = request.form['phone']
+        gender = request.form['gender']
+        address = request.form['home']
+        city = request.form['city']
+        country = request.form['country']
+        postal = request.form['postal']
+        about = request.form['about']
+        email = request.form['email']
+        #app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
+        
+        # get user by email
+        result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
+        flag = False
+        if result <= 0:
+            cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
+        
+        if phone != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
+        
+        if gender != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
+        
+        if address != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
+
+        if city != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+        
+        if country != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
+
+        if postal != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        
+        if about != "":
+            flag = True
+            cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+
+        mysql.connection.commit()
+        if flag == True:    
+            flash('Changes will be visible the next time you visit User Profile','info')
+    cur.close()
+    
+    return render_template('user.html')
