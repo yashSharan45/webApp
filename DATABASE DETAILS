@@ -54,7 +54,62 @@ CREATE TABLE User_infoDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) 
 
 id email no.of.reviews aggregateRating correspondingPoints imgSrc
 
-
-id email no.of.reviews aggregateRating correspondingPoints imgSrc
-
 CREATE TABLE RatingDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL,numReview INT(10), aggrRating INT(10), corrPoints INT(10), imgSrc VARCHAR(100), PRIMARY KEY (Id));
+
+
+CREATE TABLE MobileDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Rom INT(10), Screen_size DECIMAL(2,1), Mcam INT(10), Fcam INT(10), Price VARCHAR(50), PRIMARY KEY (Id));
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5",3,16,6,13,8,"9999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5",4,32,6,13,8,"12999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5 Pro",4,64,6,12,20,"13999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5 Pro",6,64,6,12,20,"17999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("OnePlus 5T",6,64,6,20,16,"32999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Samsung On7 Prime",4,64,5.5,13,13,"14990");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Samsung On7 Prime",3,64,5.5,13,13,"11990");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Vivo V7 plus",4,64,5.9,16,24,"21990");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Oppo F3 plus",6,64,6,16,16,"22990");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Honor 9i",4,64,5.9,16,13,"17999");
+
+INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Moto X4",4,64,5.2,12,16,"22999");
+
+
+
+CREATE TABLE LaptopDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Hdd INT(10), Ssd INT(10), Screen_size DECIMAL(3,1), Type VARCHAR(50),Price VARCHAR(50), PRIMARY KEY (Id));
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("MSI GV",8,1,0,15.6,"Gaming","57490");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("ASUS FX553VD-DM013",8,1,0,15.6,"Gaming","63990");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("ACER 
+NITRO 5 SPIN",8,1,0,15.6,"Gaming","65999");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("ALIENWARE 15",8,1,256,15.6,"Gaming","139991");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("Lenovo Yoga 520",4,1,0,14,"Business","61990");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("DELL VOSTRO 3558",4,1,0,15.6,"Business","34000");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("MACBOOK AIR",8,0,128,13.3,"Business","57630");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("DELL INSPIRON 3565",4,500,0,15.6,"Daily use","19990");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("Lenovo IP 320e",8,1,0,15.6,"Daily use","53099");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("Acer Predator G3-572",16,2,256,15.6,"Gaming","120990");
+
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("DELL INSPIRON 7577",16,1,256,15.6,"Daily use","124990");
+
+
+
+
+
+
