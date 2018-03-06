@@ -55,5 +55,6 @@ CREATE TABLE User_infoDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) 
 id email no.of.reviews aggregateRating correspondingPoints imgSrc
 
 
-// not made right now
-CREATE TABLE RatingDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL,numReview INT(10), aggrRating INT(10), corrPoints INT(10), imgSrc VARCHAR(100))
+id email no.of.reviews aggregateRating correspondingPoints imgSrc
+
+CREATE TABLE RatingDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL,numReview INT(10), aggrRating INT(10), corrPoints INT(10), imgSrc VARCHAR(100), PRIMARY KEY (Id));
