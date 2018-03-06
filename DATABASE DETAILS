@@ -57,7 +57,7 @@ id email no.of.reviews aggregateRating correspondingPoints imgSrc
 CREATE TABLE RatingDB (Id INT(11) AUTO_INCREMENT NOT NULL,Email VARCHAR(100) NOT NULL,numReview INT(10), aggrRating INT(10), corrPoints INT(10), imgSrc VARCHAR(100), PRIMARY KEY (Id));
 
 
-CREATE TABLE MobileDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Rom INT(10), Screen_size VARCHAR(50), Mcam INT(10), Fcam INT(10), Price VARCHAR(50), PRIMARY KEY (Id));
+CREATE TABLE MobileDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Rom INT(10), Screen_size VARCHAR(50), Mcam INT(10), Fcam INT(10), Price INT(20), PRIMARY KEY (Id));
 
 INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Mi Note 5",3,16,6,13,8,"9999");
 
@@ -83,7 +83,7 @@ INSERT INTO MobileDB (Name,Ram,Rom,Screen_size,Mcam,Fcam,Price) VALUES ("Moto X4
 
 
 
-CREATE TABLE LaptopDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Hdd INT(10), Ssd INT(10), Screen_size DECIMAL(3,1), Type VARCHAR(50),Price VARCHAR(50), PRIMARY KEY (Id));
+CREATE TABLE LaptopDB (Id INT(11) AUTO_INCREMENT NOT NULL,Name VARCHAR(100) NOT NULL,Ram INT(10), Hdd INT(10), Ssd INT(10), Screen_size VARCHAR(50), Type VARCHAR(50),Price INT(20), PRIMARY KEY (Id));
 
 INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("MSI GV",8,1,0,15.6,"Gaming","57490");
 
@@ -98,7 +98,7 @@ INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("Lenovo Y
 
 INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("DELL VOSTRO 3558",4,1,0,15.6,"Business","34000");
 
-INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("MACBOOK AIR",8,0,128,13.3,"Business","57630");
+INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("Lenovo Thinkpad E470 52IG",4,1,0,14,"Business","34049");
 
 INSERT INTO LaptopDB (Name,Ram,Hdd,Ssd,Screen_size,Type,Price) VALUES ("DELL INSPIRON 3565",4,500,0,15.6,"Daily use","19990");
 

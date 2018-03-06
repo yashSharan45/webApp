@@ -1,4 +1,4 @@
-import os
+import os,sys
 
 from exceptions import Exception
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
@@ -49,6 +49,9 @@ def allowed_file(filename):
 # This route will show a form to perform an AJAX request jQuery is 
 # loaded to execute the request and update the value of the operation
 
+
+def __repr__(self):
+    return str(self.__dict__)
 
 
 # check if user logger_in
@@ -417,40 +420,203 @@ def phone_app():
 @app.route('/mobile_suggestions',methods=['GET','POST'])
 @is_logged_in
 def mob_sug():
-    ram = request.args.get('radio1') # GET REQUEST
-    rom = request.args.get('radio2')
-    screen = request.args.get('radio3')
-    if screen == '5-5.5':
-        str.split("-")
-        app.logger.info("SS" +"str")
-    rear_cam = request.args.get('radio4')
-    front_cam = request.args.get('radio5')
-    price = request.args.get('radio6')
-    #app.logger.info("%s %s %s %s %s %s ",ram,rom,screen,rear_cam,front_cam,price)
+    if request.method == 'POST':
+        ram = request.form['radio1'] # POST REQUEST
+        rom = request.form['radio2']
+
+        screen = request.form['radio3']
+
+        # upper and lower limits of screen
+        screen = str(screen)
+        screen_temp = screen
+        screen = screen.split("-")
     
-    #Create Cursor
-    cur = mysql.connection.cursor()
-    # get user by email
-    result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s",[ram]) 
-    #app.logger.info("%s",screen)   
-    #result = cur.execute("SELECT * FROM MobileDB WHERE Screen_size = %s",[screen])    
-    if result > 0:
-        mysql.connection.commit()
+        l_lim_screen = screen[0]
+    
+        if screen[0] == screen_temp:
+            screen = screen[0].split("+")
+            l_lim_screen = screen[0]
+            u_lim_screen = sys.maxsize 
+        else:
+            u_lim_screen = screen[1]    
+        
+        #app.logger.info("%s %s",l_lim_screen,u_lim_screen) # 0 and 1
+    
+        rear_cam = request.form['radio4']
 
-        #data = cur.fetchone() # get only first row
-        data = cur.fetchall()
-        for row in data:
-            app.logger.info("%s",row)    
-        # Setting session data
-        #session['name_mobile'] = data['Name']
-        #app.logger.info("%s",session['name_mobile'])
-    cur.close()
-    return render_template('mobile_suggestions.html')
+        # upper and lower limits of Rear Cam
+        rear_cam = str(rear_cam)
+        rear_cam_temp = rear_cam
+        rear_cam = rear_cam.split("-")
+    
+        l_lim_rear_cam = rear_cam[0]
+    
+        if rear_cam[0] == rear_cam_temp:
+            rear_cam = rear_cam[0].split("+")
+            l_lim_rear_cam = rear_cam[0]
+            u_lim_rear_cam = sys.maxsize 
+        else:
+            u_lim_rear_cam = rear_cam[1]    
+        
+        #app.logger.info("%s %s",l_lim_rear_cam,u_lim_rear_cam) # 0 and 1
 
-@app.route('/laptop_suggestions')
+        front_cam = request.form['radio5']
+
+        # upper and lower limits of Front Cam
+        front_cam = str(front_cam)
+        front_cam_temp = front_cam
+        front_cam = front_cam.split("-")
+    
+        l_lim_front_cam = front_cam[0]
+    
+        if front_cam[0] == front_cam_temp:
+            front_cam = front_cam[0].split("+")
+            l_lim_front_cam = front_cam[0]
+            u_lim_front_cam = sys.maxsize 
+        else:
+            u_lim_front_cam = front_cam[1]    
+        
+        #app.logger.info("%s %s",l_lim_front_cam,u_lim_front_cam) # 0 and 1
+
+        price = request.form['radio6']  
+
+        # upper and lower limits of Price
+        price = str(price)
+        price_temp = price
+        price = price.split("-")
+    
+        #l_lim_price = int(price[0])
+        l_lim_price = price[0]
+    
+        if price[0] == price_temp:
+            price = price[0].split("+")
+            #l_lim_price = int(price[0])
+            l_lim_price = price[0]
+            u_lim_price = sys.maxsize
+
+        else:
+            #u_lim_price = int(price[1])  
+            u_lim_price = price[1]  
+        
+        app.logger.info("%s %s",l_lim_price,u_lim_price) # 0 and 1
+    
+        #Create Cursor
+        cur = mysql.connection.cursor()
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s",[ram]) 
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Rom = %s",[rom]) 
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Screen_size >= %s AND Screen_size < %s",[l_lim_screen,u_lim_screen])    
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Mcam >= %s AND Mcam < %s",[l_lim_rear_cam,u_lim_rear_cam])
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Fcam >= %s AND Fcam < %s",[l_lim_front_cam,u_lim_front_cam])    
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Price >= %s AND Price < %s",[l_lim_price,u_lim_price])
+        result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s AND Rom = %s AND Screen_size >= %s AND Screen_size < %s AND Mcam >= %s AND Mcam < %s AND Fcam >= %s AND Fcam < %s AND Price >= %s AND Price < %s",[ram,rom,l_lim_screen,u_lim_screen,l_lim_rear_cam,u_lim_rear_cam,l_lim_front_cam,u_lim_front_cam,l_lim_price,u_lim_price])
+
+        if result > 0:
+            mysql.connection.commit()
+
+            data = cur.fetchall()
+            for row in data:
+                app.logger.info("%s",row)
+            cur.close()
+            #return redirect(url_for('mob_sug_res'),data = data)
+            return render_template('mob_sug_res.html', data=data)
+        else:
+            flash("No records found !! ",'warning')    
+        cur.close()
+    return render_template('mobile_suggestions.html')    
+    
+
+@app.route('/mob_sug_res')
+@is_logged_in
+def mob_sug_res():
+    return render_template('mob_sug_res.html')
+
+@app.route('/laptop_suggestions',methods=['GET','POST'])
 @is_logged_in
 def lap_sug():
-    return render_template('laptop_suggestions.html')
+    if request.method == 'POST':
+        ram = request.form['radio1'] # POST REQUEST
+        ram = int(ram)
+        hdd = request.form['radio2']
+
+        ssd = request.form['radio3']
+
+        screen = request.form['radio4']
+        
+
+        # upper and lower limits of screen
+        screen = str(screen)
+        screen_temp = screen
+        screen = screen.split("-")
+    
+        l_lim_screen = screen[0]
+    
+        if screen[0] == screen_temp:
+            screen = screen[0].split("+")
+            l_lim_screen = screen[0]
+            u_lim_screen = sys.maxsize 
+        else:
+            u_lim_screen = screen[1]    
+        
+        #app.logger.info("%s %s",l_lim_screen,u_lim_screen) # 0 and 1
+
+        type_lap = request.form['radio5']
+
+        price = request.form['radio6']  
+
+        # upper and lower limits of Price
+        price = str(price)
+        price_temp = price
+        price = price.split("-")
+    
+        #l_lim_price = int(price[0])
+        l_lim_price = price[0]
+    
+        if price[0] == price_temp:
+            price = price[0].split("+")
+            #l_lim_price = int(price[0])
+            l_lim_price = price[0]
+            u_lim_price = sys.maxsize
+
+        else:
+            #u_lim_price = int(price[1])  
+            u_lim_price = price[1]  
+        
+
+        app.logger.info("%s %s %s %s-%s %s %s-%s",ram,hdd,ssd,l_lim_screen,u_lim_screen,type_lap,l_lim_price,u_lim_price)
+        #app.logger.info("%s %s",l_lim_price,u_lim_price) # 0 and 1
+        
+        #Create Cursor
+        cur = mysql.connection.cursor()
+        
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Ram = %s",[ram]) 
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Hdd = %s",[hdd])
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Ssd = %s",[ssd]) 
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Screen_size >= %s AND Screen_size < %s",[l_lim_screen,u_lim_screen])    
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Type = %s",[type_lap])
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Price >= %s AND Price < %s",[l_lim_price,u_lim_price])
+        result = cur.execute("SELECT * FROM LaptopDB WHERE Ram = %s AND Hdd = %s AND Ssd = %s AND Screen_size >= %s AND Screen_size < %s AND Type = %s AND Price >= %s AND Price < %s",[ram,hdd,ssd,l_lim_screen,u_lim_screen,type_lap,l_lim_price,u_lim_price])
+        
+        if result > 0:
+            mysql.connection.commit()
+
+            data = cur.fetchall()
+            for row in data:
+                app.logger.info("%s",row)
+            cur.close()
+            return render_template('lap_sug_res.html', data=data)
+        else:
+            flash("No records found !! ",'warning')    
+        cur.close()
+        
+    return render_template('laptop_suggestions.html')    
+
+@app.route('/lap_sug_res')
+@is_logged_in
+def lap_sug_res():
+    return render_template('lap_sug_res.html')
+
+
+
 
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
