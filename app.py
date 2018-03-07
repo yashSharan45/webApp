@@ -630,6 +630,8 @@ def user():
     	mysql.connection.commit()
         data = cur.fetchone()
      	#app.logger.info(data['COUNT(*)'])   
+        if data['COUNT(*)'] is None :
+            session['num_review'] = 0
      	session['num_review'] = data['COUNT(*)']
 
     # Sum of rating /9 ==> for 1 (45/9 = 5)	
