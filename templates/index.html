@@ -23,15 +23,25 @@
 }
         </style>
     </head>
+
     {% include 'include/navbar.html' %}
+        <!--<div  style="margin-top:80px;margin-bottom: -20px;">
+        <div id = "flsh" style="margin-top:80px;margin-bottom: -20px;">
+            {% include 'include/flashMessages.html' %}
+    </div>-->
     <body class="landing-page landing-page1">
-        
         <div class="wrapper">
+
             <div class="parallax filter-gradient orange" data-color="orange">
+
                 <div class="parallax-background">
+
                     <img class="parallax-background-image" src="static/assets/img/template/bg3.jpg">
                 </div>
                 <div class= "container">
+                    <div id = "flsh" style="margin-top:80px;margin-bottom: -20px;padding-top:2%;">
+            {% include 'include/flashMessages.html' %}
+    </div>
                     <div class="row">
                         <div class="col-md-5 hidden-xs">
                             <div class="parallax-image">
@@ -703,18 +713,50 @@ input[type=submit]:hover {
 }
 </style>
 <h4 class="header-text text-center">Contact Us</h4>
+<script type="text/javascript">
+    
+    function validateForm() {
+    var x = document.forms["frm"]["email"].value;
+    if (x == "") {
+        document.getElementById('val').visibility = "visible";
+        document.getElementById('val').style.display = "block";
+        document.getElementById('val1').innerHTML = "*Please fill in your Email";
 
+        return false;
+    }
+
+}
+</script>
+<style type="text/css">
+    #val {
+        visibility: hidden;
+        display: none;
+    }
+</style>
 <div class="containerr">
-  <form action="" method="POST">
+    <div id = "val1" style="color: red"> </div> <br id="val">
+  <form action="" method="POST" name= "frm" onsubmit="return validateForm()">
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+    <input type="text" id="fname" name="firstname" placeholder="Your name.." >
 
     <label for="lname">Last Name</label>
     <input type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-    <label for="email">Email</label>
+    <label for="email">Email</label><br>
     <input type="text" id="email" name="email" placeholder="Your email..">
-
+    <!--
+    style="   
+    padding-right:5px;
+    width: 99%;
+    padding: 3.5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: initial;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    font-size: initial;"
+    -->
     <label for="country">Country</label>
     <select id="country" name="country" style="background-color:white ">
       <option value="india">India</option>
@@ -724,9 +766,8 @@ input[type=submit]:hover {
     </select>
 
     <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>  
+    <input type="submit" value="Submit" >
   </form>
 </div>
 </div>

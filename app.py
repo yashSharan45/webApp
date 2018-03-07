@@ -85,7 +85,7 @@ def index():
         subject = request.form['subject']
         info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
         send_mail(info)
-    
+        flash('Thanks!! We will be in touch..','info')
     return render_template('index.html')
 
 @app.route('/index',methods=['GET','POST'])
@@ -98,6 +98,7 @@ def index1():
         subject = request.form['subject']
         info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
         send_mail(info)
+        flash('Thanks!! We will be in touch..','info')
     return render_template('index.html')
 
 def send_mail(suggestions):
@@ -665,6 +666,8 @@ def user():
         # Setting session data
         session['img'] = data['imgSrc']
         #app.logger.info("%s",session['img'])
+    else:
+        session['img'] = "ninja.jpg"
     cur.close()
     ####################### ON LOAD OF USER PROFILE ############################
     #Create Cursor
@@ -972,7 +975,12 @@ def password_update():
         
         #Create Cursor
         cur = mysql.connection.cursor()
-
+        #Check if changing current email only
+        if email != session['email'] :
+        	flash('Wrong Email','warning')
+        	mysql.connection.commit()
+        	cur.close()
+        	return render_template('changepass.html')
         #Check if Email already exists
         result = cur.execute("SELECT * FROM UserDB where Email = %s",[email])
         if result > 0:
@@ -985,8 +993,7 @@ def password_update():
                 app.logger.info('%s %s',old_password,new_password)
             else:
                 flash('Incorrect Password','danger')
-                return render_template('changepass.html')
-
+                return render_template('changepass.html')        
         #Commit to DB
         mysql.connection.commit()
 

@@ -104,17 +104,27 @@
 
     <div class="main-panel">
     <meta charset="UTF-8">
-  
+    <style type="text/css">       
+    #flsh {
+        margin-top: 2%;
+    }     
+    @media only screen and (max-width: 450px) {
+    #flsh {
+        margin-top:15%;
+    }
+}
+        </style>
       <link rel="stylesheet" href="static/static/css/style.css">
+      <div id="flsh" style="max-width: 100%;">
+        {% include 'include/flashMessages.html' %}
+        </div>
   <div class="container">
         <div style="
     color: red;
     margin-left: -15%;
 ">
         </div>
-        <div id="flsh" style="margin-left: -15%;">
-        {% include 'include/flashMessages.html' %}
-        </div>
+        
         <div>
         <h1 id="req">Requirements</h1>
         </div>
