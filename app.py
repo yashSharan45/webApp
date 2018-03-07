@@ -637,8 +637,11 @@ def user():
     if result > 0:
     	mysql.connection.commit()
         data = cur.fetchone()
-	session['aggrRating'] = math.floor(data['SUM(Rating)']/9) #sublime Indentation fault
-     	app.logger.info(session['aggrRating'])
+        if data['SUM(Rating)'] is None :
+        	session['aggrRating'] = 0
+        else :
+		session['aggrRating'] = math.floor(data['SUM(Rating)']/9) #sublime Indentation fault
+     		app.logger.info(session['aggrRating'])
 	
 	# Corresponding points 
 	session['points'] = session['num_review'] * session['aggrRating']
@@ -700,14 +703,14 @@ def user():
         	flash("ILL Flash",'info')
         	return render_template('user.html')
     """ 
-	if request.form['sbmt'] == 'claim':
+	if request.form['sbmt'] == 'Claim Rewards':
 		voucher = request.form['toggle']
 		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
 		send_mail(msg)
         	flash(msg,'info')
         	return render_template('user.html')
 
-       	elif request.form['sbmt'] == 'update' :
+       	elif request.form['sbmt'] == 'Update Profile' :
        		phone = request.form['phone']
         	gender = request.form['gender']
         	address = request.form['home']
@@ -753,8 +756,10 @@ def user():
             		cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
 
         	mysql.connection.commit()
-        	if flag == True:    
-            		flash('Changes will be visible the next time you visit User Profile','info')
+        	if flag == True:
+        		flash('User Profile Updated!','info')
+        		return redirect(url_for('user'))    
+            		
     	cur.close()
 
     return render_template('user.html')
