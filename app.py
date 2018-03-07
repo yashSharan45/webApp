@@ -1,4 +1,4 @@
-import os
+import os,sys,math
 
 from exceptions import Exception
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
@@ -50,6 +50,9 @@ def allowed_file(filename):
 # loaded to execute the request and update the value of the operation
 
 
+def __repr__(self):
+    return str(self.__dict__)
+
 
 # check if user logger_in
 def is_logged_in(f):
@@ -72,12 +75,29 @@ def is_logged_in2(f):
 			return redirect(url_for('login'))
 	return wrap
 
-@app.route('/')
-def index():
-	return render_template('index.html')
+@app.route('/',methods=['GET','POST'])
+def index():    
+    if request.method == 'POST':
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        email = request.form['email']
+        country = request.form['country']
+        subject = request.form['subject']
+        info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
+        send_mail(info)
+    
+    return render_template('index.html')
 
-@app.route('/index')
+@app.route('/index',methods=['GET','POST'])
 def index1():
+    if request.method == 'POST':
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        email = request.form['email']
+        country = request.form['country']
+        subject = request.form['subject']
+        info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
+        send_mail(info)
     return render_template('index.html')
 
 def send_mail(suggestions):
@@ -397,19 +417,240 @@ def web_app():
 def phone_app():
     return render_template('phone_app.html')
 
-@app.route('/mobile_suggestions')
+@app.route('/mobile_suggestions',methods=['GET','POST'])
 @is_logged_in
-def dashboard():
-    return render_template('mobile_suggestions.html')
+def mob_sug():
+    if request.method == 'POST':
+        ram = request.form['radio1'] # POST REQUEST
+        rom = request.form['radio2']
 
-@app.route('/laptop_suggestions')
+        screen = request.form['radio3']
+
+        # upper and lower limits of screen
+        screen = str(screen)
+        screen_temp = screen
+        screen = screen.split("-")
+    
+        l_lim_screen = screen[0]
+    
+        if screen[0] == screen_temp:
+            screen = screen[0].split("+")
+            l_lim_screen = screen[0]
+            u_lim_screen = sys.maxsize 
+        else:
+            u_lim_screen = screen[1]    
+        
+        #app.logger.info("%s %s",l_lim_screen,u_lim_screen) # 0 and 1
+    
+        rear_cam = request.form['radio4']
+
+        # upper and lower limits of Rear Cam
+        rear_cam = str(rear_cam)
+        rear_cam_temp = rear_cam
+        rear_cam = rear_cam.split("-")
+    
+        l_lim_rear_cam = rear_cam[0]
+    
+        if rear_cam[0] == rear_cam_temp:
+            rear_cam = rear_cam[0].split("+")
+            l_lim_rear_cam = rear_cam[0]
+            u_lim_rear_cam = sys.maxsize 
+        else:
+            u_lim_rear_cam = rear_cam[1]    
+        
+        #app.logger.info("%s %s",l_lim_rear_cam,u_lim_rear_cam) # 0 and 1
+
+        front_cam = request.form['radio5']
+
+        # upper and lower limits of Front Cam
+        front_cam = str(front_cam)
+        front_cam_temp = front_cam
+        front_cam = front_cam.split("-")
+    
+        l_lim_front_cam = front_cam[0]
+    
+        if front_cam[0] == front_cam_temp:
+            front_cam = front_cam[0].split("+")
+            l_lim_front_cam = front_cam[0]
+            u_lim_front_cam = sys.maxsize 
+        else:
+            u_lim_front_cam = front_cam[1]    
+        
+        #app.logger.info("%s %s",l_lim_front_cam,u_lim_front_cam) # 0 and 1
+
+        price = request.form['radio6']  
+
+        # upper and lower limits of Price
+        price = str(price)
+        price_temp = price
+        price = price.split("-")
+    
+        #l_lim_price = int(price[0])
+        l_lim_price = price[0]
+    
+        if price[0] == price_temp:
+            price = price[0].split("+")
+            #l_lim_price = int(price[0])
+            l_lim_price = price[0]
+            u_lim_price = sys.maxsize
+
+        else:
+            #u_lim_price = int(price[1])  
+            u_lim_price = price[1]  
+        
+        app.logger.info("%s %s",l_lim_price,u_lim_price) # 0 and 1
+    
+        #Create Cursor
+        cur = mysql.connection.cursor()
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s",[ram]) 
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Rom = %s",[rom]) 
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Screen_size >= %s AND Screen_size < %s",[l_lim_screen,u_lim_screen])    
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Mcam >= %s AND Mcam < %s",[l_lim_rear_cam,u_lim_rear_cam])
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Fcam >= %s AND Fcam < %s",[l_lim_front_cam,u_lim_front_cam])    
+        #result = cur.execute("SELECT * FROM MobileDB WHERE Price >= %s AND Price < %s",[l_lim_price,u_lim_price])
+        result = cur.execute("SELECT * FROM MobileDB WHERE Ram = %s AND Rom = %s AND Screen_size >= %s AND Screen_size < %s AND Mcam >= %s AND Mcam < %s AND Fcam >= %s AND Fcam < %s AND Price >= %s AND Price < %s",[ram,rom,l_lim_screen,u_lim_screen,l_lim_rear_cam,u_lim_rear_cam,l_lim_front_cam,u_lim_front_cam,l_lim_price,u_lim_price])
+
+        if result > 0:
+            mysql.connection.commit()
+
+            data = cur.fetchall()
+            for row in data:
+                app.logger.info("%s",row)
+            cur.close()
+            #return redirect(url_for('mob_sug_res'),data = data)
+            return render_template('mob_sug_res.html', data=data)
+        else:
+            flash("No records found !! ",'warning')    
+        cur.close()
+    return render_template('mobile_suggestions.html')    
+    
+
+@app.route('/mob_sug_res')
 @is_logged_in
-def dashboard2():
-    return render_template('laptop_suggestions.html')
+def mob_sug_res():
+    return render_template('mob_sug_res.html')
+
+@app.route('/laptop_suggestions',methods=['GET','POST'])
+@is_logged_in
+def lap_sug():
+    if request.method == 'POST':
+        ram = request.form['radio1'] # POST REQUEST
+        ram = int(ram)
+        hdd = request.form['radio2']
+
+        ssd = request.form['radio3']
+
+        screen = request.form['radio4']
+        
+
+        # upper and lower limits of screen
+        screen = str(screen)
+        screen_temp = screen
+        screen = screen.split("-")
+    
+        l_lim_screen = screen[0]
+    
+        if screen[0] == screen_temp:
+            screen = screen[0].split("+")
+            l_lim_screen = screen[0]
+            u_lim_screen = sys.maxsize 
+        else:
+            u_lim_screen = screen[1]    
+        
+        #app.logger.info("%s %s",l_lim_screen,u_lim_screen) # 0 and 1
+
+        type_lap = request.form['radio5']
+
+        price = request.form['radio6']  
+
+        # upper and lower limits of Price
+        price = str(price)
+        price_temp = price
+        price = price.split("-")
+    
+        #l_lim_price = int(price[0])
+        l_lim_price = price[0]
+    
+        if price[0] == price_temp:
+            price = price[0].split("+")
+            #l_lim_price = int(price[0])
+            l_lim_price = price[0]
+            u_lim_price = sys.maxsize
+
+        else:
+            #u_lim_price = int(price[1])  
+            u_lim_price = price[1]  
+        
+
+        app.logger.info("%s %s %s %s-%s %s %s-%s",ram,hdd,ssd,l_lim_screen,u_lim_screen,type_lap,l_lim_price,u_lim_price)
+        #app.logger.info("%s %s",l_lim_price,u_lim_price) # 0 and 1
+        
+        #Create Cursor
+        cur = mysql.connection.cursor()
+        
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Ram = %s",[ram]) 
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Hdd = %s",[hdd])
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Ssd = %s",[ssd]) 
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Screen_size >= %s AND Screen_size < %s",[l_lim_screen,u_lim_screen])    
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Type = %s",[type_lap])
+        #result = cur.execute("SELECT * FROM LaptopDB WHERE Price >= %s AND Price < %s",[l_lim_price,u_lim_price])
+        result = cur.execute("SELECT * FROM LaptopDB WHERE Ram = %s AND Hdd = %s AND Ssd = %s AND Screen_size >= %s AND Screen_size < %s AND Type = %s AND Price >= %s AND Price < %s",[ram,hdd,ssd,l_lim_screen,u_lim_screen,type_lap,l_lim_price,u_lim_price])
+        
+        if result > 0:
+            mysql.connection.commit()
+
+            data = cur.fetchall()
+            for row in data:
+                app.logger.info("%s",row)
+            cur.close()
+            return render_template('lap_sug_res.html', data=data)
+        else:
+            flash("No records found !! ",'warning')    
+        cur.close()
+        
+    return render_template('laptop_suggestions.html')    
+
+@app.route('/lap_sug_res')
+@is_logged_in
+def lap_sug_res():
+    return render_template('lap_sug_res.html')
+
+
+
 
 @app.route('/user',methods = ['GET','POST'])
 @is_logged_in
 def user():
+	######################### Points ##########################################
+	#Create Cursor
+    cur = mysql.connection.cursor()
+    #Number of Reviews:
+    result = cur.execute("SELECT COUNT(*) FROM SurveyDB WHERE email = %s",[session['email']])
+    if result > 0:
+    	mysql.connection.commit()
+        data = cur.fetchone()
+     	#app.logger.info(data['COUNT(*)'])   
+     	session['num_review'] = data['COUNT(*)']
+
+    # Sum of rating /9 ==> for 1 (45/9 = 5)	
+	result = cur.execute("SELECT SUM(Rating) FROM SurveyDB WHERE email = %s",[session['email']])     	
+    if result > 0:
+    	mysql.connection.commit()
+        data = cur.fetchone()
+        if data['SUM(Rating)'] is None :
+        	session['aggrRating'] = 0
+        else :
+		session['aggrRating'] = math.floor(data['SUM(Rating)']/9) #sublime Indentation fault
+     		app.logger.info(session['aggrRating'])
+	
+	# Corresponding points 
+	session['points'] = session['num_review'] * session['aggrRating']
+	app.logger.info(session['points'])
+
+	# Update DB
+	cur.execute("UPDATE RatingDB SET numReview = %s,aggrRating = %s,corrPoints = %s WHERE Email = %s",(session['num_review'],session['aggrRating'],session['points'],[session['email']])); 	     	  	
+    #cur.execute("INSERT INTO RatingDB(Email) VALUES (%s)",[session['email']])
+    cur.close()
     ####################### Profile Pic ########################################
     #Create Cursor
     cur = mysql.connection.cursor()
@@ -456,55 +697,71 @@ def user():
                 GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
                 AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
         """    
-        phone = request.form['phone']
-        gender = request.form['gender']
-        address = request.form['home']
-        city = request.form['city']
-        country = request.form['country']
-        postal = request.form['postal']
-        about = request.form['about']
-        email = request.form['email']
-        #app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
-        
-        # get user by email
-        result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
-        flag = False
-        if result <= 0:
-            cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
-        
-        if phone != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
-        
-        if gender != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
-        
-        if address != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
+		
+	"""        
+        if 2 == 1:
+        	flash("ILL Flash",'info')
+        	return render_template('user.html')
+    """ 
+	if request.form['sbmt'] == 'Claim Rewards':
+		voucher = request.form['toggle']
+		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+		send_mail(msg)
+        	flash(msg,'info')
+        	return render_template('user.html')
 
-        if city != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+       	elif request.form['sbmt'] == 'Update Profile' :
+       		phone = request.form['phone']
+        	gender = request.form['gender']
+        	address = request.form['home']
+        	city = request.form['city']
+        	country = request.form['country']
+        	postal = request.form['postal']
+        	about = request.form['about']
+        	email = request.form['email']
+        	#app.logger.info("%s %s %s %s %s %s %s %s",phone,gender,address,city,country,postal,email,about)
         
-        if country != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
-
-        if postal != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        	# get user by email
+        	result = cur.execute("SELECT * FROM User_infoDB WHERE email = %s",[email])
+        	flag = False
+        	if result <= 0:
+            		cur.execute("INSERT INTO User_infoDB(Email) VALUES (%s)",[email])
         
-        if about != "":
-            flag = True
-            cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+        	if phone != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET Phone = %s WHERE Email = %s",(phone,email));
+        
+        	if gender != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET Gender = %s WHERE Email = %s",(gender,email));
+        
+        	if address != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET address = %s WHERE Email = %s",(address,email));
 
-        mysql.connection.commit()
-        if flag == True:    
-            flash('Changes will be visible the next time you visit User Profile','info')
-    cur.close()
-    
+        	if city != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET city = %s WHERE Email = %s",(city,email));
+        
+        	if country != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET country = %s WHERE Email = %s",(country,email));
+
+        	if postal != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET postal = %s WHERE Email = %s",(postal,email));
+        
+        	if about != "":
+            		flag = True
+            		cur.execute("UPDATE User_infoDB SET about = %s WHERE Email = %s",(about,email));
+
+        	mysql.connection.commit()
+        	if flag == True:
+        		flash('User Profile Updated!','info')
+        		return redirect(url_for('user'))    
+            		
+    	cur.close()
+
     return render_template('user.html')
 
 """
