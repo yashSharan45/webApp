@@ -21,9 +21,31 @@
         margin-top:15%;
     }
 }
-        </style>
-    </head>
 
+	.landing-page .parallax .parallax-image img.phone {
+		float: left;
+	}
+        </style>
+	          <!--     <link rel="stylesheet" type="text/css" href="static/static/css/animate.min.css"> 
+            <link rel="stylesheet" type="text/css" href="static/static/js/wow.min.js">
+            -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js ">    
+
+            <script>
+              new WOW().init();
+              </script>
+
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script> 
+$(document).ready(function(){   
+        $("#iphon").animate({left: '20px'});
+    });
+
+</script> 
     {% include 'include/navbar.html' %}
         <!--<div  style="margin-top:80px;margin-bottom: -20px;">
         <div id = "flsh" style="margin-top:80px;margin-bottom: -20px;">
@@ -32,7 +54,7 @@
     <body class="landing-page landing-page1">
         <div class="wrapper">
 
-            <div class="parallax filter-gradient orange" data-color="orange">
+            <div class="parallax filter-gradient orange" data-color="orange" >
 
                 <div class="parallax-background">
 
@@ -44,8 +66,8 @@
     </div>
                     <div class="row">
                         <div class="col-md-5 hidden-xs">
-                            <div class="parallax-image">
-                                <img class="phone" src="static/assets/img/template/iphone3.png" style="margin-top: 20px"/>
+                            <div class="parallax-image wow" style="visibility: visible; animation-duration: 2s; animation-delay: 0.4s; animation-name: fadeInUp;" data-wow-delay="0.4s" data-wow-duration="0.6s" >
+                                <img class="phone" src="static/assets/img/template/iphone3.png" style="margin-top: 20px" />
                             </div>
                         </div>
                         <div class="col-md-6 col-md-offset-1">
@@ -66,53 +88,20 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="section section-gray section-clients">
-                <div class="container text-center">
-                    <h4 class="header-text">Friends in high places</h4>
-                    <p>
-                        Build customer confidence by listing your users! Anyone who has used your service and has been pleased with it should have a place here! From Fortune 500 to start-ups, all your app enthusiasts will be glad to be featured in this section. Moreover, users will feel confident seing someone vouching for your product!<br>
-                    </p>
-                    <div class="logos">
-                        <ul class="list-unstyled">
-                            <li ><img src="static/assets/img/logos/adobe.png"/></li>
-                            <li ><img src="static/assets/img/logos/zendesk.png"/></li>
-                            <li ><img src="static/assets/img/logos/ebay.png"/></i>
-                            <li ><img src="static/assets/img/logos/evernote.png"/></li>
-                            <li ><img src="static/assets/img/logos/airbnb.png"/></li>
-                            <li ><img src="static/assets/img/logos/zappos.png"/></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="section section-presentation">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="description">
-                                <h4 class="header-text">Processors</h4>
-                                <p>In computing, a processor or processing unit is an electronic circuit which performs operations on some external data source, usually memory or some other data stream. The term is frequently used to refer to the central processor (central processing unit) in a system, but typical computer systems (especially SoCs) combine a number of specialised "processors". </p>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-md-offset-1 hidden-xs">
-                            <img src="static/assets/img/template/processor.jpg"/>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div id="description-carousel" class="carousel fade" data-ride="carousel">
-                                <div class="carousel-inner"  style="height: 400px">
-                                    <div class="item active">
-                                        <img src="static/assets/img/template/examples/1.jpg" alt="">
+                        <div class="col-md-6 fadeInLeft animated wow">
+                            <div id="description-carousel" class="carousel fade " data-ride="carousel" >
+                                <div class="carousel-inner"  >
+                                    <div class="item active " >
+                                        <img src="static/assets/img/template/examples/02.jpg" alt="">
                                     </div>
                                     <div class="item">
-                                        <img src="static/assets/img/template/examples/CP.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/01.jpg" alt="">
                                     </div>
                                     <div class="item">
-                                        <img src="static/assets/img/template/examples/intel.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/03.png" alt="">
                                     </div>
                                 </div>
                                 <ol class="carousel-indicators carousel-indicators-orange" style="z-index: 0">
@@ -122,7 +111,7 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+                        <div class="col-md-5 col-md-offset-1 wow fadeInRight animated" >
                             <h4 class="header-text">Intel Core i9 7960X</h4>
                             <p>
                                 16 Cores, 32 Threads, Supported Memory: DDR4-2666</p>
@@ -140,17 +129,17 @@
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft animated" >
                             <div id="description-carousel1" class="carousel fade" data-ride="carousel">
-                                <div class="carousel-inner"  style="height: 400px">
+                                <div class="carousel-inner" >
                                     <div class="item active">
-                                        <img src="static/assets/img/template/examples/2.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/04.jpg" alt="">
                                     </div>
                                     <div class="item">
-                                        <img src="static/assets/img/template/examples/3.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/05.jpg" alt="">
                                     </div>
                                     <div class="item">
-                                        <img src="static/assets/img/template/examples/4.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/06.jpg" alt="">
                                     </div>
                                 </div>
                                 <ol class="carousel-indicators carousel-indicators-orange" style="z-index: 0">
@@ -160,7 +149,7 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+                        <div class="col-md-5 col-md-offset-1  wow fadeInRight animated" >
                             <h4 class="header-text">R7 370 IceQ X²</h4>
                             <p>
                                 16 Cores, 32 Threads, Supported Memory: DDR4-2666</p>
@@ -178,14 +167,14 @@
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft animated" >
                             <div id="description-carousel2" class="carousel fade" data-ride="carousel">
-                                <div class="carousel-inner"  style="height: 400px">
+                                <div class="carousel-inner"  >
                                     <div class="item active">
                                         <img src="static/assets/img/template/examples/5.png" alt="">
                                     </div>
                                     <div class="item">
-                                        <img src="static/assets/img/template/examples/6.jpg" alt="">
+                                        <img src="static/assets/img/template/examples/07.png" alt="">
                                     </div>
                                     <div class="item">
                                         <img src="static/assets/img/template/examples/7.jpg" alt="">
@@ -198,7 +187,7 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+                        <div class="col-md-5 col-md-offset-1 wow fadeInRight animated" >
                             <h4 class="header-text">Snapdragon 835</h4>
                             <p>
                                 With an advanced 10-nanometer design, the Qualcomm® Snapdragon™ 835 mobile platform can support phenomenal mobile performance.</p>
@@ -214,7 +203,7 @@
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft animated" >
                             <div id="description-carousel3" class="carousel fade" data-ride="carousel">
                                 <div class="carousel-inner"  style="height: 250px">
                                     <div class="item active">
@@ -234,7 +223,7 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+                        <div class="col-md-5 col-md-offset-1 wow fadeInRight animated">
                             <h4 class="header-text">Moov Now</h4>
                             <p>
                                 The Moov Now doesn't have all the bells and whistles you would associate with a fitness tracker. It doesn't have GPS tracking, it doesn't even have a screen; but what it does have is a cheap price tag and six-month battery life. Yes, you read that right: six months.</p>
@@ -250,7 +239,7 @@
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft animated" >
                             <div id="description-carousel4" class="carousel fade" data-ride="carousel">
                                 <div class="carousel-inner"  style="height: 250px">
                                     <div class="item active">
@@ -270,7 +259,7 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+                        <div class="col-md-5 col-md-offset-1 wow fadeInRight animated" >
                             <h4 class="header-text">Nikon D850</h4>
                             <p>
                                 According to TechRadar's Photography Editor Phil Hall, the "fabulous D850 DSLR pretty much ticks every box".It has a brillaint 45.4MP full-frame sensor, stunning image quality, and that's where the story starts.</p>
@@ -286,7 +275,7 @@
             <div class="section section-demo">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft animated" >
                             <div id="description-carousel5" class="carousel fade" data-ride="carousel">
                                 <div class="carousel-inner"  style="height: 250px">
                                     <div class="item active">
@@ -306,7 +295,9 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-md-5 col-md-offset-1">
+
+                        
+                        <div id = "d62" class="col-md-5 col-md-offset-1 wow fadeInRight animated " >
                             <h4 class="header-text">HTC Vive</h4>
                             <p>
                                 The HTC Vive is the best VR headset in the world right now. The controls are intuitive to use, the resolution is incredible, with a 1080p screen per eye, and the base stations mean you can play in a space that's 13 x 13 feet in size – that's some serious playing space to swing yourself around in. </p>
