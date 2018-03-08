@@ -77,6 +77,7 @@ def is_logged_in2(f):
 
 @app.route('/',methods=['GET','POST'])
 def index():    
+	"""
     if request.method == 'POST':
         fname = request.form['firstname']
         lname = request.form['lastname']
@@ -86,7 +87,8 @@ def index():
         info = "Contact Us Form Details" + '\n\n' + fname + ' ' + lname + '\n' + email + '\n' + country + '\n' + subject
         send_mail(info)
         flash('Thanks!! We will be in touch..','info')
-    return render_template('index.html')
+    return render_template('index.html')"""
+    	return render_template('start.html')
 
 @app.route('/index',methods=['GET','POST'])
 def index1():
