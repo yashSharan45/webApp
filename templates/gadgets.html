@@ -25,7 +25,16 @@
     
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+    
+    function validateForm() {
+    var x = document.forms["letKnow"]["eemail"].value;
+    if (x == "") {
+        return false;
+    }
 
+}
+</script>
   </head>
   <!-- START BODY -->
   <body class="nomobile">
@@ -48,7 +57,7 @@
             <!-- END TIMER -->
             <div class="col-lg-4 col-lg-offset-4 mt centered">
             	<h4>LET ME KNOW WHEN YOU LAUNCH</h4>
-				<form class="form-inline" role="form" name="letKnow" method="POST">
+				<form class="form-inline" role="form" name="letKnow" method="POST" onsubmit="return validateForm()">
 				  <div class="form-group">
 				    <label class="sr-only" for="exampleInputEmail2">Email address</label>
 				    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email" name="eemail">
