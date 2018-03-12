@@ -11,11 +11,14 @@ from flask_mail import Mail, Message
 from werkzeug import secure_filename
 from werkzeug.exceptions import BadRequest
 
+from Crypto.Cipher import DES
+
 
 # pip install Flask-WTF
 # pip install passlib
 
 app = Flask(__name__) # object called app is created of Flask class
+
 
 #Config MySQL
 app.config['MYSQL_HOST'] = 'localhost'
@@ -27,11 +30,14 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #init MYSQL
 mysql = MySQL(app)
 
+
+des = DES.new('01234567', DES.MODE_ECB)
+
 #init Mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'aneeshverma0412@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Chitkara@71'
+app.config['MAIL_PASSWORD'] = des.decrypt("!b\xa9.\xd5\x94\xb7t")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail=Mail(app)
