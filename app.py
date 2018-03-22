@@ -36,7 +36,7 @@ des = DES.new('01234567', DES.MODE_ECB)
 #init Mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'aneeshverma0412@gmail.com'
+app.config['MAIL_USERNAME'] = 'fprovider4@gmail.com'
 app.config['MAIL_PASSWORD'] = des.decrypt("!b\xa9.\xd5\x94\xb7t")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
@@ -112,7 +112,7 @@ def index1():
 def send_mail(suggestions):
     #app.logger.info('%s',suggestions)
     if suggestions != "":
-    	msg = Message('FEEDBACK', sender = 'aneeshverma0412@gmail.com', recipients = ['aneeshverma0412@gmail.com'])
+    	msg = Message('FEEDBACK', sender = 'fprovider4@gmail.com', recipients = ['fprovider4@gmail.com'])
     	msg.body = suggestions
     	mail.send(msg)
 
@@ -720,15 +720,23 @@ def user():
 	if request.form['sbmt'] == 'Claim Rewards':
 		voucher = request.form['toggle']
         	session['flag'] = 'True'
-        	msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
-		send_mail(msg)
-        	flash(msg,'info')
+
+		result = cur.execute("SELECT * FROM RewardDB WHERE email = %s",[session['email']])
+		if result <= 0:
+            		cur.execute("INSERT INTO RewardDB(Email,Reward) VALUES (%s,%s)",[session['email'],0])    
+
+		val = cur.execute("SELECT * FROM RewardDB WHERE Reward = 0")
+
+		if val == 1 : # meaning there is one result
+			cur.execute("UPDATE RewardDB SET Reward = %s WHERE Email = %s",(1,session['email']));
+			msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+			send_mail(msg)
+        		flash(msg,'info')
+		else :
+			msg = "Gift voucher already on its way"
+			flash(msg,'info')
+		mysql.connection.commit()
         	return render_template('user.html')
-	elif request.form['sbmt'] == 'cant claim':
-		msg = "Gift voucher already on its way"
-        	session['flag'] = 'True'
-		flash(msg,'info')
-		return render_template('user.html')
 
        	elif request.form['sbmt'] == 'Update Profile' :
        		phone = request.form['phone']
