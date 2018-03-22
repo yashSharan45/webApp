@@ -695,6 +695,7 @@ def user():
         session['country'] = data['Country']
         session['postal'] = data['Postal']
         session['about'] = data['About']
+        session['flag'] = 'False'
         #app.logger.info('%s',data['About'])
 
     ########################### ON SUBMIT #######################################
@@ -718,10 +719,16 @@ def user():
     """ 
 	if request.form['sbmt'] == 'Claim Rewards':
 		voucher = request.form['toggle']
-		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+        	session['flag'] = 'True'
+        	msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
 		send_mail(msg)
         	flash(msg,'info')
         	return render_template('user.html')
+	elif request.form['sbmt'] == 'cant claim':
+		msg = "Gift voucher already on its way"
+        	session['flag'] = 'True'
+		flash(msg,'info')
+		return render_template('user.html')
 
        	elif request.form['sbmt'] == 'Update Profile' :
        		phone = request.form['phone']

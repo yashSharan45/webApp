@@ -292,18 +292,14 @@
                                          </div>
 
                                         {% if session.points < 100 %}    
-                                        <!--<button type="submit" class="btn btn-info btn-fill btn-wd"><a href ="" style="color: white" rel="popover" data-popover-content="#myPopover">Claim Reward</a></button> -->
                                         <button class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" rel="popover" data-popover-content="#myPopover">Claim Rewards </button>
+                                        
                                         {% else %}
-                                        <!--
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd" action ="goo.html"><a href ="" style="color: white">
-                                        Claim Reward</a></button>
-                                         -->
-                                       <!-- <button type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "claim" name="sbmt1">
-                                        Claim Reward</button>
-                                    -->
+                                        	{% if session.flag == 'True' %}
+                                        	<button class="btn btn-info btn-fill btn-wd" action ="" value = "cant claim" name="sbmt">Claim Rewards </button>
+                                         {% else %}
                                     <input type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" name="sbmt">
-
+                                    	{% endif %}
                                         {% endif %}
                                         <br> <br>
                                         </div>
