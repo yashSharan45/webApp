@@ -81,6 +81,18 @@ def is_logged_in2(f):
 			return redirect(url_for('login'))
 	return wrap
 
+# points
+def points_check(f):
+	@wraps(f)
+	def wrap(*args, **kwargs):
+		if session['points'] < 100:
+			return f(*args,**kwargs)
+		else:
+			flash('Please Redeem your points first!!','danger')
+			return redirect(url_for('user'))
+	return wrap
+
+
 @app.route('/',methods=['GET','POST'])
 def index():    
 	"""
@@ -118,10 +130,12 @@ def send_mail(suggestions):
 
 # ROUTING OF PHONES
 @app.route('/phones')
+@points_check
 def phones():
     return render_template('phones.html')
 
 @app.route('/phones/iphoneX',methods=['GET','POST'])
+@points_check
 def phone1():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -155,6 +169,7 @@ def phone1():
     return render_template('phones/iphoneX.html')
 
 @app.route('/phones/pixel2',methods=['GET','POST'])
+@points_check
 def phone2():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -188,6 +203,7 @@ def phone2():
     return render_template('phones/pixel2.html')
 
 @app.route('/phones/SamsungS8',methods=['GET','POST'])
+@points_check
 def phone3():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -221,6 +237,7 @@ def phone3():
     return render_template('phones/SamsungS8.html')
 
 @app.route('/phones/oneplus5T',methods=['GET','POST'])
+@points_check
 def phone4():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -255,10 +272,12 @@ def phone4():
     
 # ROUTING OF LAPTOPS
 @app.route('/laptops')
+@points_check
 def laptops():
     return render_template('laptops.html')
 
 @app.route('/laptops/mac',methods=['GET','POST'])
+@points_check
 def lappy1():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -293,6 +312,7 @@ def lappy1():
     return render_template('laptops/mac.html')
 
 @app.route('/laptops/alienware',methods=['GET','POST'])
+@points_check
 def lappy2():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -328,6 +348,7 @@ def lappy2():
     return render_template('laptops/alienware.html')
 
 @app.route('/laptops/yoga',methods=['GET','POST'])
+@points_check
 def lappy3():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -363,6 +384,7 @@ def lappy3():
     return render_template('laptops/yoga.html')
 
 @app.route('/laptops/spectre',methods=['GET','POST'])
+@points_check
 def lappy4():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -408,14 +430,14 @@ def gadgets():
         return redirect(url_for('user'))
     return render_template('gadgets.html')
 
-
+"""
 @app.route('/lap_survey')
 def survey():
     return render_template('lap_survey.html')
 @app.route('/surv')
 def surv():
     return render_template('surv.html')
-
+"""
 
 
 @app.route('/web_app')
@@ -695,7 +717,7 @@ def user():
         session['country'] = data['Country']
         session['postal'] = data['Postal']
         session['about'] = data['About']
-        session['flag'] = 'False'
+        #session['flag'] = 'False'
         #app.logger.info('%s',data['About'])
 
     ########################### ON SUBMIT #######################################
@@ -719,9 +741,9 @@ def user():
     """ 
 	if request.form['sbmt'] == 'Claim Rewards':
 		voucher = request.form['toggle']
-        	session['flag'] = 'True'
+        	#session['flag'] = 'True'
 
-		result = cur.execute("SELECT * FROM RewardDB WHERE email = %s",[session['email']])
+		"""result = cur.execute("SELECT * FROM RewardDB WHERE email = %s",[session['email']])
 		if result <= 0:
             		cur.execute("INSERT INTO RewardDB(Email,Reward) VALUES (%s,%s)",[session['email'],0])    
 
@@ -735,6 +757,14 @@ def user():
 		else :
 			msg = "Gift voucher already on its way"
 			flash(msg,'info')
+		"""
+		cur.execute("DELETE FROM SurveyDB WHERE email = %s",[session['email']])
+		cur.execute("UPDATE RatingDB SET numReview = null ,aggrRating = null ,corrPoints = null WHERE Email = %s",([session['email']]));
+		session['points'] = 0
+		session['num_review'] = 0
+		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"
+		send_mail(msg)
+        	flash(msg,'info')
 		mysql.connection.commit()
         	return render_template('user.html')
 
@@ -837,7 +867,7 @@ def login():
 			error = 'Username Not Found'
 			return render_template('login.html',error=error)
 	return render_template('login.html')
-
+"""
 @app.route('/login_comp',methods=['GET','POST'])
 def login_comp():
 	if request.method == 'POST':
@@ -873,7 +903,7 @@ def login_comp():
 			return render_template('login_comp.html',error=error) 
 	return render_template('login_comp.html')
 
-
+"""
 @app.route('/logout')
 def logout():
 	session.clear()
@@ -944,6 +974,7 @@ class SignupCompany(Form):
     confirm = PasswordField('Confirm Password', render_kw={"placeholder": "Confirm Password"})
 
 # signup for company
+"""
 @app.route('/signup_company',methods=['GET','POST'])
 def signup_company():
     form = SignupCompany(request.form)
@@ -987,7 +1018,7 @@ def signup_company():
         except Exception as e:
         	exception_company = e
     return render_template('signup_company.html',form = form)
-
+"""
 #change password
 @app.route('/password_update',methods=['GET','POST'])
 def password_update():
