@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" style=" margin-top: 100px;"> 
+<h1> {{article.title}}</h1>
+<small> Written by {{article.author}} on {{article.create_date}}</small>
+
+<hr style="border-top: 1px solid rgb(255, 255, 255); ">
+<div >
+	{{article.body | safe}}
+</div>
+</div>
+
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script type="text/javascript">CKEDITOR.replace('editor')</script>	
+</body>
+</html> 

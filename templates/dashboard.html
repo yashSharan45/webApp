@@ -1,11 +1,41 @@
-</div>
-{% extends 'l2.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'include/navbar.html'%}
+    <meta name="viewport" content="width=device-width" />
 
-{% block body %}
-<h1>
- <small>Welcome {{session.username}}</small></h1>
-<a class="btn btn-success" href ="/add_article">Add Article</a>
-<hr>
+	<link href="static/paper/assets/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Animation library for notifications   -->
+    <link href="static/paper/assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS   --> 
+    <link href="static/paper/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="static/paper/assets/css/themify-icons.css" rel="stylesheet">
+<title>rexTechnica </title>
+</head>
+<body>
+
+
+<style>
+      .flashmsg{
+      margin: 40;
+      margin-left: -9;
+      padding: 20;
+      font-size: larger;
+      width: 100%;
+      }
+    </style>
+
+    <div  style="margin-top:100px"  class="flashmsg" >
+      {% include 'include/flashMessages.html' %}
+    </div>
+<h1 >
+Articles: <a class="btn btn-success pull-right" href ="/add_article">Add Article</a>
+</h1>
+
+<div class='table-responsive'>
 <table class="table table-striped">
 	<tr>
 		<th>ID</th>
@@ -31,4 +61,6 @@
 	</tr>
 	{%endfor%}
 </table>
-{% endblock %}
+ <div style="overflow-x:auto;">
+</body>
+</html>

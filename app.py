@@ -1142,7 +1142,7 @@ def dashboard():
     cur = mysql.connection.cursor()
 
     #Get articles
-    result = cur.execute("SELECT * FROM articles")
+    result = cur.execute("SELECT * FROM articles  WHERE author = %s",[session['username']])
     articles = cur.fetchall()
     if result > 0:
         return render_template('dashboard.html',articles=articles)
