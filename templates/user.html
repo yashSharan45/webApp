@@ -288,22 +288,14 @@
                                         <div class="text-center">
 
                                          <div id="myPopover" class="hide" style="color: red">
-                                           Minimum 100 points are needed to claim rewards!!  
+                                           Rewards are claimed on every 100 points!!  
                                          </div>
 
                                         {% if session.points < 100 %}    
-                                        <!--<button type="submit" class="btn btn-info btn-fill btn-wd"><a href ="" style="color: white" rel="popover" data-popover-content="#myPopover">Claim Reward</a></button> -->
                                         <button class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" rel="popover" data-popover-content="#myPopover">Claim Rewards </button>
+                                        
                                         {% else %}
-                                        <!--
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd" action ="goo.html"><a href ="" style="color: white">
-                                        Claim Reward</a></button>
-                                         -->
-                                       <!-- <button type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "claim" name="sbmt1">
-                                        Claim Reward</button>
-                                    -->
                                     <input type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" name="sbmt">
-
                                         {% endif %}
                                         <br> <br>
                                         </div>
