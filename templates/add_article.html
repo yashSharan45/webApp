@@ -4,7 +4,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	 {% include 'include/navbar.html' %}
 <div class="container" style=" margin-top: 100px;"> 
 <h1 style="font-size: 50px; margin-bottom: 20px; font-variant: small-caps; font-weight: bold">Add Article</h1>
 {%from "include/_formhelpers.html" import render_field %}
@@ -15,7 +14,8 @@
 <div class="form-group" style="font-size: 30px; margin-bottom: 20px;">
 	{{render_field(form.body,class_="form-control", id = 'editor')}}
 </div>
-<p><input type="submit" class="btn btn-primary" value="Submit" ></p>
+<p><input type="submit" class="btn btn-primary" value="Submit" >
+<a href="/dashboard"><input type="button" class="btn btn-primary" value="Cancle" ><a></p>
 </form>
 </div>
 

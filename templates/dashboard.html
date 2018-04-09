@@ -1,7 +1,8 @@
+{% extends "l2.html" %}
+{% block body %}
 <!DOCTYPE html>
 <html>
 <head>
-	{% include 'include/navbar.html'%}
     <meta name="viewport" content="width=device-width" />
 
 	<link href="static/paper/assets/css/bootstrap.min.css" rel="stylesheet"/>
@@ -20,23 +21,25 @@
 
 <style>
       .flashmsg{
-      margin: 40;
-      margin-left: -9;
+      <!--margin: 40;
+      margin-left: -9;-->
       padding: 20;
       font-size: larger;
       width: 100%;
       }
     </style>
 
-    <div  style="margin-top:100px"  class="flashmsg" >
+    <div  class="flashmsg" >
       {% include 'include/flashMessages.html' %}
     </div>
-<h1 >
-Articles: <a class="btn btn-success pull-right" href ="/add_article">Add Article</a>
+<h1 align=center>
+Articles
 </h1>
+<a class="btn btn-success pull-right" href ="/add_article">Add Article</a>
 
 <div class='table-responsive'>
 <table class="table table-striped">
+
 	<tr>
 		<th>ID</th>
 		<th>Title</th>
@@ -64,3 +67,4 @@ Articles: <a class="btn btn-success pull-right" href ="/add_article">Add Article
  <div style="overflow-x:auto;">
 </body>
 </html>
+{% endblock %}
