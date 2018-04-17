@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>rexTechnica</title>
+    <link rel="icon" href="static/img/logo.png" type="image/gif" sizes="16x16">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/blog/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/static/blog/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/static/blog/css/clean-blog.min.css" rel="stylesheet">
+<style> 
+input[type=text] {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-right: 50px;
+}
+body {
+    background-image: url('static/img/back.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+
+
+}
+input[type=text]:focus {
+    width: 100%;
+}
+</style>
+
+  </head>
+  <body>
+{% include 'include/navbar.html' %}
+
+    <!-- Navigation 
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index">Home</a>
+        <a class="navbar-brand" href="dashboard">My Articles</a>
+        <a class="navbar-brand" href="add_article">Add Articles</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <form>
+  <input type="text" name="search" placeholder="Search..">
+</form>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+-->
+    <!-- Page Header 
+    <header class="masthead" style="background-image: url('/static/blog/img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>Reviews</h1>
+              <span class="subheading"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>-->
+    <!-- Main Content -->
+    <div class="container" style="margin-top: 100px"><input type="text" name="search" placeholder="Search..">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <a href="post.html">
+        
+  {% for article in articles%}
+  <h2 class="post-title" style="font-size: 40px; "> 
+    <a href="article/{{article.id}}" style="color: black; font-weight: bold">{{article.title}}</a>
+  </h2>
+  <br>
+  <p class="post-meta">Posted by
+              <span style="font-size: 20px; color: black">{{article.author}}</span>
+              on {{article.create_date}}</p>
+<hr>  
+  {%endfor%}
+          <!-- Pager -->
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+<style type="text/css">
+footer {
+    padding: 1em;
+    color: white;
+    background-color: #33414a;
+    clear: left;
+    text-align: center;
+}
+</style>
+
+    <!-- Footer -->
+    
+	<footer>Copyright &copy; rexTechnica </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/static/blog/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/blog/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="/static/blog/js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>

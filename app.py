@@ -7,7 +7,7 @@ from flask_mail import Mail, Message
 from werkzeug import secure_filename
 from passlib.hash import sha256_crypt
 from werkzeug.exceptions import BadRequest
-from pip._vendor.requests.compat import str
+#from pip._vendor.requests.compat import str
 from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
 
