@@ -7,6 +7,7 @@ from flask_mail import Mail, Message
 from werkzeug import secure_filename
 from passlib.hash import sha256_crypt
 from werkzeug.exceptions import BadRequest
+#from pip._vendor.requests.compat import str
 from wtforms import Form, StringField , TextAreaField, PasswordField, validators
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
 
@@ -727,7 +728,6 @@ def user():
             return redirect(url_for('gadgets'))
         elif request.form['submit2'] == 'Main2':
             return redirect(url_for('laptops'))
-
             ### VERY IMPORTANT .. IF WANT TO ACCESS TWO FORMS IN SAME HTML PAGE THEN 
                 GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
                 AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
@@ -745,9 +745,7 @@ def user():
 		"""result = cur.execute("SELECT * FROM RewardDB WHERE email = %s",[session['email']])
 		if result <= 0:
             		cur.execute("INSERT INTO RewardDB(Email,Reward) VALUES (%s,%s)",[session['email'],0])    
-
 		val = cur.execute("SELECT * FROM RewardDB WHERE Reward = 0")
-
 		if val == 1 : # meaning there is one result
 			cur.execute("UPDATE RewardDB SET Reward = %s WHERE Email = %s",(1,session['email']));
 			msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
@@ -873,13 +871,10 @@ def login_comp():
 		#get credentials
 		username = request.form['username']
 		password_candidate = request.form['password']
-
 		#create cursor
 		cur = mysql.connection.cursor()
-
 		# get user by username
 		result = cur.execute("SELECT * FROM CompanyDB WHERE Username = %s",[username])
-
 		if result > 0:
 			# get stored hash
 			data = cur.fetchone() # get only first row
@@ -901,7 +896,6 @@ def login_comp():
 			error = 'Username Not Found'
 			return render_template('login_comp.html',error=error) 
 	return render_template('login_comp.html')
-
 """
 @app.route('/logout')
 def logout():
@@ -980,38 +974,30 @@ def signup_company():
     if request.method == 'POST' and form.validate():
     	#Create Cursor
         cur = mysql.connection.cursor()
-
         name = form.name.data
         company = form.company_name.data
         website = form.website.data
-
         email = form.email.data
-
         #Check if Email already exists
         email_exists = cur.execute("SELECT * FROM CompanyDB where Email = %s",[email])
         if email_exists > 0:
         	flash('This email already exists','danger')
-
         username = form.username.data
         
         #Check if Username already exists
         username_exists = cur.execute("SELECT * FROM CompanyDB where Username = %s",[username])
         if username_exists > 0:
         	flash('This username already exists','danger')
-
         password = sha256_crypt.encrypt(str(form.password.data))
                 
         try:
         	#Execute Cursor
             cur.execute("INSERT INTO CompanyDB(Name,Company,Website,Email,Username,Password) VALUES (%s,%s,%s,%s,%s,%s)",(name,company,website,email,username,password))
             #cur.execute("INSERT INTO temp(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
-
             #Commit to DB
             mysql.connection.commit()
-
             #Close Connection
             cur.close()
-
             flash('You are now registered and can log in','success')
             return redirect(url_for('login'))
         except Exception as e:
@@ -1244,4 +1230,4 @@ def delete_article(id):
 
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
-    app.run(debug = True)
+app.run(debug = True)

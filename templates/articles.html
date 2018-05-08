@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <title>rexTechnica</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Template by Colorlib" />
+        <meta name="keywords" content="HTML, CSS, JavaScript, PHP" />
+        <meta name="author" content="Colorlib" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <head>
-    <title>rexTechnica</title>
-    <link rel="icon" href="static/img/logo.png" type="image/gif" sizes="16x16">
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700%7CLibre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css"  href='/static/art/css/clear.css' />
+        <link rel="stylesheet" type="text/css"  href='/static/art/css/common.css' />
+        <link rel="stylesheet" type="text/css"  href='/static/art/css/font-awesome.min.css' />
+        <link rel="stylesheet" type="text/css"  href='/static/art/css/carouFredSel.css' />
+        <link rel="stylesheet" type="text/css"  href='/static/art/css/sm-clean.css' />
+        <link rel="stylesheet" type="text/css"  href='/static/art/style.css' />
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Bootstrap core CSS -->
-    <link href="/static/blog/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="/static/blog/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- Custom styles for this template -->
-    <link href="/static/blog/css/clean-blog.min.css" rel="stylesheet">
-<style> 
-input[type=text] {
+        <!--[if lt IE 9]>
+                <script src="/static/art/js/html5.js"></script>
+        <![endif]-->
+        <style> 
+input[type=text]
+ {
     width: 200px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -35,107 +36,203 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
     margin-right: 50px;
 }
-body {
-    background-image: url('static/img/back.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-
-
-}
 input[type=text]:focus {
     width: 100%;
 }
 </style>
 
-  </head>
-  <body>
-{% include 'include/navbar.html' %}
+<script>
+function myFunction() {
+    var input, filter, ul, ul1, li, li1, a, a1, i;
+    input = document.getElementById("srchh");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myDIV");
+    ul1 = document.getElementById("hh");
+    li = ul.getElementsByTagName("h2");
+    li1 = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        a1 = li1[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            li1[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+            li1[i].style.display = "none";
 
-    <!-- Navigation 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index">Home</a>
-        <a class="navbar-brand" href="dashboard">My Articles</a>
-        <a class="navbar-brand" href="add_article">Add Articles</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-
-            <li class="nav-item">
-              <form>
-  <input type="text" name="search" placeholder="Search..">
-</form>
-
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
--->
-    <!-- Page Header 
-    <header class="masthead" style="background-image: url('/static/blog/img/home-bg.jpg')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              <h1>Reviews</h1>
-              <span class="subheading"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>-->
-    <!-- Main Content -->
-    <div class="container" style="margin-top: 100px"><input type="text" name="search" placeholder="Search..">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-preview">
-            <a href="post.html">
-        
-  {% for article in articles%}
-  <h2 class="post-title" style="font-size: 40px; "> 
-    <a href="article/{{article.id}}" style="color: black; font-weight: bold">{{article.title}}</a>
-  </h2>
-  <br>
-  <p class="post-meta">Posted by
-              <span style="font-size: 20px; color: black">{{article.author}}</span>
-              on {{article.create_date}}</p>
-<hr>  
-  {%endfor%}
-          <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <hr>
-<style type="text/css">
-footer {
-    padding: 1em;
-    color: white;
-    background-color: #33414a;
-    clear: left;
-    text-align: center;
+        }
+    }
 }
-</style>
+</script>
 
-    <!-- Footer -->
-    
-	<footer>Copyright &copy; rexTechnica </footer>
+    </head>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="/static/blog/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/blog/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {% include 'include/navbar.html'%}
+    <body class="home blog">
 
-    <!-- Custom scripts for this template -->
-    <script src="/static/blog/js/clean-blog.min.js"></script>
+            <div class="clear"></div>
+        </div>
+        
+        <!-- Home Content -->
+        <div id="content" class="site-content">
+            <div id="blog-wrapper">
+                <div class="blog-holder center-relative">
 
-  </body>
+  
+                    <article id="post-1" class="blog-item-holder featured-post">
+                        <div class="entry-content relative">
+                            <div class="content-1170 center-relative">
+                                <div class="cat-links">
+                                    <ul>
+                                        <li>
+                                            <!--<a href="#">Crafting</a> -->
+                                            <div class="container" id = "srch"><input id = "srchh" onkeyup="myFunction()" type="text" name="search" placeholder="Search..">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<div class="entry-date published">February 12, 2016</div> -->
+                                <h2 class="entry-title">
+                                    <a href="single.html">Reviews</a>
+                                </h2>
+                                <div class="excerpt">
+                                    Review by people, unboxing etc Review by people, unboxing etcReview by people, unboxing etcReview by people, unboxing etcReview by people, unboxing etcReview by people, unboxing etcReview by people, unboxing etcReview by people, unboxing etc
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+                      <div id="myDIV">
 
+                      {% for article in articles%}
+
+                    <article id="post-2" class="blog-item-holder">
+                        <div class="entry-content relative">
+                            <div  id="h" class="content-1170 center-relative">
+                                <h2 class="entry-title">
+                                    <a href="article/{{article.id}}">{{article.title}}</a>
+                                </h2>
+                                <div class="cat-links">
+                                    <ul id="hh">
+                                        <li>
+                                            <a href="#">{{article.author}} <div class="entry-date published">{{article.create_date}}</div></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<div class="entry-date published" id="dte">{{article.create_date}}</div>-->
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+                      {%endfor%}
+                  </div>
+                    
+<!--
+
+                    <article id="post-3" class="blog-item-holder">
+                        <div class="entry-content relative">
+                            <div class="content-1170 center-relative">
+                                <h2 class="entry-title">
+                                    <a href="single.html">Everything is design</a>
+                                </h2>
+                                <div class="cat-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Art</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="entry-date published">February 12, 2016</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+
+
+
+                    <article id="post-4" class="blog-item-holder">
+                        <div class="entry-content relative">
+                            <div class="content-1170 center-relative">
+                                <h2 class="entry-title">
+                                    <a href="single.html">It’s all about experience</a>
+                                </h2>
+                                <div class="cat-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Life</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="entry-date published">February 12, 2016</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+
+
+
+                    <article id="post-5" class="blog-item-holder">
+                        <div class="entry-content relative">
+                            <div class="content-1170 center-relative">
+                                <h2 class="entry-title">
+                                    <a href="single.html">This is not my code</a>
+                                </h2>
+                                <div class="cat-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Coding</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="entry-date published">February 12, 2016</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+
+
+
+                    <article id="post-6" class="blog-item-holder">
+                        <div class="entry-content relative">
+                            <div class="content-1170 center-relative">
+                                <h2 class="entry-title">
+                                    <a href="single.html">Support human activity</a>
+                                </h2>
+                                <div class="cat-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Advocacy</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="entry-date published">February 12, 2016</div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </article>
+				-->
+                </div>
+                <div class="clear"></div>
+                <!--<div class="block load-more-holder"><a>LOAD MORE ENTRIES</a></div>-->
+            </div>
+
+            <div class="featured-image-holder" style="margin-top:5%">
+                <div class="featured-post-image" style="background-image: url(/static/art/demo-images/icon.png)" ></div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+
+        <!--Load JavaScript-->
+        <script type="text/javascript" src="/static/art/js/jquery.js"></script>
+        <script type='text/javascript' src='/static/art/js/imagesloaded.pkgd.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.nicescroll.min.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.smartmenus.min.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.carouFredSel-6.0.0-packed.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.mousewheel.min.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.touchSwipe.min.js'></script>
+        <script type='text/javascript' src='/static/art/js/jquery.easing.1.3.js'></script>
+        <script type='text/javascript' src='/static/art/js/main.js'></script>
+    </body>
 </html>
