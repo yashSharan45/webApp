@@ -1095,7 +1095,7 @@ def articles():
     cur = mysql.connection.cursor()
 
     #Get articles
-    result = cur.execute("SELECT * FROM articles")
+    result = cur.execute("SELECT * FROM articles ORDER BY create_date DESC")
     articles = cur.fetchall()
     if result > 0:
         return render_template('articles.html',articles=articles)
