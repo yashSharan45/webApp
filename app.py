@@ -1,15 +1,15 @@
 import os,sys,math
 
-from exceptions import Exception
-from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
-from pip._vendor.requests.compat import str
-from wtforms import Form, StringField , TextAreaField, PasswordField, validators
-from flask_mysqldb import MySQL
-from passlib.hash import sha256_crypt
 from functools import wraps
+from flask_mysqldb import MySQL
+from exceptions import Exception
 from flask_mail import Mail, Message
 from werkzeug import secure_filename
+from passlib.hash import sha256_crypt
 from werkzeug.exceptions import BadRequest
+#from pip._vendor.requests.compat import str
+from wtforms import Form, StringField , TextAreaField, PasswordField, validators
+from flask import Flask, render_template, flash, request, redirect, url_for, session, logging, request, send_from_directory, jsonify
 
 from Crypto.Cipher import DES
 
@@ -36,7 +36,7 @@ des = DES.new('01234567', DES.MODE_ECB)
 #init Mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'aneeshverma0412@gmail.com'
+app.config['MAIL_USERNAME'] = 'fprovider4@gmail.com'
 app.config['MAIL_PASSWORD'] = des.decrypt("!b\xa9.\xd5\x94\xb7t")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
@@ -81,6 +81,18 @@ def is_logged_in2(f):
 			return redirect(url_for('login'))
 	return wrap
 
+# points
+def points_check(f):
+	@wraps(f)
+	def wrap(*args, **kwargs):
+		if session['points'] < 100:
+			return f(*args,**kwargs)
+		else:
+			flash('Please Redeem your points first!!','danger')
+			return redirect(url_for('user'))
+	return wrap
+
+
 @app.route('/',methods=['GET','POST'])
 def index():    
 	"""
@@ -112,16 +124,18 @@ def index1():
 def send_mail(suggestions):
     #app.logger.info('%s',suggestions)
     if suggestions != "":
-    	msg = Message('FEEDBACK', sender = 'aneeshverma0412@gmail.com', recipients = ['aneeshverma0412@gmail.com'])
+    	msg = Message('FEEDBACK', sender = 'fprovider4@gmail.com', recipients = ['fprovider4@gmail.com'])
     	msg.body = suggestions
     	mail.send(msg)
 
 # ROUTING OF PHONES
 @app.route('/phones')
+@points_check
 def phones():
     return render_template('phones.html')
 
 @app.route('/phones/iphoneX',methods=['GET','POST'])
+@points_check
 def phone1():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -129,9 +143,9 @@ def phone1():
         send_mail(suggestions)
         # get data through invisible form
         email = request.form['email']
-        category = request.form['category']
-        product = request.form['product']
         rating = request.form['starwar']
+        product = request.form['product']
+        category = request.form['category']
 
 
         #Create Cursor
@@ -155,6 +169,7 @@ def phone1():
     return render_template('phones/iphoneX.html')
 
 @app.route('/phones/pixel2',methods=['GET','POST'])
+@points_check
 def phone2():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -188,6 +203,7 @@ def phone2():
     return render_template('phones/pixel2.html')
 
 @app.route('/phones/SamsungS8',methods=['GET','POST'])
+@points_check
 def phone3():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -221,6 +237,7 @@ def phone3():
     return render_template('phones/SamsungS8.html')
 
 @app.route('/phones/oneplus5T',methods=['GET','POST'])
+@points_check
 def phone4():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -255,10 +272,12 @@ def phone4():
     
 # ROUTING OF LAPTOPS
 @app.route('/laptops')
+@points_check
 def laptops():
     return render_template('laptops.html')
 
 @app.route('/laptops/mac',methods=['GET','POST'])
+@points_check
 def lappy1():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -293,6 +312,7 @@ def lappy1():
     return render_template('laptops/mac.html')
 
 @app.route('/laptops/alienware',methods=['GET','POST'])
+@points_check
 def lappy2():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -328,6 +348,7 @@ def lappy2():
     return render_template('laptops/alienware.html')
 
 @app.route('/laptops/yoga',methods=['GET','POST'])
+@points_check
 def lappy3():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -363,6 +384,7 @@ def lappy3():
     return render_template('laptops/yoga.html')
 
 @app.route('/laptops/spectre',methods=['GET','POST'])
+@points_check
 def lappy4():
     if request.method == 'POST':
         #sending mail from data acquired from textbox
@@ -408,14 +430,14 @@ def gadgets():
         return redirect(url_for('user'))
     return render_template('gadgets.html')
 
-
+"""
 @app.route('/lap_survey')
 def survey():
     return render_template('lap_survey.html')
 @app.route('/surv')
 def surv():
     return render_template('surv.html')
-
+"""
 
 
 @app.route('/web_app')
@@ -695,6 +717,7 @@ def user():
         session['country'] = data['Country']
         session['postal'] = data['Postal']
         session['about'] = data['About']
+        #session['flag'] = 'False'
         #app.logger.info('%s',data['About'])
 
     ########################### ON SUBMIT #######################################
@@ -705,7 +728,6 @@ def user():
             return redirect(url_for('gadgets'))
         elif request.form['submit2'] == 'Main2':
             return redirect(url_for('laptops'))
-
             ### VERY IMPORTANT .. IF WANT TO ACCESS TWO FORMS IN SAME HTML PAGE THEN 
                 GIVE DIFFERENT NAME AND VALUES TO THE SUBMIT BUTTONS OF THOSE FORMS
                 AND ACCESS THEM WITH " request.form['buttonName'] == 'buttonValue' "            
@@ -718,9 +740,29 @@ def user():
     """ 
 	if request.form['sbmt'] == 'Claim Rewards':
 		voucher = request.form['toggle']
-		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+        	#session['flag'] = 'True'
+
+		"""result = cur.execute("SELECT * FROM RewardDB WHERE email = %s",[session['email']])
+		if result <= 0:
+            		cur.execute("INSERT INTO RewardDB(Email,Reward) VALUES (%s,%s)",[session['email'],0])    
+		val = cur.execute("SELECT * FROM RewardDB WHERE Reward = 0")
+		if val == 1 : # meaning there is one result
+			cur.execute("UPDATE RewardDB SET Reward = %s WHERE Email = %s",(1,session['email']));
+			msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"			
+			send_mail(msg)
+        		flash(msg,'info')
+		else :
+			msg = "Gift voucher already on its way"
+			flash(msg,'info')
+		"""
+		cur.execute("DELETE FROM SurveyDB WHERE email = %s",[session['email']])
+		cur.execute("UPDATE RatingDB SET numReview = null ,aggrRating = null ,corrPoints = null WHERE Email = %s",([session['email']]));
+		session['points'] = 0
+		session['num_review'] = 0
+		msg = "Gift voucher of " + voucher + " will be sent to " + session['email'] + " within 24 hours"
 		send_mail(msg)
         	flash(msg,'info')
+		mysql.connection.commit()
         	return render_template('user.html')
 
        	elif request.form['sbmt'] == 'Update Profile' :
@@ -822,20 +864,17 @@ def login():
 			error = 'Username Not Found'
 			return render_template('login.html',error=error)
 	return render_template('login.html')
-
+"""
 @app.route('/login_comp',methods=['GET','POST'])
 def login_comp():
 	if request.method == 'POST':
 		#get credentials
 		username = request.form['username']
 		password_candidate = request.form['password']
-
 		#create cursor
 		cur = mysql.connection.cursor()
-
 		# get user by username
 		result = cur.execute("SELECT * FROM CompanyDB WHERE Username = %s",[username])
-
 		if result > 0:
 			# get stored hash
 			data = cur.fetchone() # get only first row
@@ -857,8 +896,7 @@ def login_comp():
 			error = 'Username Not Found'
 			return render_template('login_comp.html',error=error) 
 	return render_template('login_comp.html')
-
-
+"""
 @app.route('/logout')
 def logout():
 	session.clear()
@@ -929,50 +967,43 @@ class SignupCompany(Form):
     confirm = PasswordField('Confirm Password', render_kw={"placeholder": "Confirm Password"})
 
 # signup for company
+"""
 @app.route('/signup_company',methods=['GET','POST'])
 def signup_company():
     form = SignupCompany(request.form)
     if request.method == 'POST' and form.validate():
     	#Create Cursor
         cur = mysql.connection.cursor()
-
         name = form.name.data
         company = form.company_name.data
         website = form.website.data
-
         email = form.email.data
-
         #Check if Email already exists
         email_exists = cur.execute("SELECT * FROM CompanyDB where Email = %s",[email])
         if email_exists > 0:
         	flash('This email already exists','danger')
-
         username = form.username.data
         
         #Check if Username already exists
         username_exists = cur.execute("SELECT * FROM CompanyDB where Username = %s",[username])
         if username_exists > 0:
         	flash('This username already exists','danger')
-
         password = sha256_crypt.encrypt(str(form.password.data))
                 
         try:
         	#Execute Cursor
             cur.execute("INSERT INTO CompanyDB(Name,Company,Website,Email,Username,Password) VALUES (%s,%s,%s,%s,%s,%s)",(name,company,website,email,username,password))
             #cur.execute("INSERT INTO temp(Name,Email,Username,Password) VALUES (%s,%s,%s,%s)",(name,email,username,password))
-
             #Commit to DB
             mysql.connection.commit()
-
             #Close Connection
             cur.close()
-
             flash('You are now registered and can log in','success')
             return redirect(url_for('login'))
         except Exception as e:
         	exception_company = e
     return render_template('signup_company.html',form = form)
-
+"""
 #change password
 @app.route('/password_update',methods=['GET','POST'])
 def password_update():
@@ -1057,6 +1088,146 @@ def uploaded_file(filename):
                                filename)
 
 
+
+@app.route('/articles')
+def articles():
+    #Create cursor
+    cur = mysql.connection.cursor()
+
+    #Get articles
+    result = cur.execute("SELECT * FROM articles ORDER BY create_date DESC")
+    articles = cur.fetchall()
+    if result > 0:
+        return render_template('articles.html',articles=articles)
+    else:
+        msg = "No Articles Found"
+        return render_template('articles.html',msg=msg)    
+    #close connection
+    cur.close()
+
+#register form class
+@app.route('/article/<string:id>/')
+def article(id):
+    #Create cursor
+    cur = mysql.connection.cursor()
+
+    #Get articles
+    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+    
+    article = cur.fetchone()
+    
+    return render_template ('article.html',article=article)
+
+
+#Dashboard
+@app.route('/dashboard')
+@is_logged_in
+def dashboard():
+    #Create cursor
+    cur = mysql.connection.cursor()
+
+    #Get articles
+    result = cur.execute("SELECT * FROM articles  WHERE author = %s",[session['username']])
+    articles = cur.fetchall()
+    if result > 0:
+        return render_template('dashboard.html',articles=articles)
+    else:
+        msg = "No Articles Found"
+        return render_template('dashboard.html',msg=msg)    
+    #close connection
+    cur.close()
+
+    
+#Article Form Class
+class ArticleForm(Form):
+    title = StringField('Title',[validators.Length(min = 1 , max =200)])
+    body = TextAreaField('Body',[validators.Length(min=30)])
+    
+#Add Article
+@app.route('/add_article',methods=['GET','POST'])
+@is_logged_in
+def add_article():
+    form = ArticleForm(request.form)
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        body = form.body.data
+
+        #Create cursor
+        cur = mysql.connection.cursor()
+
+        #Exexute
+        cur.execute("INSERT INTO articles(title,body,author)VALUES(%s, %s, %s)",(title, body, session['username']))    
+
+	    #Commit to DB
+        mysql.connection.commit()
+
+        #Close connectionn
+        cur.close()
+
+        flash('Article Created', 'success')
+        return redirect(url_for('dashboard'))
+    return render_template('add_article.html',form = form)
+
+#Edit Article
+@app.route('/edit_article/<string:id>',methods=['GET','POST'])
+@is_logged_in
+def edit_article(id):
+    # Create Cursor
+    cur = mysql.connection.cursor()
+    
+    #Get article by id
+    result = cur.execute("SELECT * FROM articles WHERE id = %s",[id])
+    article = cur.fetchone()
+    
+    #Get form
+    form = ArticleForm(request.form)
+    
+    #Populate article form fields
+    form.title.data = article['title']
+    form.body.data = article['body']
+    if request.method == 'POST' and form.validate():
+        title = request.form['title']
+        body = request.form['body']
+
+        #Create cursor
+        cur = mysql.connection.cursor()
+
+        #Exexute
+        cur.execute("UPDATE articles SET title = %s, body = %s WHERE id = %s ",(title,body,id))
+
+        #Commit to DB
+        mysql.connection.commit()
+
+        #Close connectionn
+        cur.close()
+
+        flash('Article Updated', 'success')
+        return redirect(url_for('dashboard'))
+    return render_template('edit_article.html',form = form)        
+
+#Delete Article
+@app.route('/delete_article/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_article(id):
+    #create cursor
+    cur = mysql.connection.cursor()
+
+    #execute
+    cur.execute("DELETE FROM articles WHERE id = %s",[id])
+
+    #Commit to DB
+    mysql.connection.commit()
+
+    #Close connectionn
+    cur.close()
+
+    flash('Article Deleted', 'success')
+    return redirect(url_for('dashboard'))
+
+
+
+
+
 if __name__ == '__main__':
     app.secret_key = 'secretZone'
-    app.run(debug = True)
+app.run(debug = True)

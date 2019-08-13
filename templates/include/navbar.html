@@ -39,6 +39,7 @@
             {% endif %}
             {% if session.logged_in %}
             <li><a href="/user">Profile </a></li>
+            <li><a href="/articles">Reviews </a></li>
             <li class="mob"><a href="/mobile_suggestions" > Mobile suggestion </a></li>
             <li class="mob"><a href="/laptop_suggestions" > Laptop suggestion </a></li>
             <li class="mob"><a href="/password_update" > Change Password </a></li>
@@ -46,6 +47,7 @@
             <li>
                 
                 <a href="#0" class="cd-subnav-trigger"><span>Categories</span></a>
+                {% if session.points < 100 %}
                 <ul>
                     <li class="go-back"><a href="#0">Menu</a></li>
                     <li><a href="/phones">Phones</a></li>
@@ -54,6 +56,14 @@
                     <li><a href="#0" class="placeholder">Placeholder</a></li>
                     
                 </ul>
+                {% else %}
+                <ul>
+                    <li class="go-back"><a href="#0">Menu</a></li>
+                    <li><a href="#0">Redeem your points first !! </a></li>
+                    <li><a href="#0" class="placeholder">Placeholder</a></li>
+                </ul>
+
+                {% endif %}
             </li> 
             {% endif %}
         </ul> <!-- .cd-main-nav -->

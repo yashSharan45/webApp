@@ -164,12 +164,6 @@
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
 
     	<div class="sidebar-wrapper">
-           <!-- <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
-                </a>
-            </div>-->
-
             <ul class="nav">               
                 <li class="active">
                     <a href="user">
@@ -178,15 +172,21 @@
                     </a>
                 </li>
                 <li>
+                    <a href="dashboard">
+                        <i class="ti-comments"></i>
+                        <p>Add Review</p>
+                    </a>
+                </li>
+                <li>
                     <a href="mobile_suggestions">
-                        <i class="ti-panel"></i>
+                        <i class="ti-mobile"></i>
                         <p>Mobile Suggestion</p>
                     </a>
                 </li>
 
                 <li>
                     <a href="laptop_suggestions">
-                        <i class="ti-panel"></i>
+                        <i class="ti-desktop"></i>
                         <p>Laptop Suggestion</p>
                     </a>
                 </li>
@@ -264,7 +264,7 @@
                             <div class="text-center">
                                 <div class="row">
                                     <div class="col-md-3 col-md-offset-1">
-                                        <h5>{{session.num_review}}<br /><small>Reviews</small></h5>
+                                        <h5>{{session.num_review}}<br /><small>Surveys</small></h5>
                                     </div>
                                     <div class="col-md-4">
                                         <h5><br /><small></small></h5>
@@ -288,22 +288,14 @@
                                         <div class="text-center">
 
                                          <div id="myPopover" class="hide" style="color: red">
-                                           Minimum 100 points are needed to claim rewards!!  
+                                           Rewards are claimed on every 100 points!!  
                                          </div>
 
                                         {% if session.points < 100 %}    
-                                        <!--<button type="submit" class="btn btn-info btn-fill btn-wd"><a href ="" style="color: white" rel="popover" data-popover-content="#myPopover">Claim Reward</a></button> -->
                                         <button class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" rel="popover" data-popover-content="#myPopover">Claim Rewards </button>
+                                        
                                         {% else %}
-                                        <!--
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd" action ="goo.html"><a href ="" style="color: white">
-                                        Claim Reward</a></button>
-                                         -->
-                                       <!-- <button type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "claim" name="sbmt1">
-                                        Claim Reward</button>
-                                    -->
                                     <input type="submit" class="btn btn-info btn-fill btn-wd" action ="" value = "Claim Rewards" name="sbmt">
-
                                         {% endif %}
                                         <br> <br>
                                         </div>
