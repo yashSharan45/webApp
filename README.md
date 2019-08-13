@@ -4,28 +4,28 @@ STEPS FOR GIT
 ===============================================================
 PUSH
 1. In your Desktop or Documents or wherever's terminal type -> 
-	git clone https://github.com/aneeshverma04/WebApp-Python.git
+	git clone https://github.com/yashSharan45/webApp.git
 
 NOTE: make sure wherever you are cloning the repo, the folder name shouldn't have a space    	   between the words e.g. $ /Desktop/Flask Project/WebApp-Python will not work when        
       installing flask 
 
 2. Make your own branch, my branch would be ->
-	git branch aneesh1      # aneesh1 is branch name
+	git branch yash      # yash is branch name
 3. Switch to branch ->
-	git checkout aneesh1
+	git checkout yash
 4. Add/Delete your code 
 5. Then add your code to local git ->
 	git add .
 6. Commit your code ->
 	git commit -m "Message about today's work done "
 7. Set up an alias for 'origin' ->
-	git remote add origin https://github.com/aneeshverma04/WebApp-Python.git
+	git remote add origin https://github.com/yashSharan45/webApp.git
 8. Push your code to github ->
-	git push origin aneesh1  # Your branch name instead of aneesh1
+	git push origin yash  # Your branch name instead of yash
 							 # Enter your username and password when asked
  							 
 PULL
-1. git pull origin aneesh1 
+1. git pull origin yash 
 
 Merge
 1. When need to merge we will create a pull request on github
